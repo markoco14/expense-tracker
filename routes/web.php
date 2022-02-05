@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ExpensesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('record', function () {
-    return view('record');
-});
+// expense input routes
+Route::get('record', [ExpensesController::class, 'index']);
+
+// sign up page routes
+Route::get('signup', [UsersController::class, 'index']);
+
+Route::post('signup', [UsersController::class, 'register']);
+
+// log in page routes

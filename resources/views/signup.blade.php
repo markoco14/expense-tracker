@@ -16,53 +16,61 @@
     <body>
         <div>
             <div>
-                <h1>Record your expenses</h1>
-                <form action="" method="get" class="form">
+                <h1>Sign Up</h1>
+                <form action="" method="post" class="form">
+                    @csrf
                     <div class="control-group">
-                    <label 
-                            for="amount"
+                        <label 
+                            for="name"
                             class="form-label">
-                            How much did you spend?
-                        </label>
-                        <input 
-                            type="number" 
-                            id="amount" 
-                            name="amount"
-                            class="form-control"
-                            >
-                        <p class="form-label"><small>*currency in TWD*</small></p>
-                    </div>
-                    <!-- <div>
-                        <label for="">
-                            In what currency
-                        </label>
-                        <input type="text">
-                    </div> -->
-                    <div class="control-group">
-                        <label 
-                            for="what" 
-                            class="form-label"
-                            >
-                            What did you buy?
+                            Name
                         </label>
                         <input 
                             type="text" 
-                            id="what" 
-                            name="what"
+                            id="name" 
+                            name="name"
                             class="form-control"
                             >
                     </div>
                     <div class="control-group">
                         <label 
-                            for="" 
+                            for="username" 
                             class="form-label"
                             >
-                            Where did you buy it?
+                            Username
                         </label>
                         <input 
                             type="text" 
-                            id="location" 
-                            name="location"
+                            id="username" 
+                            name="username"
+                            class="form-control"
+                            >
+                    </div>
+                    <div class="control-group">
+                        <label 
+                            for="email" 
+                            class="form-label"
+                            >
+                            Email
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            class="form-control"
+                            >
+                    </div>
+                    <div class="control-group">
+                        <label 
+                            for="password" 
+                            class="form-label"
+                            >
+                            Password
+                        </label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password"
                             class="form-control"
                             >
                     </div>
@@ -72,7 +80,7 @@
                             name="submit" 
                             class="form-control"
                             >
-                            Enter Expenses
+                            Sign Up
                         </button>
                     </div>
                 </form>
