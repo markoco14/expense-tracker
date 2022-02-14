@@ -23,8 +23,9 @@ Route::get('/', function () {
 Route::get('record', [ExpensesController::class, 'index']);
 
 // sign up page routes
-Route::get('signup', [UsersController::class, 'index']);
+Route::get('signup', [UsersController::class, 'create']);
 
-Route::post('signup', [UsersController::class, 'register']);
+Route::post('signup', [UsersController::class, 'store']);
 
 // log in page routes
+Route::get('login', [UsersController::class, 'login']);
