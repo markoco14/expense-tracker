@@ -21,22 +21,13 @@
         </nav>
         <div>
             <div>
-                <h1>Sign Up</h1>
-                <form action="/signup" method="post" class="form">
+                @php
+
+                @endphp
+
+                <h1>Log In</h1>
+                <form action="" method="post" class="form">
                     @csrf
-                    <div class="control-group">
-                        <label 
-                            for="name"
-                            class="form-label">
-                            Name
-                        </label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            name="name"
-                            class="form-control"
-                            >
-                    </div>
                     <div class="control-group">
                         <label 
                             for="username" 
@@ -48,20 +39,6 @@
                             type="text" 
                             id="username" 
                             name="username"
-                            class="form-control"
-                            >
-                    </div>
-                    <div class="control-group">
-                        <label 
-                            for="email" 
-                            class="form-label"
-                            >
-                            Email
-                        </label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email"
                             class="form-control"
                             >
                     </div>
@@ -82,9 +59,10 @@
                     <div class="control-group">
                         <button 
                             type="submit" 
+                            name="submit" 
                             class="form-control"
                             >
-                            Sign Up
+                            Log In
                         </button>
                     </div>
                 </form>
