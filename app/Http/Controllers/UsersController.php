@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 // use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 // use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -10,24 +11,24 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
-    public function index() {
+    public function create() {
         return view('signup');
     }
 
-    public function register() {
+    public function store() {
         // echo "You have signed up";
-        $user = User::create([
-            'name' => $_POST['name'],
-            'username' => $_POST['username'],
-            'email' => $_POST['email'],
-            'password' => $_POST['password']
+        $attributes = request()->validate([
+            'name' => ['required','max:255'],
+            'username' => ['required','max:255','min:3'],
+            'email' => ['required','email','max:255'],
+            'password' => ['required','min:7'],
+        ]);
 
-        ]);
-        return view('login', [
-            'name' => $name,
-            'username' => $username,
-            'email' => $email,
-            'password' => $password
-        ]);
+        User::create($attributes);
+        return redirect('login');
+    }
+    
+    public function login() {
+        return view('login');
     }
 }
