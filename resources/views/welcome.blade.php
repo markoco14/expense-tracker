@@ -23,8 +23,17 @@
     <body>
         <nav>
             <a href="/">Home</a>
-            <a href="/signup">Sign Up</a>
-            <a href="/login">Log In</a>
+            @guest
+                <a href="/signup">Sign Up</a>
+                <a href="/login">Log In</a>
+            @endguest
+            @auth
+                <form action="/logout" method="post">
+                    @csrf
+                    <button type="submit">Log Out</button>
+                </form>
+                <p>Welcome back, mother fucker!</p>
+            @endauth
         </nav>
         <div>
             <h1>Expense Tracker App</h1>

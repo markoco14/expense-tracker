@@ -12,21 +12,35 @@
         <!-- Styles -->
         <link rel="stylesheet" href="app.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="//unpkg.com/alpinejs" defer></script>
     </head>
     <body>
         <nav>
             <a href="/">Home</a>
-            <a href="/signup">Sign Up</a>
-            <a href="/login">Log In</a>
+            @guest
+                <a href="/signup">Sign Up</a>
+                <a href="/login">Log In</a>
+            @endguest
+            @auth
+                <form action="/logout" method="post">
+                    @csrf
+                    <button type="submit">Log Out</button>
+                </form>
+                <p>Welcome back, mother fucker!</p>
+            @endauth
         </nav>
         <div>
             <div>
-                @php
-
-                @endphp
-
                 <h1>Log In</h1>
-                <form action="" method="post" class="form">
+                @if (session()->has('success'))
+                    <p
+                        x-data="{ show: true }"
+                        x-init="setTimeout(() => show = false, 4000)"
+                        x-show="show"
+                    >
+                    {{ session('success') }}</p>
+                @endif
+                <form action="login" method="post" class="form">
                     @csrf
                     <div class="control-group">
                         <label 
