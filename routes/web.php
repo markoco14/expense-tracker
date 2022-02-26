@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ExpensesController;
+use App\Http\Controllers\SessionsController;
+use Illuminate\Contracts\Session\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +25,12 @@ Route::get('/', function () {
 Route::get('record', [ExpensesController::class, 'index']);
 
 // sign up page routes
-Route::get('signup', [UsersController::class, 'create']);
-
-Route::post('signup', [UsersController::class, 'store']);
+Route::get('signup', [UsersController::class, 'create'])->middleware('guest');
+Route::post('signup', [UsersController::class, 'store'])->middleware('guest');
 
 // log in page routes
-Route::get('login', [UsersController::class, 'login']);
+Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
+Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest');
+
+// log out
+Route::get('logout', [SessionsController::class, 'destroy'])->middleware('auth');
