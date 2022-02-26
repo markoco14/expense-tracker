@@ -24,15 +24,13 @@
         <nav>
             <a href="/">Home</a>
             @guest
-                <a href="/signup">Sign Up</a>
-                <a href="/login">Log In</a>
+                <a href="signup">Sign Up</a>
+                <a href="login">Log In</a>
             @endguest
             @auth
-                <form action="/logout" method="post">
-                    @csrf
-                    <button type="submit">Log Out</button>
-                </form>
-                <p>Welcome back, mother fucker!</p>
+                <a href="record">Record</a>
+                <a href="logout">Log out</a>
+                <p>Welcome back!</p>
             @endauth
         </nav>
         <div>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\SessionsController;
+use Illuminate\Contracts\Session\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,8 @@ Route::get('signup', [UsersController::class, 'create'])->middleware('guest');
 Route::post('signup', [UsersController::class, 'store'])->middleware('guest');
 
 // log in page routes
-Route::get('login', [SessionsController::class, 'login']);
-Route::post('login', [SessionsController::class, 'store']);
+Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
+Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest');
 
-Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
+// log out
+Route::get('logout', [SessionsController::class, 'destroy'])->middleware('auth');

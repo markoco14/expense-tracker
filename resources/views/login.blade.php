@@ -18,15 +18,13 @@
         <nav>
             <a href="/">Home</a>
             @guest
-                <a href="/signup">Sign Up</a>
-                <a href="/login">Log In</a>
+                <a href="signup">Sign Up</a>
+                <a href="login">Log In</a>
             @endguest
             @auth
-                <form action="/logout" method="post">
-                    @csrf
-                    <button type="submit">Log Out</button>
-                </form>
-                <p>Welcome back, mother fucker!</p>
+                <a href="record">Record</a>
+                <a href="logout">Log out</a>
+                <p>Welcome back!</p>
             @endauth
         </nav>
         <div>
@@ -40,22 +38,26 @@
                     >
                     {{ session('success') }}</p>
                 @endif
-                <form action="login" method="post" class="form">
+                <form action="sessions" method="post" class="form">
                     @csrf
                     <div class="control-group">
                         <label 
-                            for="username" 
+                            for="email" 
                             class="form-label"
                             >
                             Username
                         </label>
                         <input 
-                            type="text" 
-                            id="username" 
-                            name="username"
+                            type="email" 
+                            id="email" 
+                            name="email"
                             class="form-control"
+                            {{-- value={{old('email')}} --}}
                             >
                     </div>
+                    @error('email')
+                        <p>{{$message}}</p>
+                    @enderror
                     <div class="control-group">
                         <label 
                             for="password" 
