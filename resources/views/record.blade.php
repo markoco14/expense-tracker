@@ -1,90 +1,101 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-        <!-- Styles -->
-        <link rel="stylesheet" href="app.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    </head>
-    <body>
-        <x-navbar />
-        <div>
-            <div>
-                <h1>Record your expenses</h1>
-                @if (session()->has('success'))
-                    <p>{{ session('success') }}</p>
-                @endif
-                <form action="record" method="post" class="form">
-                    @csrf
-                    <div class="control-group">
-                    <label 
-                            for="amount"
-                            class="form-label">
-                            How much did you spend?
-                        </label>
-                        <input 
-                            type="number" 
-                            id="amount" 
-                            name="amount"
-                            class="form-control"
-                            >
-                        <p class="form-label"><small>*currency in TWD*</small></p>
-                        @error('amount')
-                        <p>{{$message}}</p>
+<x-header />
+    <x-navbar />
+    <div>
+        <div class="col-sm-6 offset-sm-3">
+            <h1>Record your expenses</h1>
+            @if (session()->has('success'))
+                <p
+                    x-data="{ show: true }"
+                    x-init="setTimeout(() => show = false, 4000)"
+                    x-show="show"
+                >
+                    {{ session('success') }}
+                </p>
+            @endif
+            <form action="record" method="post" class="form">
+                @csrf
+                <div class="control-group">
+                <label 
+                        for="amount"
+                        class="form-label">
+                        How much did you spend?
+                    </label>
+                    <input 
+                        type="number" 
+                        id="amount" 
+                        name="amount"
+                        class="form-control"
+                        value={{old('amount')}}
+                        >
+                    @error('amount')
+                        <p class="text-danger">{{$message}}</p>
                     @enderror
-                    </div>
-                    <div class="control-group">
-                        <label 
-                            for="what" 
-                            class="form-label"
-                            >
-                            What did you buy?
-                        </label>
-                        <input 
-                            type="text" 
-                            id="what" 
-                            name="what"
-                            class="form-control"
-                            >
-                        @error('what')
-                            <p>{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="control-group">
-                        <label 
-                            for="where" 
-                            class="form-label"
-                            >
-                            Where did you buy it?
-                        </label>
-                        <input 
-                            type="text" 
-                            id="where" 
-                            name="where"
-                            class="form-control"
-                            >
-                        @error('where')
-                            <p>{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="control-group">
-                        <button 
-                            type="submit" 
-                            name="submit" 
-                            class="form-control"
-                            >
-                            Enter Expenses
-                        </button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="control-group">
+                    <label 
+                        for="what" 
+                        class="form-label"
+                        >
+                        What did you buy?
+                    </label>
+                    <input 
+                        type="text" 
+                        id="what" 
+                        name="what"
+                        class="form-control"
+                        value={{old('what')}}
+                        >
+                    @error('what')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="control-group">
+                    <label 
+                        for="where" 
+                        class="form-label"
+                        >
+                        Where did you buy it?
+                    </label>
+                    <input 
+                        type="text" 
+                        id="where" 
+                        name="where"
+                        class="form-control"
+                        value={{old('where')}}
+                        >
+                    @error('where')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="control-group">
+                    <button 
+                        type="submit" 
+                        name="submit" 
+                        class="form-control"
+                        >
+                        Enter Expenses
+                    </button>
+                </div>
+            </form>
         </div>
-    </body>
-</html>
+    </div>
+    <script>
+        let amount = document.getElementById('amount');
+        let what = document.getElementById('what');
+        let where = document.getElementById('where');
+        amount.focus();
+        amount.addEventListener('keypress', function(e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                what.focus();
+            }
+        });
+        what.addEventListener('keypress', function(e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                where.focus();
+            }
+        })
+
+    </script>
+<x-footer />
