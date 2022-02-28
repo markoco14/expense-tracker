@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 // expense input routes
 Route::get('record', [ExpensesController::class, 'index']);
+Route::post('record', [ExpensesController::class, 'store']);
 
 // sign up page routes
 Route::get('signup', [UsersController::class, 'create'])->middleware('guest');

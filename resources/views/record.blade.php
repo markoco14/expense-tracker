@@ -18,7 +18,11 @@
         <div>
             <div>
                 <h1>Record your expenses</h1>
-                <form action="" method="get" class="form">
+                @if (session()->has('success'))
+                    <p>{{ session('success') }}</p>
+                @endif
+                <form action="record" method="post" class="form">
+                    @csrf
                     <div class="control-group">
                     <label 
                             for="amount"
@@ -32,13 +36,10 @@
                             class="form-control"
                             >
                         <p class="form-label"><small>*currency in TWD*</small></p>
+                        @error('amount')
+                        <p>{{$message}}</p>
+                    @enderror
                     </div>
-                    <!-- <div>
-                        <label for="">
-                            In what currency
-                        </label>
-                        <input type="text">
-                    </div> -->
                     <div class="control-group">
                         <label 
                             for="what" 
@@ -52,20 +53,26 @@
                             name="what"
                             class="form-control"
                             >
+                        @error('what')
+                            <p>{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="control-group">
                         <label 
-                            for="" 
+                            for="where" 
                             class="form-label"
                             >
                             Where did you buy it?
                         </label>
                         <input 
                             type="text" 
-                            id="location" 
-                            name="location"
+                            id="where" 
+                            name="where"
                             class="form-control"
                             >
+                        @error('where')
+                            <p>{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="control-group">
                         <button 
