@@ -83,6 +83,7 @@
         let amount = document.getElementById('amount');
         let what = document.getElementById('what');
         let where = document.getElementById('where');
+
         amount.focus();
         amount.addEventListener('keypress', function(e) {
             if (e.key === "Enter") {
@@ -90,12 +91,12 @@
                 what.focus();
             }
         });
+
         what.addEventListener('keypress', function(e) {
             if (e.key === "Enter") {
                 e.preventDefault();
                 where.focus();
             }
         })
-
     </script>
 <x-footer />
