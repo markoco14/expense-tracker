@@ -6,7 +6,7 @@
     @endguest
     @auth
         <a href="record">Record</a>
+        <a href="details">Details</a>
         <a href="logout">Log out</a>
-        <p>Welcome back!</p>
     @endauth
 </nav>

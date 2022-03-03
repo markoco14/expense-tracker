@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\BudgetController;
 use Illuminate\Contracts\Session\Session;
 
 /*
@@ -35,3 +36,6 @@ Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest
 
 // log out
 Route::get('logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
+// budget routes
+Route::get('details', [BudgetController::class, 'index'])->middleware('auth');;
