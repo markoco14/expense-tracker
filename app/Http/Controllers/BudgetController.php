@@ -33,4 +33,8 @@ class BudgetController extends Controller
             'surplus' => number_format($surplus)
         ]);
     }
+
+    public function setup() {
+        return view('budget.setup');
+    }
 }

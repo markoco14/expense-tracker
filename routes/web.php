@@ -38,4 +38,5 @@ Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest
 Route::get('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
 // budget routes
-Route::get('details', [BudgetController::class, 'index'])->middleware('auth');;
+Route::get('details', [BudgetController::class, 'index'])->middleware('auth');
+Route::get('setup', [BudgetController::class, 'setup'])->middleware('auth');
