@@ -19,7 +19,7 @@ class CreatePersonalAccessTokensTable extends Migration
             $table->string('name', 191);
             $table->string('token', 64)->unique();
             $table->text('abilities', 191)->nullable();
-            $table->timestamp('last_used_at', 191)->nullable();
+            $table->timestamp('last_used_at')->nullable();
             $table->timestamps();
         });
     }
