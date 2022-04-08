@@ -2,7 +2,7 @@
     <x-navbar />
     <div>
         <div class="col-sm-6 offset-sm-3">
-            <h1>Track your expenses</h1>
+            <h1>Set Your Financial Information</h1>
             @if (session()->has('success'))
                 <p
                     x-data="{ show: true }"
@@ -12,58 +12,112 @@
                     {{ session('success') }}
                 </p>
             @endif
-            <form action="tracking" method="post" class="form">
+            <form action="profile" method="post" class="form">
                 @csrf
                 <div class="control-group">
                 <label 
-                        for="amount"
+                        for="salary"
                         class="form-label">
-                        How much did you spend?
+                        What is your salary?
                     </label>
                     <input 
                         type="number" 
-                        id="amount" 
-                        name="amount"
+                        id="salary" 
+                        name="salary"
                         class="form-control"
-                        value={{old('amount')}}
+                        value={{old('salary')}}
                         >
-                    @error('amount')
+                    @error('salary')
                         <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
                 <div class="control-group">
                     <label 
-                        for="what" 
+                        for="li" 
                         class="form-label"
                         >
-                        What did you buy?
+                        LI
                     </label>
                     <input 
                         type="text" 
-                        id="what" 
-                        name="what"
+                        id="li" 
+                        name="li"
                         class="form-control"
-                        value={{old('what')}}
+                        value={{old('li')}}
                         >
-                    @error('what')
+                    @error('li')
                         <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
                 <div class="control-group">
                     <label 
-                        for="where" 
+                        for="nhi" 
                         class="form-label"
                         >
-                        Where did you buy it?
+                        NHI
                     </label>
                     <input 
                         type="text" 
-                        id="where" 
-                        name="where"
+                        id="nhi" 
+                        name="nhi"
                         class="form-control"
-                        value={{old('where')}}
+                        value={{old('nhi')}}
                         >
-                    @error('where')
+                    @error('nhi')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="control-group">
+                    <label 
+                        for="rent" 
+                        class="form-label"
+                        >
+                        Rent
+                    </label>
+                    <input 
+                        type="text" 
+                        id="rent" 
+                        name="rent"
+                        class="form-control"
+                        value={{old('rent')}}
+                        >
+                    @error('rent')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="control-group">
+                    <label 
+                        for="utilities" 
+                        class="form-label"
+                        >
+                        Utilities
+                    </label>
+                    <input 
+                        type="text" 
+                        id="utilities" 
+                        name="utilities"
+                        class="form-control"
+                        value={{old('utilities')}}
+                        >
+                    @error('utilities')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="control-group">
+                    <label 
+                        for="savings" 
+                        class="form-label"
+                        >
+                        Savings
+                    </label>
+                    <input 
+                        type="text" 
+                        id="savings" 
+                        name="savings"
+                        class="form-control"
+                        value={{old('savings')}}
+                        >
+                    @error('savings')
                         <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
@@ -73,7 +127,7 @@
                         name="submit" 
                         class="form-control"
                         >
-                        Enter Expenses
+                        Submit
                     </button>
                 </div>
             </form>
