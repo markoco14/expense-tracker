@@ -2,7 +2,7 @@
     <x-navbar />
     <div>
         <div class="col-sm-6 offset-sm-3">
-            <h1>Record your expenses</h1>
+            <h1>Track your expenses</h1>
             @if (session()->has('success'))
                 <p
                     x-data="{ show: true }"
@@ -12,7 +12,7 @@
                     {{ session('success') }}
                 </p>
             @endif
-            <form action="record" method="post" class="form">
+            <form action="tracking" method="post" class="form">
                 @csrf
                 <div class="control-group">
                 <label 

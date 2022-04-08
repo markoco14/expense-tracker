@@ -22,10 +22,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// expense input routes
-Route::get('record', [ExpensesController::class, 'index']);
-Route::post('record', [ExpensesController::class, 'store']);
-
 // sign up page routes
 Route::get('signup', [UsersController::class, 'create'])->middleware('guest');
 Route::post('signup', [UsersController::class, 'store'])->middleware('guest');
@@ -36,6 +32,15 @@ Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest
 
 // log out
 Route::get('logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
+// profile information routes
+Route::get('profile', function () {
+    return view('profile');
+});
+
+// expense input routes
+Route::get('tracking', [ExpensesController::class, 'index']);
+Route::post('tracking', [ExpensesController::class, 'store']);
 
 // budget routes
 Route::get('details', [BudgetController::class, 'index'])->middleware('auth');

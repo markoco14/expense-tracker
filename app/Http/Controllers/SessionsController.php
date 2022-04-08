@@ -15,7 +15,7 @@ class SessionsController extends Controller
         ]);
 
         if (auth()->attempt($attributes)) {
-            return redirect('record')->with('success', 'Welcome back!');
+            return redirect('tracking')->with('success', 'Welcome back!');
         }
 
         return back()

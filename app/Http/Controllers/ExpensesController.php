@@ -15,7 +15,7 @@ use Illuminate\Http\Client\Request;
 class ExpensesController extends Controller
 {
     public function index() {
-        return view('record');
+        return view('tracking');
     }
 
     public function store() {
@@ -48,7 +48,7 @@ class ExpensesController extends Controller
 
         session()->flash('success', 'Your data has been stored.');
 
-        return redirect('record');
+        return redirect('tracking');
         // dd('You sent some data.');
     }
 }
