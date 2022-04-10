@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\FinancialsController;
 use Illuminate\Contracts\Session\Session;
 
 /*
@@ -34,9 +35,8 @@ Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest
 Route::get('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
 // profile information routes
-Route::get('profile', function () {
-    return view('profile');
-});
+Route::get('profile', [FinancialsController::class, 'index']);
+Route::post('profile', [FinancialsController::class, 'store']);
 
 // expense input routes
 Route::get('tracking', [ExpensesController::class, 'index']);
