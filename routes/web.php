@@ -20,7 +20,7 @@ use Illuminate\Contracts\Session\Session;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 // sign up page routes
