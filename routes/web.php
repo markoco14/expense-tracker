@@ -35,12 +35,12 @@ Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest
 Route::get('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
 // profile information routes
-Route::get('profile', [FinancialsController::class, 'index']);
-Route::post('profile', [FinancialsController::class, 'store']);
+Route::get('profile', [FinancialsController::class, 'index'])->middleware('auth');
+Route::post('profile', [FinancialsController::class, 'store'])->middleware('auth');
 
 // expense input routes
-Route::get('tracking', [ExpensesController::class, 'index']);
-Route::post('tracking', [ExpensesController::class, 'store']);
+Route::get('tracking', [ExpensesController::class, 'index'])->middleware('auth');
+Route::post('tracking', [ExpensesController::class, 'store'])->middleware('auth');
 
 // budget routes
 Route::get('details', [BudgetController::class, 'index'])->middleware('auth');
