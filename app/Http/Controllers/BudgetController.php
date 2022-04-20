@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Expense;
 use App\Models\UserDeduction;
 use App\Models\UserSalary;
+use Illuminate\Http\Request;
 
 
 class BudgetController extends Controller
@@ -91,5 +92,14 @@ class BudgetController extends Controller
 
     public function setup() {
         return view('budget.setup');
+    }
+
+    public function spending() {
+
+        $expenses = Expense::where('username', auth()->user()->username)
+            ->get();
+
+        // dd($expenses);
+        return view('budget.spending', compact('expenses'));
     }
 }
