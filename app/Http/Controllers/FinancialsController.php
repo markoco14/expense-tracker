@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserSalary;
 use App\Models\UserDeduction;
 use Illuminate\Http\Client\Request;
+use Carbon\Carbon;
 
 // use Illuminate\Support\Facades\DB;
 
@@ -37,9 +38,10 @@ class FinancialsController extends Controller
                 $salary = new UserSalary;
                 $salary->user_id = auth()->user()->id;
                 $salary->salary_amount = $value;
-                $salary->salary_status = 'ACTIVE';
+                $salary->salary_status = 'CURRENT';
                 $salary->job_category = 'NULL';
                 $salary->job_title = 'NULL';
+                $salary->month = Carbon::now()->month;
                 // dd($salary);
                 $salary->save();
             }
@@ -48,8 +50,9 @@ class FinancialsController extends Controller
                 $deduction->user_id = auth()->user()->id;
                 $deduction->deduction_name = $key;
                 $deduction->deduction_amount = $value;
-                $deduction->deduction_status = 'ACTIVE';
+                $deduction->deduction_status = 'CURRENT';
                 $deduction->deduction_type = 'deduction';
+                $deduction->month = Carbon::now()->month;
                 // dd($deduction);
                 $deduction->save();
                 // TODO: change the type later (employment, necessities, etc)
