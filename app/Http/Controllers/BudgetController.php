@@ -10,20 +10,23 @@ use Illuminate\Http\Request;
 
 class BudgetController extends Controller
 {
-    public function index() {
+    public function index()
+    {
 
         $monthlySalary = UserSalary::where('user_id', auth()->user()->id)
+            ->latest()
             ->pluck('salary_amount');
         if ($monthlySalary->isNotEmpty()) {
             $monthlySalary = $monthlySalary->toArray()[0];
         } else {
             $monthlySalary = 0;
         }
-            
+
         $labourInsurance = UserDeduction::where('user_id', auth()->user()->id)
             ->where('deduction_name', 'li')
+            ->latest()
             ->pluck('deduction_amount');
-        if ($labourInsurance->isNotEmpty()){
+        if ($labourInsurance->isNotEmpty()) {
             $labourInsurance = $labourInsurance->toArray()[0];
         } else {
             $labourInsurance = 0;
@@ -31,6 +34,7 @@ class BudgetController extends Controller
 
         $nationalHealthInsurance = UserDeduction::where('user_id', auth()->user()->id)
             ->where('deduction_name', 'nhi')
+            ->latest()
             ->pluck('deduction_amount');
         if ($nationalHealthInsurance->isNotEmpty()) {
             $nationalHealthInsurance = $nationalHealthInsurance->toArray()[0];
@@ -48,18 +52,21 @@ class BudgetController extends Controller
 
         $rent = UserDeduction::where('user_id', auth()->user()->id)
             ->where('deduction_name', 'rent')
+            ->latest()
             ->pluck('deduction_amount');
 
         $utilities = UserDeduction::where('user_id', auth()->user()->id)
             ->where('deduction_name', 'utilities')
+            ->latest()
             ->pluck('deduction_amount');
-        
+
         $savings = UserDeduction::where('user_id', auth()->user()->id)
             ->where('deduction_name', 'savings')
+            ->latest()
             ->pluck('deduction_amount');
-        
+
         $totalDailyBudget = 34 * 500;
-        
+
         if ($rent->isNotEmpty() && $utilities->isNotEmpty() && $savings->isNotEmpty()) {
             $rent = $rent->toArray()[0];
             $utilities = $utilities->toArray()[0];
@@ -71,7 +78,7 @@ class BudgetController extends Controller
             $savings = 0;
             $beforeDailyExpenses = 0;
         }
-        
+
         $surplus = $beforeDailyExpenses - $totalDailyBudget;
 
 
@@ -90,11 +97,13 @@ class BudgetController extends Controller
         ]);
     }
 
-    public function setup() {
+    public function setup()
+    {
         return view('budget.setup');
     }
 
-    public function spending() {
+    public function spending()
+    {
 
         $expenses = Expense::where('username', auth()->user()->username)
             ->get();
