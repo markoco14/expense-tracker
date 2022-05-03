@@ -6,11 +6,12 @@ use App\Models\Expense;
 use App\Models\UserDeduction;
 use App\Models\UserSalary;
 use Illuminate\Http\Request;
-
+use App\Services\DeductionCalculatorService;
 
 class BudgetController extends Controller
 {
-    public function index() {
+
+    public function index(DeductionCalculatorService $deductionCalculatorService) {
 
         $monthlySalary = UserSalary::where('user_id', auth()->user()->id)
             ->pluck('salary_amount');
@@ -19,24 +20,9 @@ class BudgetController extends Controller
         } else {
             $monthlySalary = 0;
         }
-            
-        $labourInsurance = UserDeduction::where('user_id', auth()->user()->id)
-            ->where('deduction_name', 'li')
-            ->pluck('deduction_amount');
-        if ($labourInsurance->isNotEmpty()){
-            $labourInsurance = $labourInsurance->toArray()[0];
-        } else {
-            $labourInsurance = 0;
-        }
 
-        $nationalHealthInsurance = UserDeduction::where('user_id', auth()->user()->id)
-            ->where('deduction_name', 'nhi')
-            ->pluck('deduction_amount');
-        if ($nationalHealthInsurance->isNotEmpty()) {
-            $nationalHealthInsurance = $nationalHealthInsurance->toArray()[0];
-        } else {
-            $nationalHealthInsurance = 0;
-        }
+        $labourInsurance = $deductionCalculatorService->getLabourInsurance();
+        $nationalHealthInsurance = $deductionCalculatorService->getNationalHealthInsruance();
 
         if (gettype($labourInsurance) !== 'integer' && gettype($nationalHealthInsurance) !== 'integer') {
             $deductions = 0;
@@ -46,19 +32,10 @@ class BudgetController extends Controller
             $takeHomePay = $monthlySalary - $deductions;
         }
 
-        $rent = UserDeduction::where('user_id', auth()->user()->id)
-            ->where('deduction_name', 'rent')
-            ->pluck('deduction_amount');
-
-        $utilities = UserDeduction::where('user_id', auth()->user()->id)
-            ->where('deduction_name', 'utilities')
-            ->pluck('deduction_amount');
+        $rent = $deductionCalculatorService->getRent();
+        $utilities = $deductionCalculatorService->getUtilities();
+        $savings = $deductionCalculatorService->getSavings();
         
-        $savings = UserDeduction::where('user_id', auth()->user()->id)
-            ->where('deduction_name', 'savings')
-            ->pluck('deduction_amount');
-        
-        $totalDailyBudget = 34 * 500;
         
         if ($rent->isNotEmpty() && $utilities->isNotEmpty() && $savings->isNotEmpty()) {
             $rent = $rent->toArray()[0];
@@ -72,8 +49,9 @@ class BudgetController extends Controller
             $beforeDailyExpenses = 0;
         }
         
+        $totalDailyBudget = 34 * 500;
         $surplus = $beforeDailyExpenses - $totalDailyBudget;
-
+        
 
         return view('budget.details', [
             'monthlySalary' => number_format($monthlySalary),
