@@ -36,7 +36,6 @@ Route::get('logout', [SessionsController::class, 'destroy'])->middleware('auth')
 
 // profile information routes
 Route::get('profile', [FinancialsController::class, 'index'])->middleware('auth');
-Route::post('profile/store', [FinancialsController::class, 'store'])->middleware('auth');
 Route::post('profile/salaries', [FinancialsController::class, 'salaries'])->middleware('auth');
 Route::post('profile/deductions', [FinancialsController::class, 'deductions'])->middleware('auth');
 Route::post('profile/savings', [FinancialsController::class, 'savings'])->middleware('auth');

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserBudget;
 use App\Models\UserSalary;
 use App\Models\UserDeduction;
+use App\Models\UserSaving;
+
 use Illuminate\Http\Client\Request;
 use Carbon\Carbon;
 
@@ -29,14 +32,16 @@ class FinancialsController extends Controller
 
         // dd($attributes);
         $salary = new UserSalary;
-                $salary->user_id = auth()->user()->id;
-                $salary->salary_amount = $attributes['salary'];
-                $salary->salary_status = 'CURRENT';
-                $salary->job_category = 'NULL';
-                $salary->job_title = 'NULL';
-                $salary->month = Carbon::now()->month;
-                // dd($salary);
-                $salary->save();
+        $salary->user_id = auth()->user()->id;
+        $salary->salary_amount = $attributes['salary'];
+        $salary->salary_status = 'CURRENT';
+        $salary->job_category = 'NULL';
+        $salary->job_title = 'NULL';
+        $salary->month = Carbon::now()->month;
+        // dd($salary);
+        $salary->save();
+        return redirect('profile');
+
     }
     // deductions function
     public function deductions() {
@@ -48,7 +53,23 @@ class FinancialsController extends Controller
             'utilities' => ['required']
         ]);
 
-        dd($attributes);
+        // dd($attributes);
+
+        foreach ($attributes as $key => $value) {
+            $deduction = new UserDeduction;
+            $deduction->user_id = auth()->user()->id;
+            $deduction->deduction_name = $key;
+            $deduction->deduction_amount = $value;
+            $deduction->deduction_status = 'CURRENT';
+            $deduction->deduction_type = 'deduction';
+            $deduction->month = Carbon::now()->month;
+            // dd($deduction);
+            $deduction->save();
+            // TODO: change the type later (employment, necessities, etc)
+        }
+        return redirect('profile');
+
+
     }
     // savings function
     public function savings() {
@@ -57,8 +78,21 @@ class FinancialsController extends Controller
             'savings' => ['required']
         ]);
 
-        dd($attributes);
+        // dd($attributes);
+
+        $saving = new UserSaving;
+        $saving->user_id = auth()->user()->id;
+        $saving->savings_name = 'monthly';
+        $saving->savings_status = 'CURRENT';
+        $saving->savings_amount = $attributes['savings'];
+        // $saving->month = Carbon::now()->month;
+        // dd($saving);
+        $saving->save();
+
+        return redirect('profile');
+
     }
+
     // budgets function
     public function budgets() {
         // dd('You hit the budgets endpoint');
@@ -66,80 +100,16 @@ class FinancialsController extends Controller
             'budgets' => ['required']
         ]);
 
-        dd($attributes);
-    }
-    public function store() {
-
-        // dd('connection to controller established');
-
-        $attributes = request()->validate([
-            'salary' => ['required'],
-            'li' => ['required'],
-            'nhi' => ['required'],
-            'rent' => ['required'],
-            'utilities' => ['required'],
-            'savings' => ['required'],
-            'budget' => ['required'],
-        ]);
-
-        dd($attributes);
-
-        foreach ($attributes as $key => $value) {
-            if ($key === 'salary') {
-                $salary = new UserSalary;
-                $salary->user_id = auth()->user()->id;
-                $salary->salary_amount = $value;
-                $salary->salary_status = 'CURRENT';
-                $salary->job_category = 'NULL';
-                $salary->job_title = 'NULL';
-                $salary->month = Carbon::now()->month;
-                // dd($salary);
-                $salary->save();
-            }
-            else {
-                $deduction = new UserDeduction;
-                $deduction->user_id = auth()->user()->id;
-                $deduction->deduction_name = $key;
-                $deduction->deduction_amount = $value;
-                $deduction->deduction_status = 'CURRENT';
-                $deduction->deduction_type = 'deduction';
-                $deduction->month = Carbon::now()->month;
-                // dd($deduction);
-                $deduction->save();
-                // TODO: change the type later (employment, necessities, etc)
-            }
-        }
-        
-
-
-        // store both
-
-        // then return a view
-
-
-
-        // dd($attributes['amount'], $attributes['what'], $attributes['where']);
-
-        // $expense = new Expense;
-        // $expense->amount = $attributes['amount'];
-        // $expense->what = $attributes['what'];
-        // $expense->where = $attributes['where'];
-        // $expense->username = auth()->user()->username;
-
-        // $expense->save();
-        // dd($expense);
-
-        // Expense::create($attributes);
-        // DB::table('expenses')->insert([
-        //     'username'=>'Markoco14',
-        //     'amount'=>$attributes['amount'],
-        //     'what'=>$attributes['what'],
-        //     'where'=>$attributes['where'],
-        // ]);
-
-        // session()->flash('success', 'Your data has been stored.');
+        // dd($attributes);
+        $budget = new UserBudget;
+        $budget->user_id = auth()->user()->id;
+        $budget->budget_name = 'daily';
+        $budget->budget_status = 'CURRENT';
+        $budget->budget_amount = $attributes['budgets'];
+        // $budget->month = Carbon::now()->month;
+        // dd($budget);
+        $budget->save();
 
         return redirect('profile');
-        // dd('You sent some data.');
     }
 }
