@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\UserBudget;
 use App\Models\UserDeduction;
+use App\Models\UserSaving;
 
 class DeductionCalculatorService
 {
@@ -49,10 +51,16 @@ class DeductionCalculatorService
     }
 
     public function getSavings() {
-        $savings = UserDeduction::where('user_id', auth()->user()->id)
-            ->where('deduction_name', 'savings')
-            ->pluck('deduction_amount');
+        $savings = UserSaving::where('user_id', auth()->user()->id)
+            ->where('savings_status', 'CURRENT')
+            ->pluck('savings_amount');
         return $savings;
+    }
+    public function getDailyBudget() {
+        $budget = UserBudget::where('user_id', auth()->user()->id)
+            ->where('budget_status', 'CURRENT')
+            ->pluck('budget_amount');
+        return $budget;
     }
 
 
