@@ -12,12 +12,12 @@
                     {{ session('success') }}
                 </p>
             @endif
-            <form action="profile" method="post" class="form">
+            {{-- salary section --}}
+            <h2>Salary</h2>
+            <form action="profile/salaries" method="post" class="form">
                 @csrf
                 <div class="control-group">
-                <label 
-                        for="salary"
-                        class="form-label">
+                    <label for="salary" class="form-label">
                         What is your salary?
                     </label>
                     <input 
@@ -26,11 +26,26 @@
                         name="salary"
                         class="form-control"
                         value={{old('salary')}}
-                        >
+                    >
                     @error('salary')
                         <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
+                <div class="control-group">
+                    <button 
+                        type="submit" 
+                        name="submit" 
+                        class="form-control"
+                        >
+                        Submit Salary
+                    </button>
+                </div>
+            </form>
+
+            {{-- deductions section --}}
+            <h2>Deductions</h2>
+            <form action="profile/deductions" method="post" class="form">
+                @csrf
                 <div class="control-group">
                     <label 
                         for="li" 
@@ -104,6 +119,21 @@
                     @enderror
                 </div>
                 <div class="control-group">
+                    <button 
+                        type="submit" 
+                        name="submit" 
+                        class="form-control"
+                        >
+                        Submit Deductions
+                    </button>
+                </div>
+            </form>
+
+            {{-- savings section --}}
+            <h2>Savings</h2>
+            <form action="profile/savings" method="post" class="form">
+                @csrf
+                <div class="control-group">
                     <label 
                         for="savings" 
                         class="form-label"
@@ -127,7 +157,40 @@
                         name="submit" 
                         class="form-control"
                         >
-                        Submit
+                        Submit Savings
+                    </button>
+                </div>
+            </form>
+
+            {{-- budget section --}}
+            <h2>Budgets</h2>
+            <form action="profile/budgets" method="post" class="form">
+                @csrf
+                <div class="control-group">
+                    <label 
+                        for="budgets" 
+                        class="form-label"
+                        >
+                        Daily Budget
+                    </label>
+                    <input 
+                        type="text" 
+                        id="budgets" 
+                        name="budgets"
+                        class="form-control"
+                        value={{old('budgets')}}
+                        >
+                    @error('budgets')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="control-group">
+                    <button 
+                        type="submit" 
+                        name="submit" 
+                        class="form-control"
+                        >
+                        Submit Budget
                     </button>
                 </div>
             </form>

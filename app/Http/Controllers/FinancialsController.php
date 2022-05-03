@@ -20,6 +20,54 @@ class FinancialsController extends Controller
         return view('profile');
     }
 
+    // salaries function
+    public function salaries() {
+        // dd('You hit the salaries endpoint');
+        $attributes = request()->validate([
+            'salary' => ['required']
+        ]);
+
+        // dd($attributes);
+        $salary = new UserSalary;
+                $salary->user_id = auth()->user()->id;
+                $salary->salary_amount = $attributes['salary'];
+                $salary->salary_status = 'CURRENT';
+                $salary->job_category = 'NULL';
+                $salary->job_title = 'NULL';
+                $salary->month = Carbon::now()->month;
+                // dd($salary);
+                $salary->save();
+    }
+    // deductions function
+    public function deductions() {
+        // dd('You hit the deductions endpoint');
+        $attributes = request()->validate([
+            'li' => ['required'],
+            'nhi' => ['required'],
+            'rent' => ['required'],
+            'utilities' => ['required']
+        ]);
+
+        dd($attributes);
+    }
+    // savings function
+    public function savings() {
+        // dd('You hit the savings endpoint');
+        $attributes = request()->validate([
+            'savings' => ['required']
+        ]);
+
+        dd($attributes);
+    }
+    // budgets function
+    public function budgets() {
+        // dd('You hit the budgets endpoint');
+        $attributes = request()->validate([
+            'budgets' => ['required']
+        ]);
+
+        dd($attributes);
+    }
     public function store() {
 
         // dd('connection to controller established');
@@ -31,7 +79,10 @@ class FinancialsController extends Controller
             'rent' => ['required'],
             'utilities' => ['required'],
             'savings' => ['required'],
+            'budget' => ['required'],
         ]);
+
+        dd($attributes);
 
         foreach ($attributes as $key => $value) {
             if ($key === 'salary') {
