@@ -49,8 +49,15 @@ class BudgetController extends Controller
             $beforeDailyExpenses = 0;
         }
         
-        $totalDailyBudget = 34 * 500;
-        $surplus = $beforeDailyExpenses - $totalDailyBudget;
+        $totalDailyBudget = $deductionCalculatorService->getDailyBudget();
+        // dd($totalDailyBudget);
+        if ($totalDailyBudget->isNotEmpty()) {
+            $totalDailyBudget = $totalDailyBudget->toArray()[0];
+            $surplus = $beforeDailyExpenses - $totalDailyBudget;
+        } else {
+            $totalDailyBudget = 0;
+            $surplus = 0;
+        }
         
 
         return view('budget.details', [
