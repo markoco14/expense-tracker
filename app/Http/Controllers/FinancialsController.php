@@ -85,6 +85,7 @@ class FinancialsController extends Controller
         $saving->savings_name = 'monthly';
         $saving->savings_status = 'CURRENT';
         $saving->savings_amount = $attributes['savings'];
+        // dd($saving);
         // $saving->month = Carbon::now()->month;
         // dd($saving);
         $saving->save();

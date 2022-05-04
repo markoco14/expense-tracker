@@ -8,6 +8,7 @@ use App\Models\UserSaving;
 
 class DeductionCalculatorService
 {
+
     public function getLabourInsurance() {
         $labourInsurance = UserDeduction::where('user_id', auth()->user()->id)
                 ->where('deduction_name', 'li')
@@ -40,6 +41,12 @@ class DeductionCalculatorService
         $rent = UserDeduction::where('user_id', auth()->user()->id)
             ->where('deduction_name', 'rent')
             ->pluck('deduction_amount');
+
+            if ($rent->isNotEmpty()) {
+                $rent = $rent->toArray()[0];
+            } else {
+                $rent = 0;
+            }
         return $rent;
     }
 
@@ -47,6 +54,12 @@ class DeductionCalculatorService
         $utilities = UserDeduction::where('user_id', auth()->user()->id)
             ->where('deduction_name', 'utilities')
             ->pluck('deduction_amount');
+            if ($utilities->isNotEmpty()) {
+                $utilities = $utilities->toArray()[0];
+            } else {
+                $utilities = 0;
+            }
+            
         return $utilities;
     }
 
@@ -54,12 +67,24 @@ class DeductionCalculatorService
         $savings = UserSaving::where('user_id', auth()->user()->id)
             ->where('savings_status', 'CURRENT')
             ->pluck('savings_amount');
+            if ($savings->isNotEmpty()) {
+                $savings = $savings->toArray()[0];
+            } else {
+                $savings = 0;
+            }
+            
         return $savings;
     }
     public function getDailyBudget() {
         $budget = UserBudget::where('user_id', auth()->user()->id)
             ->where('budget_status', 'CURRENT')
             ->pluck('budget_amount');
+
+            if ($budget->isNotEmpty()) {
+                $budget = $budget->toArray()[0];
+            } else {
+                $budget = 0;
+            }
         return $budget;
     }
 
