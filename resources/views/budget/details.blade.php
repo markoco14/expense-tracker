@@ -19,26 +19,38 @@
                     <td>Deductions</td>
                     <td>${{$deductions}}</td>
                 </tr>
+                {{-- {{dd($allDeductions)}} --}}
+                @foreach ($allDeductions as $deduction)
                 <tr>
+                    <td>{{$deduction['deduction_name']}}</td>
+                    <td>${{number_format($deduction['deduction_amount'])}}</td>
+                </tr>
+                @endforeach
+                {{-- <tr>
                     <td>LI</td>
                     <td>${{$labourInsurance}}</td>
                 </tr>
                 <tr>
                     <td>NHI</td>
                     <td>${{$nationalHealthInsurance}}</td>
-                </tr>
-                <tr>
+                </tr> --}}
+                {{-- 
+                    comment out take home pay for now. 
+                    need to fix up some stuff with the deductions form
+                    once I have types, I can get THP and go from there
+                --}}
+                {{-- <tr>
                     <td>Take Home Pay</td>
                     <td>${{$takeHomePay}}</td>
-                </tr>
-                <tr>
+                </tr> --}}
+                {{-- <tr>
                     <td>Rent</td>
                     <td>${{$rent}}</td>
                 </tr>
                 <tr>
                     <td>Utilities</td>
                     <td>${{$utilities}}</td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <td>Savings</td>
                     <td>${{$savings}}</td>

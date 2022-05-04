@@ -7,6 +7,7 @@ use App\Models\UserDeduction;
 use App\Models\UserSalary;
 use Illuminate\Http\Request;
 use App\Services\DeductionCalculatorService;
+use Carbon\Carbon;
 
 class BudgetController extends Controller
 {
@@ -20,20 +21,24 @@ class BudgetController extends Controller
         } else {
             $monthlySalary = 0;
         }
-
+        
         $labourInsurance = $deductionCalculatorService->getLabourInsurance();
         $nationalHealthInsurance = $deductionCalculatorService->getNationalHealthInsruance();
-        $deductions = $labourInsurance + $nationalHealthInsurance;
+        $allDeductions = $deductionCalculatorService->getDeductions();
+        $deductions = 0;
+        foreach ($allDeductions as $deduction) {
+            $deductions += $deduction['deduction_amount'];
+        }
         $takeHomePay = $monthlySalary - $deductions;
         $rent = $deductionCalculatorService->getRent();
         $utilities = $deductionCalculatorService->getUtilities();
         $savings = $deductionCalculatorService->getSavings();
         $beforeDailyExpenses = $takeHomePay - $rent - $utilities - $savings;
         $totalDailyBudget = $deductionCalculatorService->getDailyBudget();
-        $budgetedMonthlyExpenses = $totalDailyBudget * 31;
+        $budgetedMonthlyExpenses = $totalDailyBudget * Carbon::now()->daysInMonth;
         $surplus = $beforeDailyExpenses - $totalDailyBudget;
         
-
+        
         return view('budget.details', [
             'monthlySalary' => number_format($monthlySalary),
             'deductions' => number_format($deductions),
@@ -45,7 +50,8 @@ class BudgetController extends Controller
             'savings' => number_format($savings),
             'beforeDailyExpenses' => number_format($beforeDailyExpenses),
             'totalDailyBudget' => number_format($budgetedMonthlyExpenses),
-            'surplus' => number_format($surplus)
+            'surplus' => number_format($surplus),
+            'allDeductions' => $allDeductions
         ]);
     }
 

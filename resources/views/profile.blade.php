@@ -55,80 +55,38 @@
                 For now, you may only use the deductions given to you.
                 You will be able to choose your deductions later.
             </p>
-            <form action="profile/deductions" method="post" class="form">
+            <input 
+                type="text"
+                id="add-deduction-input"
+            >
+            <button
+                id="add-deduction-button"    
+            >
+                Add Deduction
+            </button>
+            <form 
+                action="profile/deductions" 
+                method="post" 
+                class="form"
+                id="deduction-form"
+            >
                 @csrf
-                <div class="control-group">
-                    <label 
-                        for="li" 
-                        class="form-label"
-                        >
-                        LI
-                    </label>
-                    <input 
-                        type="text" 
-                        id="li" 
-                        name="li"
-                        class="form-control"
-                        value={{old('li')}}
-                        >
+                <div id="user-deductions-container">
+                </div>
+                {{-- 
                     @error('li')
                         <p class="text-danger">{{$message}}</p>
                     @enderror
-                </div>
-                <div class="control-group">
-                    <label 
-                        for="nhi" 
-                        class="form-label"
-                        >
-                        NHI
-                    </label>
-                    <input 
-                        type="text" 
-                        id="nhi" 
-                        name="nhi"
-                        class="form-control"
-                        value={{old('nhi')}}
-                        >
                     @error('nhi')
                         <p class="text-danger">{{$message}}</p>
                     @enderror
-                </div>
-                <div class="control-group">
-                    <label 
-                        for="rent" 
-                        class="form-label"
-                        >
-                        Rent
-                    </label>
-                    <input 
-                        type="text" 
-                        id="rent" 
-                        name="rent"
-                        class="form-control"
-                        value={{old('rent')}}
-                        >
                     @error('rent')
                         <p class="text-danger">{{$message}}</p>
                     @enderror
-                </div>
-                <div class="control-group">
-                    <label 
-                        for="utilities" 
-                        class="form-label"
-                        >
-                        Utilities
-                    </label>
-                    <input 
-                        type="text" 
-                        id="utilities" 
-                        name="utilities"
-                        class="form-control"
-                        value={{old('utilities')}}
-                        >
                     @error('utilities')
                         <p class="text-danger">{{$message}}</p>
                     @enderror
-                </div>
+                --}}
                 <div class="control-group">
                     <button 
                         type="submit" 
@@ -217,24 +175,38 @@
             </form>
         </div>
     </div>
-    {{-- <script>
-        let amount = document.getElementById('amount');
-        let what = document.getElementById('what');
-        let where = document.getElementById('where');
+    <script>
+        let addDeductionInput = document.getElementById('add-deduction-input');
+        let addDeductionButton = document.getElementById('add-deduction-button');
+        let deductionForm = document.getElementById('deduction-form');
+        addDeductionButton.addEventListener('click', addNewDeductionInput);
+        
+        function addNewDeductionInput(e) {
+            // console.log(addDeductionInput.value);
+            // console.log(deductionForm);
+            let userDeductionsContainer = document.getElementById('user-deductions-container');
 
-        amount.focus();
-        amount.addEventListener('keypress', function(e) {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                what.focus();
-            }
-        });
+            let newDivGroup = document.createElement('div');
+            newDivGroup.setAttribute('class', 'control-group');
 
-        what.addEventListener('keypress', function(e) {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                where.focus();
-            }
-        })
-    </script> --}}
+            let newLabel = document.createElement('label');
+            newLabel.setAttribute('for', addDeductionInput.value);
+            newLabel.setAttribute('class', 'form-label');
+            newLabel.setAttribute('id', addDeductionInput.value);
+            newLabel.textContent = addDeductionInput.value;
+            console.log(newLabel);
+            
+            let newInput = document.createElement('input');
+            newInput.setAttribute('name', addDeductionInput.value);
+            newInput.setAttribute('class', 'form-control');
+            newInput.setAttribute('type', 'number');
+            console.log(newInput);
+
+            userDeductionsContainer.appendChild(newDivGroup);
+            newDivGroup.appendChild(newLabel);
+            newDivGroup.appendChild(newInput);
+
+            addDeductionInput.value = '';
+        }
+    </script>
 <x-footer />

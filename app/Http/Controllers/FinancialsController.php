@@ -26,6 +26,9 @@ class FinancialsController extends Controller
     // salaries function
     public function salaries() {
         // dd('You hit the salaries endpoint');
+        UserSalary::where('salary_status', 'CURRENT')
+        ->where('user_id', auth()->user()->id)
+        ->update(['salary_status' => 'OOD']);
         $attributes = request()->validate([
             'salary' => ['required']
         ]);
@@ -46,14 +49,19 @@ class FinancialsController extends Controller
     // deductions function
     public function deductions() {
         // dd('You hit the deductions endpoint');
-        $attributes = request()->validate([
-            'li' => ['required'],
-            'nhi' => ['required'],
-            'rent' => ['required'],
-            'utilities' => ['required']
-        ]);
-
-        // dd($attributes);
+        // dd(request()->input());
+        UserDeduction::where('deduction_status', 'CURRENT')
+        ->where('user_id', auth()->user()->id)
+        ->update(['deduction_status' => 'OOD']);
+        $rules = [];
+        foreach(request()->input() as $key => $value) {
+            if ($key === '_token' || $key === 'submit') {
+                continue;
+            } else {
+                $rules[$key] = 'required';
+            }
+        }
+        $attributes = request()->validate($rules);
 
         foreach ($attributes as $key => $value) {
             $deduction = new UserDeduction;
@@ -74,6 +82,9 @@ class FinancialsController extends Controller
     // savings function
     public function savings() {
         // dd('You hit the savings endpoint');
+        UserSaving::where('savings_status', 'CURRENT')
+        ->where('user_id', auth()->user()->id)
+        ->update(['savings_status' => 'OOD']);
         $attributes = request()->validate([
             'savings' => ['required']
         ]);
@@ -97,6 +108,9 @@ class FinancialsController extends Controller
     // budgets function
     public function budgets() {
         // dd('You hit the budgets endpoint');
+        UserBudget::where('budget_status', 'CURRENT')
+        ->where('user_id', auth()->user()->id)
+        ->update(['budget_status' => 'OOD']);
         $attributes = request()->validate([
             'budgets' => ['required']
         ]);
