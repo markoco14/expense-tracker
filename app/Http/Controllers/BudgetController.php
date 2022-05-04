@@ -23,41 +23,15 @@ class BudgetController extends Controller
 
         $labourInsurance = $deductionCalculatorService->getLabourInsurance();
         $nationalHealthInsurance = $deductionCalculatorService->getNationalHealthInsruance();
-
-        if (gettype($labourInsurance) !== 'integer' && gettype($nationalHealthInsurance) !== 'integer') {
-            $deductions = 0;
-            $takeHomePay = 0;
-        } else {
-            $deductions = $labourInsurance + $nationalHealthInsurance;
-            $takeHomePay = $monthlySalary - $deductions;
-        }
-
+        $deductions = $labourInsurance + $nationalHealthInsurance;
+        $takeHomePay = $monthlySalary - $deductions;
         $rent = $deductionCalculatorService->getRent();
         $utilities = $deductionCalculatorService->getUtilities();
         $savings = $deductionCalculatorService->getSavings();
-        
-        
-        if ($rent->isNotEmpty() && $utilities->isNotEmpty() && $savings->isNotEmpty()) {
-            $rent = $rent->toArray()[0];
-            $utilities = $utilities->toArray()[0];
-            $savings = $savings->toArray()[0];
-            $beforeDailyExpenses = $takeHomePay - $rent - $utilities - $savings;
-        } else {
-            $rent = 0;
-            $utilities = 0;
-            $savings = 0;
-            $beforeDailyExpenses = 0;
-        }
-        
+        $beforeDailyExpenses = $takeHomePay - $rent - $utilities - $savings;
         $totalDailyBudget = $deductionCalculatorService->getDailyBudget();
-        // dd($totalDailyBudget);
-        if ($totalDailyBudget->isNotEmpty()) {
-            $totalDailyBudget = $totalDailyBudget->toArray()[0];
-            $surplus = $beforeDailyExpenses - $totalDailyBudget;
-        } else {
-            $totalDailyBudget = 0;
-            $surplus = 0;
-        }
+        $budgetedMonthlyExpenses = $totalDailyBudget * 31;
+        $surplus = $beforeDailyExpenses - $totalDailyBudget;
         
 
         return view('budget.details', [
@@ -70,7 +44,7 @@ class BudgetController extends Controller
             'utilities' => number_format($utilities),
             'savings' => number_format($savings),
             'beforeDailyExpenses' => number_format($beforeDailyExpenses),
-            'totalDailyBudget' => number_format($totalDailyBudget),
+            'totalDailyBudget' => number_format($budgetedMonthlyExpenses),
             'surplus' => number_format($surplus)
         ]);
     }
