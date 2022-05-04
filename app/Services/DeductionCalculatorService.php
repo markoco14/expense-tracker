@@ -63,6 +63,20 @@ class DeductionCalculatorService
         return $utilities;
     }
 
+    public function getDeductions() {
+        $deductionsCollection = UserDeduction::where('user_id', auth()->user()->id)
+        ->where('deduction_status', 'CURRENT')
+        ->get();
+        // $deductions = [];
+        // foreach ($deductionsCollection as $key => $value) {
+        //     $deductions[$key] = $value;
+        // }
+        $deductions = $deductionsCollection->toArray();
+        // dd($deductions);
+        return $deductions;
+
+    }
+
     public function getSavings() {
         $savings = UserSaving::where('user_id', auth()->user()->id)
             ->where('savings_status', 'CURRENT')
