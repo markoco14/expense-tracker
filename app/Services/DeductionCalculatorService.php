@@ -2,12 +2,26 @@
 
 namespace App\Services;
 
+use App\Models\UserSalary;
 use App\Models\UserBudget;
 use App\Models\UserDeduction;
 use App\Models\UserSaving;
 
 class DeductionCalculatorService
 {
+
+    public function getSalary() {
+        $monthlySalary = UserSalary::where('user_id', auth()->user()->id)
+                ->where('salary_status', 'CURRENT')
+                ->pluck('salary_amount');
+            if ($monthlySalary->isNotEmpty()) {
+                $monthlySalary = $monthlySalary->toArray()[0];
+            } else {
+                $monthlySalary = 0;
+            }
+
+            return $monthlySalary;
+    }
 
     public function getLabourInsurance() {
         $labourInsurance = UserDeduction::where('user_id', auth()->user()->id)
