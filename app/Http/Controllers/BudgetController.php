@@ -14,14 +14,9 @@ class BudgetController extends Controller
 
     public function index(DeductionCalculatorService $deductionCalculatorService) {
 
-        $monthlySalary = UserSalary::where('user_id', auth()->user()->id)
-            ->pluck('salary_amount');
-        if ($monthlySalary->isNotEmpty()) {
-            $monthlySalary = $monthlySalary->toArray()[0];
-        } else {
-            $monthlySalary = 0;
-        }
         
+        
+        $monthlySalary = $deductionCalculatorService->getSalary();
         $labourInsurance = $deductionCalculatorService->getLabourInsurance();
         $nationalHealthInsurance = $deductionCalculatorService->getNationalHealthInsruance();
         $allDeductions = $deductionCalculatorService->getDeductions();
@@ -36,7 +31,7 @@ class BudgetController extends Controller
         $beforeDailyExpenses = $takeHomePay - $rent - $utilities - $savings;
         $totalDailyBudget = $deductionCalculatorService->getDailyBudget();
         $budgetedMonthlyExpenses = $totalDailyBudget * Carbon::now()->daysInMonth;
-        $surplus = $beforeDailyExpenses - $totalDailyBudget;
+        $surplus = $beforeDailyExpenses - $budgetedMonthlyExpenses;
         
         
         return view('budget.details', [
