@@ -9,6 +9,7 @@
         <a href="spending">Spending</a>
         <a href="profile">Profile</a>
         <a href="details">Details</a>
+        <a href="progress">Progress</a>
         <a href="logout">Log out</a>
     @endauth
 </nav>
