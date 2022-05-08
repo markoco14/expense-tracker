@@ -49,3 +49,4 @@ Route::post('tracking', [ExpensesController::class, 'store'])->middleware('auth'
 Route::get('details', [BudgetController::class, 'index'])->middleware('auth');
 Route::get('setup', [BudgetController::class, 'setup'])->middleware('auth');
 Route::get('spending', [BudgetController::class, 'spending'])->middleware('auth');
+Route::get('progress', [BudgetController::class, 'progress'])->middleware('auth');

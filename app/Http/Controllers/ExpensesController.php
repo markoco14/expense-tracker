@@ -24,31 +24,17 @@ class ExpensesController extends Controller
             'amount' => ['required'],
             'what' => ['required'],
             'where' => ['required'],
-            // 'username' => 'Markoco14'
         ]);
-
-        // dd($attributes['amount'], $attributes['what'], $attributes['where']);
 
         $expense = new Expense;
         $expense->amount = $attributes['amount'];
         $expense->what = $attributes['what'];
         $expense->where = $attributes['where'];
         $expense->username = auth()->user()->username;
-
         $expense->save();
-        // dd($expense);
-
-        // Expense::create($attributes);
-        // DB::table('expenses')->insert([
-        //     'username'=>'Markoco14',
-        //     'amount'=>$attributes['amount'],
-        //     'what'=>$attributes['what'],
-        //     'where'=>$attributes['where'],
-        // ]);
 
         session()->flash('success', 'Your data has been stored.');
 
         return redirect('tracking');
-        // dd('You sent some data.');
     }
 }

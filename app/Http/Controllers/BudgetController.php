@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\UserBudget;
 use App\Models\UserDeduction;
 use App\Models\UserSalary;
 use Illuminate\Http\Request;
@@ -13,9 +14,6 @@ class BudgetController extends Controller
 {
 
     public function index(DeductionCalculatorService $deductionCalculatorService) {
-
-        
-        
         $monthlySalary = $deductionCalculatorService->getSalary();
         $labourInsurance = $deductionCalculatorService->getLabourInsurance();
         $nationalHealthInsurance = $deductionCalculatorService->getNationalHealthInsruance();
@@ -32,7 +30,6 @@ class BudgetController extends Controller
         $totalDailyBudget = $deductionCalculatorService->getDailyBudget();
         $budgetedMonthlyExpenses = $totalDailyBudget * Carbon::now()->daysInMonth;
         $surplus = $beforeDailyExpenses - $budgetedMonthlyExpenses;
-        
         
         return view('budget.details', [
             'monthlySalary' => number_format($monthlySalary),
@@ -59,7 +56,41 @@ class BudgetController extends Controller
         $expenses = Expense::where('username', auth()->user()->username)
             ->get();
 
-        // dd($expenses);
         return view('budget.spending', compact('expenses'));
+    }
+
+    public function progress() {
+
+        $expenses = Expense::where('username', auth()->user()->username)
+            ->get()
+            ->toArray();
+
+        $expensesToday = [];
+        $totalSpent = 0;
+        
+        foreach($expenses as &$expense) {
+            $expense['created_at'] = Carbon::parse($expense['created_at'])->toDateString();
+            if ($expense['created_at'] === Carbon::today()->toDateString()) {
+                array_push($expensesToday, $expense['amount']);
+                $totalSpent += $expense['amount'];
+            }
+        }
+
+        $budget = UserBudget::where('user_id', auth()->user()->id)
+            ->where('budget_status', 'CURRENT')
+            ->get()
+            ->toArray()[0]['budget_amount'];
+
+        $amountRemaining = $budget - $totalSpent;
+        $percentSpent = $totalSpent/$budget*100;
+        // dd($amountRemaining);
+
+
+        return view('progress', [
+            'expenses' => $expensesToday,
+            'budget' => $budget,
+            'remaining' => $amountRemaining,
+            'percent' => $percentSpent
+        ]);
     }
 }
