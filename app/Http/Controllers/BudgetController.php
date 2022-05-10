@@ -23,10 +23,10 @@ class BudgetController extends Controller
             $deductions += $deduction['deduction_amount'];
         }
         $takeHomePay = $monthlySalary - $deductions;
-        $rent = $deductionCalculatorService->getRent();
-        $utilities = $deductionCalculatorService->getUtilities();
+        // $rent = $deductionCalculatorService->getRent();
+        // $utilities = $deductionCalculatorService->getUtilities();
         $savings = $deductionCalculatorService->getSavings();
-        $beforeDailyExpenses = $takeHomePay - $rent - $utilities - $savings;
+        $beforeDailyExpenses = $takeHomePay - $savings;
         $totalDailyBudget = $deductionCalculatorService->getDailyBudget();
         $budgetedMonthlyExpenses = $totalDailyBudget * Carbon::now()->daysInMonth;
         $surplus = $beforeDailyExpenses - $budgetedMonthlyExpenses;
@@ -37,8 +37,8 @@ class BudgetController extends Controller
             'labourInsurance' => number_format($labourInsurance),
             'nationalHealthInsurance' => number_format($nationalHealthInsurance),
             'takeHomePay' => number_format($takeHomePay),
-            'rent' => number_format($rent),
-            'utilities' => number_format($utilities),
+            // 'rent' => number_format($rent),
+            // 'utilities's => number_format($utilities),
             'savings' => number_format($savings),
             'beforeDailyExpenses' => number_format($beforeDailyExpenses),
             'totalDailyBudget' => number_format($budgetedMonthlyExpenses),
