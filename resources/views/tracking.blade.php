@@ -1,20 +1,20 @@
 <x-header />
     <x-navbar />
-    <div>
-        <div class="col-sm-6 offset-sm-3">
-            <h1>Track your expenses</h1>
-            @if (session()->has('success'))
-                <p
-                    x-data="{ show: true }"
-                    x-init="setTimeout(() => show = false, 4000)"
-                    x-show="show"
-                >
-                    {{ session('success') }}
-                </p>
-            @endif
+    <main class="app-main">
+        <section class="section">
             <form action="tracking" method="post" class="form">
+                <h1>Track your expenses</h1>
+                @if (session()->has('success'))
+                    <p
+                        x-data="{ show: true }"
+                        x-init="setTimeout(() => show = false, 4000)"
+                        x-show="show"
+                    >
+                        {{ session('success') }}
+                    </p>
+                @endif
                 @csrf
-                <div class="control-group">
+                <div class="mb-3 control-group">
                 <label 
                         for="amount"
                         class="form-label">
@@ -31,7 +31,7 @@
                         <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
-                <div class="control-group">
+                <div class="mb-3 control-group">
                     <label 
                         for="what" 
                         class="form-label"
@@ -49,7 +49,7 @@
                         <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
-                <div class="control-group">
+                <div class="mb-3 control-group">
                     <label 
                         for="where" 
                         class="form-label"
@@ -67,7 +67,7 @@
                         <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
-                <div class="control-group">
+                <div class="mb-3 control-group">
                     <button 
                         type="submit" 
                         name="submit" 
@@ -77,8 +77,8 @@
                     </button>
                 </div>
             </form>
-        </div>
-    </div>
+        </section>
+    </main>
     <script>
         let amount = document.getElementById('amount');
         let what = document.getElementById('what');
