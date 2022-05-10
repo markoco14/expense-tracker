@@ -85,12 +85,15 @@ class BudgetController extends Controller
         $percentSpent = $totalSpent/$budget*100;
         // dd($amountRemaining);
 
+        $today = Carbon::today();
+
 
         return view('progress', [
             'expenses' => $expensesToday,
             'budget' => $budget,
             'remaining' => $amountRemaining,
-            'percent' => $percentSpent
+            'percent' => $percentSpent,
+            'today' => $today
         ]);
     }
 }
