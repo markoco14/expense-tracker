@@ -40,14 +40,14 @@
             </div>
             <div class="col card" style="background-color:white;">
                 <p>Extra</p>
-                @php
-                    $monthSurplus = 900
-                @endphp
-                @if ($monthSurplus > 0)
+                {{-- @php
+                    // $monthSurplus = 900
+                @endphp --}}
+                {{-- @if ($monthSurplus > 0)
                 <p style="color: green; font-size:2rem; text-align: center;">{{$monthSurplus}}</p>
                 @else
                 <p style="color: red; font-size:2rem; text-align: center;">{{$monthSurplus}}</p>
-                @endif
+                @endif --}}
             </div>
         </div>
         <table class="table card" style="background-color:white;">
