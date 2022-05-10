@@ -69,4 +69,5 @@
                 </tr>
             </tbody>
         </table>
+    </div>
 <x-footer />
