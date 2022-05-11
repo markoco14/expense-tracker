@@ -1,4 +1,4 @@
-    <footer class="bg-dark text-white mt-6 p-3 text-center">
+    <footer class="bg-dark text-white p-3 text-center">
         <p>all rights reserved c 2022</p>
         <p class="mb-0">thank you for playing</p>
     </footer>
