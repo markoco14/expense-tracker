@@ -1,8 +1,18 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+@guest
+    <nav class="navbar navbar-expand-lg navbar-light">
+@endguest
+@auth
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+@endauth
     <div class="container-fluid">
-        <p class="navbar-brand text-light align-middle mb-0 p-3">ExpenSave</p>
+        @guest
+            <p class="navbar-brand text-light align-middle mb-0 p-1"><strong>Expensave</strong></p>            
+        @endguest
+        @auth
+            <p class="navbar-brand text-light align-middle mb-0 p-1"><strong>Expensave</strong></p>
+        @endauth
         <button 
-            class="navbar-toggler bg-light"
+            class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarTogglerDemo01"
