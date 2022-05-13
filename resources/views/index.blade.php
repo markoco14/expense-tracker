@@ -17,7 +17,4 @@
                 </div>
             </div>
         </section>
-        <section>
-            <x-hero_signup />
-        </section>
 <x-footer />
