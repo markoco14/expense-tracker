@@ -1,9 +1,9 @@
 <x-header />
-    <x-navbar />
-    <div>
-        <div class="col-sm-6 offset-sm-3">
-            <h1>Sign Up</h1>
-            <form action="/signup" method="post" class="form">
+    <section class="hero">
+        <x-navbar />
+        <div class="col-sm-6 offset-sm-3 mt-5 mb-5 pb-4 pt-4 pr-1 pl-1 container">
+            {{-- <h1>Sign Up</h1> --}}
+            <form action="/signup" method="post" class="landing-form pt-5">
                 @csrf
                 <div class="control-group">
                     <label 
@@ -58,7 +58,7 @@
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="control-group">
+                <div class="control-group mb-3">
                     <label 
                         for="password" 
                         class="form-label"
@@ -78,12 +78,12 @@
                 <div class="control-group">
                     <button 
                         type="submit" 
-                        class="form-control"
+                        class="form-control landing-button"
                         >
-                        Sign Up
+                        SIGN UP
                     </button>
                 </div>
             </form>
         </div>
-    </div>
+    </section class="hero">
 <x-footer />

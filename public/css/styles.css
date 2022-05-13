@@ -1,3 +1,81 @@
+h1, h2, h3, h4, h5, h6 {
+    margin:0;
+}
+
+.hero {
+    background-image: url('../images/money_tree_coins.jpg');
+    background-position: 30% 25%;
+    background-size: cover;
+    /* background-color: rgb(53, 213, 53); */
+    height:100vh;
+}
+
+.hero-content {
+    padding:1em;
+    margin-top:35%;
+    color:rgb(232, 232, 232);
+    max-width:650px;
+}
+
+.hero-button {
+    margin-top:15%;
+    display:flex;
+    justify-content: right;
+    border-radius: 2%;
+    margin-right:10%;
+    font-size:2.5rem;
+}
+
+.hero-button a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero-form {
+    display:none;
+}
+
+@media (min-width: 400px) {
+    .hero-content {
+        margin-top:5em;
+        width: 80%;
+    }
+
+    .hero-button {
+        margin-top:10%;
+    }
+}
+
+@media (min-width: 600px) {
+    .hero-flex {
+        display:flex;
+        justify-content: space-evenly;
+    }
+
+    .hero-content {
+        max-width:40%;
+        margin-top:8em;
+    }
+
+    .hero-form {
+        display: block;
+        max-width: 40%;
+        margin-top: 1em;
+    }
+
+    .hero-form-color {
+        display: block;
+        min-width: 30%;
+    }
+
+    .hero-button {
+        display: none;
+    }
+
+    .hero-button a {
+        display: none;
+    }
+}
 .app-main {
     /* padding: 0.5em; */
     /* display: flex;
@@ -21,15 +99,27 @@
 }
 
 .form {
-    color: rgb(42, 42, 42);
+    color: rgb(0, 0, 0);
     max-width:400px;
     margin:auto;
-    background:white;
+    background-color:rgb(255, 255, 255);
     padding:2em;
     border-radius: 5%;
     margin-top:0.5em;
 }
 
-.form h1 {
-    margin: 0 0 1em;
+.landing-form {
+    color: rgb(255, 255, 255);
+    font-weight:bold;
+    max-width:400px;
+    margin:auto;
+    background-color:rgba(255,255,255,0.25);
+    padding:2em;
+    border-radius: 5%;
+    margin-top:0.5em;
+}
+
+.landing-button {
+    background-color: rgb(45, 144, 3);
+    color:white;
 }

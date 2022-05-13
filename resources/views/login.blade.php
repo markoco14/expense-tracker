@@ -1,8 +1,7 @@
 <x-header />
-    <x-navbar />
-    <div>
-        <div class="col-sm-6 offset-sm-3">
-            <h1>Log In</h1>
+    <section class="hero">
+        <x-navbar />
+        <div class="col-sm-6 offset-sm-3 mt-5 pt-5 container">
             @if (session()->has('success'))
                 <p
                     x-data="{ show: true }"
@@ -12,7 +11,7 @@
                     {{ session('success') }}
                 </p>
             @endif
-            <form action="sessions" method="post" class="form">
+            <form action="sessions" method="post" class="landing-form" style="height: 50vh;">
                 @csrf
                 <div class="control-group">
                     <label 
@@ -32,7 +31,7 @@
                 @error('email')
                     <p class="text-danger">{{$message}}</p>
                 @enderror
-                <div class="control-group">
+                <div class="control-group mb-3">
                     <label 
                         for="password" 
                         class="form-label"
@@ -53,12 +52,12 @@
                     <button 
                         type="submit" 
                         name="submit" 
-                        class="form-control"
+                        class="form-control landing-button "
                         >
-                        Log In
+                        LOG IN
                     </button>
                 </div>
             </form>
         </div>
-    </div>
+    </section>
 <x-footer />

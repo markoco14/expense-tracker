@@ -1,6 +1,23 @@
 <x-header />
-    <x-navbar />
-    <div class="col-sm-6 offset-sm-3">
-        <h1>Expense Tracker App</h1>
-    </div>
+        <section class="hero">
+            <x-navbar />
+            <div class="hero-flex">
+                <div class="hero-content">
+                    <h1 class="hero-h1">
+                        Know the ins and outs of your financial life
+                    </h1>
+                </div>
+                <div class="hero-button">
+                    <a href="signup">
+                        Sign up
+                    </a>
+                </div>
+                <div class="hero-form">
+                    <x-hero_signup />
+                </div>
+            </div>
+        </section>
+        <section>
+            <x-hero_signup />
+        </section>
 <x-footer />
