@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-content {
     padding:1em;
-    margin-top:35%;
+    margin-top:40%;
     color:rgb(232, 232, 232);
     max-width:650px;
 }
@@ -48,6 +48,12 @@ h1, h2, h3, h4, h5, h6 {
 
     .hero-button {
         margin-top:10%;
+    }
+}
+
+@media (max-width:600px) and (max-height:400px) {
+    .hero-flex {
+        margin-top:0px;
     }
 }
 
