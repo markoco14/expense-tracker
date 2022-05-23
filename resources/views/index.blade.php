@@ -4,7 +4,9 @@
             <div class="hero-flex">
                 <div class="hero-content">
                     <h1 class="hero-h1">
-                        Know the ins and outs of your financial life
+                        Know the ins and 
+                        <br>
+                        outs of your financial life
                     </h1>
                 </div>
                 <div class="hero-button">
