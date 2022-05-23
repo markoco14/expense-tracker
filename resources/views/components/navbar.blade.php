@@ -1,28 +1,17 @@
 @guest
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="nav">
 @endguest
 @auth
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <nav class="nav">
 @endauth
-    <div class="container-fluid">
         @guest
-            <p class="navbar-brand text-light align-middle mb-0 p-1"><strong>Expensave</strong></p>            
+            <p><strong>Expensave</strong></p>            
         @endguest
         @auth
-            <p class="navbar-brand text-light align-middle mb-0 p-1"><strong>Expensave</strong></p>
+            <p><strong>Expensave</strong></p>
         @endauth
-        <button 
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" 
-            aria-expanded="false" 
-            aria-label="Toggle navigation"
-         >
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse navbar-nav text-light" id="navbarTogglerDemo01">
+        
+        <div>
             @guest
                 <a href="/">Home</a>
                 <a href="signup">Sign Up</a>
@@ -37,5 +26,4 @@
                 <a href="logout">Log out</a>
             @endauth
         </div>
-    </div>
 </nav>

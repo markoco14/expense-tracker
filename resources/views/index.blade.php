@@ -12,9 +12,17 @@
                         Sign up
                     </a>
                 </div>
-                <div class="hero-form">
-                    <x-hero_signup />
+                <div class="hero-button-secondary">
+                    <p>
+                        Already a member?
+                        <a href="login">
+                            Login
+                        </a>
+                    </p>
                 </div>
+                {{-- <div class="hero-form">
+                    <x-hero_signup />
+                </div> --}}
             </div>
         </section>
 <x-footer />

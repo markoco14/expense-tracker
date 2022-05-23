@@ -83,6 +83,7 @@
                         SIGN UP
                     </button>
                 </div>
+                <p>Already a member? <a href="login">login</a></p>
             </form>
         </div>
     </section class="hero">

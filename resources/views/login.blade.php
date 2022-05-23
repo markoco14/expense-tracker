@@ -57,6 +57,8 @@
                         LOG IN
                     </button>
                 </div>
+                <p>Not a member? <a href="signup">signup</a></p>
+
             </form>
         </div>
     </section>

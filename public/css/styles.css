@@ -1,118 +1,70 @@
+:root {
+    --main-white: rgb(228, 228, 228);
+    --secondary-white: rgb(197, 197, 197);
+    --main-green: rgb(63, 145, 74);
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin:0;
 }
 
+.nav {
+    display:flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    color: var(--main-white)
+}
+
+.nav a {
+    color: var(--main-white);
+    text-decoration: none;
+}
+
 .hero {
     background-image: url('../images/money_tree_coins.jpg');
-    background-position: 30% 25%;
+    background-position: 5%;
     background-size: cover;
-    /* background-color: rgb(53, 213, 53); */
     min-height:100vh;
 }
 
 .hero-content {
-    padding:1em;
-    margin-top:40%;
-    color:rgb(232, 232, 232);
+    padding:0 1rem;
+    margin-top:10rem;
+    color:var(--main-white);
     max-width:650px;
 }
 
 .hero-button {
-    margin-top:15%;
-    /* display:flex; */
-    /* justify-content: right; */
-    margin-left:50%;
+    padding: 0 1rem;
+    margin-top:2rem;
+    margin-bottom:0.75rem;
     border-radius: 2%;
-    margin-right:10%;
-    font-size:2.5rem;
+    font-size:2rem;
 }
 
 .hero-button a {
-    color: white;
+    padding:0.5rem 1rem;
+    border-radius:5%;
+    background-color: var(--main-green);
+}
+
+.hero-button a {
+    color: var(--main-white);
     text-decoration: none;
 }
 
-.hero-form {
-    display:none;
+.hero-button-secondary {
+    color: var(--secondary-white);
+    padding: 0 1rem;
+    border-radius: 2%;
+    font-size:1.25rem;
 }
 
-@media (min-width: 400px) {
-
-    .hero-flex {
-        margin-top:45%;
-    }
-    .hero-content {
-        margin-top:5em;
-        width: 80%;
-    }
-
-    .hero-button {
-        margin-top:10%;
-    }
+.hero-button-secondary a {
+    color: var(--secondary-white);
 }
 
-@media (max-width:600px) and (max-height:400px) {
-    .hero-flex {
-        margin-top:0px;
-    }
-}
-
-@media (min-width: 500px) {
-    .hero-flex {
-        margin-top:25%;
-    }
-}
-
-
-@media (min-width: 600px) {
-    .hero-flex {
-        margin-top:25%;
-        display:flex;
-        justify-content: space-evenly;
-    }
-
-    .hero-content {
-        max-width:40%;
-        margin-top:8em;
-    }
-
-    .hero-form {
-        display: block;
-        max-width: 40%;
-        margin-top: 1em;
-    }
-
-    .hero-form-color {
-        display: block;
-        min-width: 30%;
-    }
-
-    .hero-button {
-        display: none;
-    }
-    
-    .hero-button a {
-        display: none;
-    }
-}
-
-@media (min-width: 1000px) {
-    .hero-flex {
-        margin-top:5%;
-    }
-}
-
-/* query for ipad pro */
-/* @media (min-width:1000px) && (min-height: 1200px) {
-    .hero-flex {
-        margin-top:20%;
-    }
-} */
 .app-main {
-    /* padding: 0.5em; */
-    /* display: flex;
-    justify-content: center; */
-    /* background: rgb(153, 221, 153); */
     background-image: linear-gradient(to bottom right, rgb(152, 236, 136), rgb(192, 255, 211));
     min-height:100vh;
     width:100vw;
@@ -152,6 +104,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .landing-button {
-    background-color: rgb(45, 144, 3);
+    background-color: var(--main-green);
     color:white;
 }
