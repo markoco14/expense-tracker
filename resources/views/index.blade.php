@@ -1,6 +1,6 @@
 <x-header />
         <section class="hero">
-            <x-navbar />
+            <x-landing_nav />
             <div class="hero-flex">
                 <div class="hero-content">
                     <h1 class="hero-h1">
