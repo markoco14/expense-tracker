@@ -17,7 +17,6 @@
                     type="text" 
                     id="name" 
                     name="name"
-                
                     value="{{ old('name') }}"
                 >
                 @error('name')
@@ -27,7 +26,6 @@
             <div class="form-group">
                 <label 
                     for="username" 
-                
                     >
                     Username
                 </label>
@@ -35,7 +33,6 @@
                     type="text" 
                     id="username" 
                     name="username"
-                
                     value="{{ old('username') }}"
                 >
                 @error('username')
@@ -45,7 +42,6 @@
             <div class="form-group">
                 <label 
                     for="email" 
-                
                     >
                     Email
                 </label>
@@ -53,7 +49,6 @@
                     type="email" 
                     id="email" 
                     name="email"
-                
                     value="{{ old('email') }}"
                 >
                 @error('email')
@@ -63,7 +58,6 @@
             <div class="form-group">
                 <label 
                     for="password" 
-                
                     >
                     Password
                 </label>
@@ -71,7 +65,6 @@
                     type="password" 
                     id="password" 
                     name="password"
-                
                 >
                 @error('password')
                     <p class="error">{{ $message }}</p>
@@ -82,7 +75,7 @@
                     START SAVING
                 </button>
             </div>
-            <p>Already a member? <a href="login">LOGIN</a></p>
+            <p>Already a member? <a href="login">LOG IN</a></p>
         </form>
     </div>
     </section>

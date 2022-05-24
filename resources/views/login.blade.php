@@ -1,7 +1,7 @@
 <x-header />
-    <section class="hero">
+    <section class="section-full half-half">
         <x-navbar />
-        <div class="col-sm-6 offset-sm-3 mt-5 pt-5 container">
+        <div class="container">
             @if (session()->has('success'))
                 <p
                     x-data="{ show: true }"
@@ -11,12 +11,14 @@
                     {{ session('success') }}
                 </p>
             @endif
-            <form action="sessions" method="post" class="landing-form" style="height: 50vh;">
+            <form action="sessions" method="post" class="form">
                 @csrf
-                <div class="control-group">
+                <div class="form-title">
+                    <h2>Log In</h2>
+                </div>
+                <div class="form-group">
                     <label 
                         for="email" 
-                        class="form-label"
                         >
                         Email
                     </label>
@@ -24,17 +26,15 @@
                         type="email" 
                         id="email" 
                         name="email"
-                        class="form-control"
                         {{-- value={{old('email')}} --}}
                         >
                 </div>
                 @error('email')
-                    <p class="text-danger">{{$message}}</p>
+                    <p>{{$message}}</p>
                 @enderror
-                <div class="control-group mb-3">
+                <div class="form-group">
                     <label 
                         for="password" 
-                        class="form-label"
                         >
                         Password
                     </label>
@@ -42,22 +42,20 @@
                         type="password" 
                         id="password" 
                         name="password"
-                        class="form-control"
                         >
                 </div>
                 @error('password')
-                    <p class="text-danger">{{$message}}</p>
+                    <p>{{$message}}</p>
                 @enderror
-                <div class="control-group">
+                <div class="form-group">
                     <button 
                         type="submit" 
                         name="submit" 
-                        class="form-control landing-button "
                         >
                         LOG IN
                     </button>
                 </div>
-                <p>Not a member? <a href="signup">signup</a></p>
+                <p>Not a member? <a href="signup">SIGN UP</a></p>
 
             </form>
         </div>
