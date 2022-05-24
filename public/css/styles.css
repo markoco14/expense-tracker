@@ -2,6 +2,7 @@
     --main-white: rgb(228, 228, 228);
     --secondary-white: rgb(197, 197, 197);
     --main-green: rgb(63, 145, 74);
+    --secondary-green: rgb(127, 232, 57);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -27,6 +28,9 @@ h1, h2, h3, h4, h5, h6 {
     min-height:100vh;
 }
 
+.hero span {
+    color: var(--secondary-green);
+}
 .hero-content {
     padding:0 1rem;
     margin-top:10rem;
