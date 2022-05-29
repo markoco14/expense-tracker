@@ -21,7 +21,7 @@ use Illuminate\Contracts\Session\Session;
 
 Route::get('/', function () {
     return view('index');
-});
+})->middleware('guest');
 
 // sign up page routes
 Route::get('signup', [UsersController::class, 'create'])->middleware('guest');
