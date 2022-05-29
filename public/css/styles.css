@@ -1,7 +1,9 @@
 :root {
     --main-white: rgb(228, 228, 228);
     --secondary-white: rgb(197, 197, 197);
+    --main-dark: rgb(41,41,41);
     --main-green: rgb(63, 145, 74);
+    /* --main-green: rgb(127, 232, 57); */
     --secondary-green: rgb(127, 232, 57);
 }
 
@@ -9,19 +11,29 @@ body {
     box-sizing:border-box;
     margin:0;
     padding:0;
+    font-size:1.25rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
     margin:0;
 }
 
+a {
+    color: var(--main-dark);
+    text-decoration: none;
+}
+
 .landing-nav {
     display:flex;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
+    align-items: center;
+    padding: 1rem 1rem;
     color: var(--main-white)
 }
 
+.landing-nav p {
+    margin:0;
+}
 .landing-nav a {
     color: var(--main-white);
     text-decoration: none;
@@ -106,6 +118,20 @@ h1, h2, h3, h4, h5, h6 {
     margin:auto;
     background: white;
 }
+.section-half {
+    width:100%;
+    min-height:50vh;
+    margin:auto;
+    background: white;
+}
+.section-quarter {
+    width:100%;
+    min-height:25vh;
+    margin:auto;
+    background: white;
+}
+
+
 
 .half-half {
     background: rgb(228,228,228);
@@ -120,7 +146,15 @@ h1, h2, h3, h4, h5, h6 {
 .container {
     height:100%;
     padding:1rem;
+}
+.form-container {
+    height:100%;
+    padding:1rem;
     margin-top:25%;
+}
+
+.profile-form {
+    margin-bottom:2em;
 }
 
 .form {
@@ -131,7 +165,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .form-title {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: var(--main-green);
 }
 
@@ -140,6 +174,13 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     margin-bottom: 0.5rem;
 }
+
+.add-input-group {
+    display:flex;
+    justify-content:space-between;
+    margin-bottom: 0.5rem;
+}
+
 .form-group label  {
     margin-bottom: 0.5rem;
 }
@@ -151,26 +192,10 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--main-green);
 }
 
-.form a {
+.form-link {
     color: var(--main-green)
 }
 
 .error {
     color:red;
-}
-
-.landing-form {
-    color: rgb(255, 255, 255);
-    font-weight:bold;
-    max-width:400px;
-    margin:auto;
-    background-color:rgba(255,255,255,0.25);
-    padding:2em;
-    border-radius: 5%;
-    margin-top:0.5em;
-}
-
-.landing-button {
-    background-color: var(--main-green);
-    color:white;
 }
