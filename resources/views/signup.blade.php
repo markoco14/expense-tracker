@@ -1,11 +1,11 @@
 <x-header />
 <section class="section-full half-half">
     <x-navbar />
-        <div class="container">
+        <div class="form-container">
             <form action="/signup" method="post" class="form">
                 @csrf
             <div class="form-title">
-                <h2>Sign Up</h2>
+                <h1>Sign Up</h1>
             </div>
             <div class="form-group">
                 <label 
@@ -75,7 +75,7 @@
                     START SAVING
                 </button>
             </div>
-            <p>Already a member? <a href="login">LOG IN</a></p>
+            <p>Already a member? <a href="login" class="form-link">LOG IN</a></p>
         </form>
     </div>
     </section>
