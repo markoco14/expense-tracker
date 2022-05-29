@@ -9,8 +9,8 @@
         <div >
             <div >{{$today->format('F')}} {{$today->day}}</div>
         </div>
-        <div  style="min-height:10vh;">
-            <div >
+        <div class="progress-row">
+            <div class="progress-card">
                 <p>Day's Total</p> 
                 @if ($budget - $remaining > $budget )
                     <p style="color: red; font-size:2rem; text-align: center;">${{$budget - $remaining}}</p>
@@ -18,27 +18,27 @@
                     <p style="color: green; font-size:2rem; text-align: center;">${{$budget - $remaining}}</p>
                 @endif
             </div>
-            <div >
-                <p>Percent of budget spent</p>
+            <div class="progress-card">
+                <p>Percent of Budget</p>
                 @if ($percent > 100)
-                <p style="color:red; font-size:2rem; text-align: center;">{{$percent}}%</p>
+                <p class="loss"{$percent}}%</p>
                 @else 
-                <p style="color:green; font-size:2rem; text-align: center;">{{$percent}}%</p>
+                <p class="gain">{{$percent}}%</p>
                 @endif
             </div>
         </div>
-        <div  style="min-height:10vh;">
-            <div >
+        <div class="progress-row">
+            <div class="progress-card">
                 <p>Money left</p>
 
                 @if ($remaining < 0)
-                <p style="color:red; font-size:2rem; text-align: center;">$0</p>
+                <p class="loss">$0</p>
                 @else
-                <p style="color:green; font-size:2rem; text-align: center;">${{$remaining}}</p>
+                <p class="gain">${{$remaining}}</p>
                 @endif
 
             </div>
-            <div >
+            <div class="progress-card">
                 <p>Extra</p>
                 {{-- @php
                     // $monthSurplus = 900

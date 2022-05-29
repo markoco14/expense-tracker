@@ -215,3 +215,26 @@ a {
 .error {
     color:red;
 }
+
+/* PROGRESS PAGE STYLES */
+
+.progress-row {
+    min-height:10vh;
+    display:flex;
+}
+
+.progress-card {
+    width:50%;
+}
+
+.gain {
+    color:green; 
+    font-size:2rem; 
+    text-align: center;
+}
+
+.loss {
+    color:red; 
+    font-size:2rem; 
+    text-align: center;
+}
