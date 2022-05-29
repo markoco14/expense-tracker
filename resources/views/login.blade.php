@@ -1,7 +1,7 @@
 <x-header />
     <section class="section-full half-half">
         <x-navbar />
-        <div class="container">
+        <div class="form-container">
             @if (session()->has('success'))
                 <p
                     x-data="{ show: true }"
@@ -14,7 +14,7 @@
             <form action="sessions" method="post" class="form">
                 @csrf
                 <div class="form-title">
-                    <h2>Log In</h2>
+                    <h1>Log In</h1>
                 </div>
                 <div class="form-group">
                     <label 
@@ -30,7 +30,7 @@
                         >
                 </div>
                 @error('email')
-                    <p>{{$message}}</p>
+                    <p class="error">{{$message}}</p>
                 @enderror
                 <div class="form-group">
                     <label 
@@ -45,7 +45,7 @@
                         >
                 </div>
                 @error('password')
-                    <p>{{$message}}</p>
+                    <p class="error">{{$message}}</p>
                 @enderror
                 <div class="form-group">
                     <button 
@@ -55,7 +55,7 @@
                         LOG IN
                     </button>
                 </div>
-                <p>Not a member? <a href="signup">SIGN UP</a></p>
+                <p>Not a member? <a href="signup" class="form-link">SIGN UP</a></p>
 
             </form>
         </div>
