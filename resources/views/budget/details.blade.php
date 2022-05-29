@@ -3,7 +3,7 @@
 
     <x-navbar />
     <div class="container">
-        <h1 class="form-title">Expense Tracker App</h1>
+        <h1 class="form-title">Your Financial Details</h1>
         <p>Budget List for {{Carbon\Carbon::now()->format('F')}}</p>
         <table>
             <thead>
