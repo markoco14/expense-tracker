@@ -14,5 +14,6 @@
         <link rel="stylesheet" href="{{URL::asset("/css/styles.css")}}">
         {{-- <link rel="stylesheet" href="{{URL::asset("/css/styles.css", 'secure')}}"> --}}
         {{-- <link rel="stylesheet" href="{{URL::asset("/css/styles.css", 'secure')}}"> --}}
+        <script async src="https://kit.fontawesome.com/d0c81e3c08.js" crossorigin="anonymous"></script>
     </head>
     <body>

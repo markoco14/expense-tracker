@@ -56,6 +56,22 @@ a {
     text-decoration: none;
 }
 
+.hamburger-block {
+    padding:0 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    color:var(--main-white);
+    background-color: var(--main-green);
+}
+.hamburger-block a {
+    color:white;
+    text-align: right;
+}
+.hamburger-block-hidden {
+    display:none;
+}
+
 .hero {
     background-image: url('../images/money_tree_coins.jpg');
     background-position: 5%;
