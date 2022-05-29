@@ -1,8 +1,8 @@
 @guest
-    <nav class="nav">
+    <nav class="landing-nav">
 @endguest
 @auth
-    <nav class="nav">
+    <nav class="landing-nav">
 @endauth
         @guest
             <p><strong>Expensave</strong></p>            

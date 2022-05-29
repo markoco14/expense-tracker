@@ -10,9 +10,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        {{-- <link rel="stylesheet" href="{{URL::asset("/css/styles.css")}}"> --}}
-        <link rel="stylesheet" href="{{URL::asset("/css/styles.css", 'secure')}}">
+        {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
+        <link rel="stylesheet" href="{{URL::asset("/css/styles.css")}}">
+        {{-- <link rel="stylesheet" href="{{URL::asset("/css/styles.css", 'secure')}}"> --}}
         {{-- <link rel="stylesheet" href="{{URL::asset("/css/styles.css", 'secure')}}"> --}}
     </head>
     <body>

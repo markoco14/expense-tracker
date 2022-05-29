@@ -1,118 +1,109 @@
+:root {
+    --main-white: rgb(228, 228, 228);
+    --secondary-white: rgb(197, 197, 197);
+    --main-dark: rgb(41,41,41);
+    --main-green: rgb(63, 145, 74);
+    /* --main-green: rgb(127, 232, 57); */
+    --secondary-green: rgb(127, 232, 57);
+}
+
+body {
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-size:1.25rem;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin:0;
 }
 
+a {
+    color: var(--main-dark);
+    text-decoration: none;
+}
+
+.landing-nav {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+    color: var(--main-white)
+}
+
+.landing-nav p {
+    margin:0;
+}
+.landing-nav a {
+    color: var(--main-white);
+    text-decoration: none;
+}
+.nav {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+    color: var(--main-white);
+    background-color: var(--main-green);
+}
+
+.nav p {
+    margin: 0;
+}
+
+.nav a {
+    color: var(--main-white);
+    text-decoration: none;
+}
+
 .hero {
     background-image: url('../images/money_tree_coins.jpg');
-    background-position: 30% 25%;
+    background-position: 5%;
     background-size: cover;
-    /* background-color: rgb(53, 213, 53); */
     min-height:100vh;
 }
 
+.hero span {
+    color: var(--secondary-green);
+}
 .hero-content {
-    padding:1em;
-    margin-top:40%;
-    color:rgb(232, 232, 232);
+    padding:0 1rem;
+    margin-top:10rem;
+    color:var(--main-white);
     max-width:650px;
 }
 
 .hero-button {
-    margin-top:15%;
-    /* display:flex; */
-    /* justify-content: right; */
-    margin-left:50%;
+    padding: 0 1rem;
+    margin-top:2rem;
+    margin-bottom:0.75rem;
     border-radius: 2%;
-    margin-right:10%;
-    font-size:2.5rem;
+    font-size:2rem;
 }
 
 .hero-button a {
-    color: white;
+    padding:0.5rem 1rem;
+    border-radius:5%;
+    background-color: var(--main-green);
+}
+
+.hero-button a {
+    color: var(--main-white);
     text-decoration: none;
 }
 
-.hero-form {
-    display:none;
+.hero-button-secondary {
+    color: var(--secondary-white);
+    padding: 0 1rem;
+    border-radius: 2%;
+    font-size:1.25rem;
 }
 
-@media (min-width: 400px) {
-
-    .hero-flex {
-        margin-top:45%;
-    }
-    .hero-content {
-        margin-top:5em;
-        width: 80%;
-    }
-
-    .hero-button {
-        margin-top:10%;
-    }
+.hero-button-secondary a {
+    color: var(--secondary-white);
 }
 
-@media (max-width:600px) and (max-height:400px) {
-    .hero-flex {
-        margin-top:0px;
-    }
-}
-
-@media (min-width: 500px) {
-    .hero-flex {
-        margin-top:25%;
-    }
-}
-
-
-@media (min-width: 600px) {
-    .hero-flex {
-        margin-top:25%;
-        display:flex;
-        justify-content: space-evenly;
-    }
-
-    .hero-content {
-        max-width:40%;
-        margin-top:8em;
-    }
-
-    .hero-form {
-        display: block;
-        max-width: 40%;
-        margin-top: 1em;
-    }
-
-    .hero-form-color {
-        display: block;
-        min-width: 30%;
-    }
-
-    .hero-button {
-        display: none;
-    }
-    
-    .hero-button a {
-        display: none;
-    }
-}
-
-@media (min-width: 1000px) {
-    .hero-flex {
-        margin-top:5%;
-    }
-}
-
-/* query for ipad pro */
-/* @media (min-width:1000px) && (min-height: 1200px) {
-    .hero-flex {
-        margin-top:20%;
-    }
-} */
 .app-main {
-    /* padding: 0.5em; */
-    /* display: flex;
-    justify-content: center; */
-    /* background: rgb(153, 221, 153); */
     background-image: linear-gradient(to bottom right, rgb(152, 236, 136), rgb(192, 255, 211));
     min-height:100vh;
     width:100vw;
@@ -121,37 +112,90 @@ h1, h2, h3, h4, h5, h6 {
 .rounding {
     border-radius:5%;
 }
-.section {
+.section-full {
     width:100%;
-    /* padding:2em; */
-    max-width: 600px;
+    min-height:100vh;
     margin:auto;
     background: white;
-    /* opacity: 0.9; */
+}
+.section-half {
+    width:100%;
+    min-height:50vh;
+    margin:auto;
+    background: white;
+}
+.section-quarter {
+    width:100%;
+    min-height:25vh;
+    margin:auto;
+    background: white;
+}
+
+
+
+.half-half {
+    background: rgb(228,228,228);
+    background: linear-gradient(
+        0deg, 
+        rgba(255,255,255,1) 45%, 
+        rgba(255,255,255,1) 50%, 
+        rgba(63,145,74,1) 55%
+        );
+    }
+
+.container {
+    height:100%;
+    padding:1rem;
+}
+.form-container {
+    height:100%;
+    padding:1rem;
+    margin-top:25%;
+}
+
+.profile-form {
+    margin-bottom:2em;
 }
 
 .form {
-    color: rgb(0, 0, 0);
-    max-width:400px;
-    margin:auto;
-    background-color:rgb(255, 255, 255);
-    padding:2em;
-    border-radius: 5%;
-    margin-top:0.5em;
+    padding: 2em;
+    border-radius: 2%;
+    background-color: white;
+    box-shadow: 0px 10px 22px 0px rgba(122,122,122,1);
 }
 
-.landing-form {
-    color: rgb(255, 255, 255);
-    font-weight:bold;
-    max-width:400px;
-    margin:auto;
-    background-color:rgba(255,255,255,0.25);
-    padding:2em;
-    border-radius: 5%;
-    margin-top:0.5em;
+.form-title {
+    margin-bottom: 1rem;
+    color: var(--main-green);
 }
 
-.landing-button {
-    background-color: rgb(45, 144, 3);
-    color:white;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+}
+
+.add-input-group {
+    display:flex;
+    justify-content:space-between;
+    margin-bottom: 0.5rem;
+}
+
+.form-group label  {
+    margin-bottom: 0.5rem;
+}
+
+.form button {
+    border:none;
+    padding: 0.5em;
+    color: var(--main-white);
+    background-color: var(--main-green);
+}
+
+.form-link {
+    color: var(--main-green)
+}
+
+.error {
+    color:red;
 }

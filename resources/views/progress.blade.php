@@ -1,16 +1,16 @@
 <x-header />
     <x-navbar />
-    <div class="container bd-highlight">
+    <div>
         @if ($percent > 100)
             <p>Woah, dude. You have spent way too much money today. Try to have more self control.</p>
         @else
             <p>You're doing pretty decent today. Just don't spend too much more.</p>
         @endif
-        <div class="row">
-            <div class="col" style="background-color:white;">{{$today->format('F')}} {{$today->day}}</div>
+        <div >
+            <div >{{$today->format('F')}} {{$today->day}}</div>
         </div>
-        <div class="row" style="min-height:10vh;">
-            <div class="col card" style="background-color:white;">
+        <div  style="min-height:10vh;">
+            <div >
                 <p>Day's Total</p> 
                 @if ($budget - $remaining > $budget )
                     <p style="color: red; font-size:2rem; text-align: center;">${{$budget - $remaining}}</p>
@@ -18,7 +18,7 @@
                     <p style="color: green; font-size:2rem; text-align: center;">${{$budget - $remaining}}</p>
                 @endif
             </div>
-            <div class="col card" style="background-color:white;">
+            <div >
                 <p>Percent of budget spent</p>
                 @if ($percent > 100)
                 <p style="color:red; font-size:2rem; text-align: center;">{{$percent}}%</p>
@@ -27,8 +27,8 @@
                 @endif
             </div>
         </div>
-        <div class="row" style="min-height:10vh;">
-            <div class="col card" style="background-color:white;">
+        <div  style="min-height:10vh;">
+            <div >
                 <p>Money left</p>
 
                 @if ($remaining < 0)
@@ -38,7 +38,7 @@
                 @endif
 
             </div>
-            <div class="col card" style="background-color:white;">
+            <div >
                 <p>Extra</p>
                 {{-- @php
                     // $monthSurplus = 900
@@ -50,7 +50,7 @@
                 @endif --}}
             </div>
         </div>
-        <table class="table card" style="background-color:white;">
+        <table>
             <thead>
                 <tr>
                     <th>Your Daily Progress</th>
@@ -81,10 +81,10 @@
                 <tr>
                     @if ($remaining < 0)
                         <td>Overspend</td>
-                        <td>{{$remaining * -1}}</td>
+                        <td>${{$remaining * -1}}</td>
                         @else
                         <td>Saving</td>
-                        <td>{{$remaining}}</td>
+                        <td>${{$remaining}}</td>
                     @endif
                 </tr>
             </tbody>

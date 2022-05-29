@@ -1,18 +1,17 @@
 <x-header />
     <x-navbar />
-    <main class="app-main p-2 pb-5">
-        <section class="form col-sm-6 offset-sm-3 mt-2 p-3 pt-4 bg-light">
-            <section class="mb-4">
-                <h1 class="mb-4">Your Finances</h1>
-                <div class="btn-group">
-                    <a href="#income" class="btn btn-outline-success">Income</a>
-                    <a href="#deductions" class="btn btn-outline-success">Deductions</a>
-                    <a href="#savings" class="btn btn-outline-success">Savings</a>
-                    <a href="#budget" class="btn btn-outline-success">Budget</a>
+    <div class="container">
+        <div class="form">
+            <section style="margin-bottom: 2rem;">
+                <h1 class="form-title">Your Financial Profile</h1>
+                <div>
+                    <a href="#income">Income</a>
+                    <a href="#deductions">Deductions</a>
+                    <a href="#savings">Savings</a>
+                    <a href="#budget">Budget</a>
                 </div>
             </section>
-            <section class="col-sm-6 offset-sm-3">
-    
+            <section class="profile-form">
                 @if (session()->has('success'))
                     <p
                         x-data="{ show: true }"
@@ -23,64 +22,50 @@
                     </p>
                 @endif
                 {{-- salary section --}}
-                <form action="profile/salaries" method="post" class="form bordered">
-                    <h2 id="income">Income</h2>
-                    {{-- <p>
-                        Set your salary information here. 
-                        You may update your salary anytime as you receive pay increases. 
-                        But we recommend only changing your salary at the beginning of every month.
-                    </p> --}}
+                <form  action="profile/salaries" method="post">
+                    <h2 class="form-title" id="income">Income</h2>
                     @csrf
-                <div class="control-group">
-                        <label for="salary" class="form-label">
+                <div class="form-group">
+                        <label for="salary">
                             Salary
                         </label>
                         <input 
                             type="number" 
                             id="salary" 
                             name="salary"
-                            class="form-control"
+                            
                             value={{old('salary')}}
                         >
                         @error('salary')
-                            <p class="text-danger">{{$message}}</p>
+                            <p class="error">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="control-group">
+                    <div class="form-group">
                         <button 
                             type="submit" 
                             name="submit" 
-                            class="form-control"
+                            
                             >
-                            Submit Salary
+                            Save
                         </button>
                     </div>
                 </form>
             </section>
-            <section class="col-sm-6 offset-sm-3">
+            <section class="profile-form">
                 {{-- deductions section --}}
-                <form 
+                <form  
                     action="profile/deductions" 
-                    method="post" 
-                    class="form border" 
+                    method="post"
                     id="deduction-form"
                     >
-                <h2 id="deductions">Deductions</h2>
-                {{-- <p>
-                    Set your salary deductions here. 
-                    You may update your deductions anytime as they change in real life. 
-                    For now, you may only use the deductions given to you.
-                    You will be able to choose your deductions later.
-                </p> --}}
-                <div class="control-group">
+                <h2 class="form-title" id="deductions">Deductions</h2>
+                <div class="add-input-group">
                     <input 
                         type="text"
                         id="add-deduction-input"
-                        class="form-control"
                     >
                     <button
-                        id="add-deduction-button" 
-                        class="form-control w-50"   
+                        id="add-deduction-button"    
                     >
                         Add Deduction
                     </button>
@@ -88,45 +73,26 @@
                     @csrf
                     <div id="user-deductions-container">
                     </div>
-                    {{-- 
-                        @error('li')
-                            <p class="text-danger">{{$message}}</p>
-                        @enderror
-                        @error('nhi')
-                            <p class="text-danger">{{$message}}</p>
-                        @enderror
-                        @error('rent')
-                            <p class="text-danger">{{$message}}</p>
-                        @enderror
-                        @error('utilities')
-                            <p class="text-danger">{{$message}}</p>
-                        @enderror
-                    --}}
-                    <div class="control-group">
+                    <div class="form-group">
                         <button 
                             type="submit" 
                             name="submit" 
-                            class="form-control"
+                            
                             >
-                            Submit Deductions
+                            Save
                         </button>
                     </div>
                 </form>
             </section>
-            <section class="col-sm-6 offset-sm-3">
+            <section class="profile-form">
                 {{-- savings section --}}
-                <form action="profile/savings" method="post" class="form border">
-                    <h2 id="savings">Savings</h2>
-                    {{-- <p>
-                        Set your savings information here. 
-                        You may update your savings anytime if your savings rate changes. 
-                        For now, you may only have one type of savings.
-                    </p> --}}
+                <form  action="profile/savings" method="post" >
+                    <h2 class="form-title" id="savings">Savings</h2>
                     @csrf
-                    <div class="control-group">
+                    <div class="form-group">
                         <label 
                             for="savings" 
-                            class="form-label"
+                        
                             >
                             Savings
                         </label>
@@ -134,38 +100,34 @@
                             type="text" 
                             id="savings" 
                             name="savings"
-                            class="form-control"
+                            
                             value={{old('savings')}}
                             >
                         @error('savings')
-                            <p class="text-danger">{{$message}}</p>
+                            <p class="error">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="control-group">
+                    <div class="form-group">
                         <button 
                             type="submit" 
                             name="submit" 
-                            class="form-control"
+                            
                             >
-                            Submit Savings
+                            Save
                         </button>
                     </div>
                 </form>
             </section>
-                {{-- budget section --}}
-            <section class="col-sm-6 offset-sm-3">
-                <form action="profile/budgets" method="post" class="form border">
-                    <h2 id="budget">Budget</h2>
-                    {{-- <p>
-                        Set your daily budget information here. 
-                        You may update your daily budget anytime if you change how much you want to spend. 
-                        But we recommend only changing your daily budget at the beginning of every month.
-                    </p> --}}
+            
+            {{-- budget section --}}
+            <section class="profile-form">
+                <form  action="profile/budgets" method="post" >
+                    <h2 class="form-title" id="budget">Budget</h2>
                     @csrf
-                    <div class="control-group">
+                    <div class="form-group">
                         <label 
                             for="budgets" 
-                            class="form-label"
+                        
                             >
                             Daily Budget
                         </label>
@@ -173,26 +135,26 @@
                             type="text" 
                             id="budgets" 
                             name="budgets"
-                            class="form-control"
+                            
                             value={{old('budgets')}}
                             >
                         @error('budgets')
-                            <p class="text-danger">{{$message}}</p>
+                            <p class="error">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="control-group">
+                    <div class="form-group">
                         <button 
                             type="submit" 
                             name="submit" 
-                            class="form-control"
+                            
                             >
-                            Submit Budget
+                            Save
                         </button>
                     </div>
                 </form>
             </section>
-        </section>
-    </main>
+        </div>
+    </div>
     <script>
         let addDeductionInput = document.getElementById('add-deduction-input');
         let addDeductionButton = document.getElementById('add-deduction-button');
@@ -200,12 +162,13 @@
         addDeductionButton.addEventListener('click', addNewDeductionInput);
         
         function addNewDeductionInput(e) {
+            e.preventDefault();
             // console.log(addDeductionInput.value);
             // console.log(deductionForm);
             let userDeductionsContainer = document.getElementById('user-deductions-container');
 
             let newDivGroup = document.createElement('div');
-            newDivGroup.setAttribute('class', 'control-group');
+            newDivGroup.setAttribute('class', 'form-group');
 
             let newLabel = document.createElement('label');
             newLabel.setAttribute('for', addDeductionInput.value);

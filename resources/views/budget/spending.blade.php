@@ -1,7 +1,9 @@
 <x-header />
+<section class="section-full">
+
     <x-navbar />
-    <div class="col-sm-6 offset-sm-3">
-        <h1>Expense Tracker App</h1>
+    <div class="container">
+        <h1 class="form-title">Expense Tracker App</h1>
         <p>Here is a record of your daily spending in {{Carbon\Carbon::now()->format('F')}}</p>
         <table>
             <thead>
@@ -24,4 +26,5 @@
         <ul>
         </ul>
     </div>
+</section>
 <x-footer />
