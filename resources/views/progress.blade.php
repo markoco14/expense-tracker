@@ -1,6 +1,8 @@
 <x-header />
+<section class="section-full">
     <x-navbar />
-    <div>
+    <div class="container">
+        <h1 class="form-title">Today's Progress</h1>
         @if ($percent > 100)
             <p>Woah, dude. You have spent way too much money today. Try to have more self control.</p>
         @else
@@ -25,6 +27,7 @@
                 @else 
                 <p class="gain">{{$percent}}%</p>
                 @endif
+                <canvas id="myChart"></canvas>
             </div>
         </div>
         <div class="progress-row">
@@ -66,7 +69,7 @@
                 @foreach ($expenses as $key => $value)
                 <tr>
                     <td>Expense {{$key + 1}}</td>
-                    <td>{{$value}}</td>
+                    <td style="text-align: right;">${{$value}}</td>
                 </tr>
                 @endforeach
                 <tr>
@@ -90,4 +93,64 @@
             </tbody>
         </table>
     </div>
+</section>
+    <script async>
+
+        async function fetchData () {
+            const response = await fetch('api/progress')
+            ;
+            const data = await response.json();
+            return data;
+        }
+        
+        fetchData().then(data => {
+            const totalSpent = data;
+            console.log(totalSpent);
+            data = {
+                datasets: [{
+                    label: '% of Budget Spent',
+                    data: [totalSpent, (500-totalSpent)],
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgba(255, 99, 132, 0.2)',
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+            myChart.config.type = 'doughnut';
+            myChart.config.data = data;
+            myChart.update();
+        });
+
+        const labels = [
+            'Spent',
+            'Remaining',
+        ];
+        
+        const data = {
+            // labels: labels,
+            datasets: [{
+                label: '% of Budget Spent',
+                data: [0, 100],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgba(255, 99, 132, 0.2)',
+                    // 'rgb(255,255,255)'
+                ],
+                hoverOffset: 4
+            }]
+        };
+        
+        const config = {
+            type: 'doughnut',
+            data: data,
+        };
+        
+    </script>
+    <script async defer>
+        const myChart = new Chart(
+          document.getElementById('myChart'),
+          config
+        );
+      </script>
 <x-footer />
