@@ -9,6 +9,7 @@ use App\Models\UserSalary;
 use Illuminate\Http\Request;
 use App\Services\DeductionCalculatorService;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class BudgetController extends Controller
 {
@@ -83,6 +84,7 @@ class BudgetController extends Controller
 
         $amountRemaining = $budget - $totalSpent;
         $percentSpent = $totalSpent/$budget*100;
+        // dd(json_encode($percentSpent));
         // dd($amountRemaining);
 
         $today = Carbon::today();
@@ -95,5 +97,20 @@ class BudgetController extends Controller
             'percent' => $percentSpent,
             'today' => $today
         ]);
+    }
+
+    public function percent() {
+        
+        $expenses = Expense::get()
+        ->where('username', 'markoco14');
+        $totalSpent = 0;
+        
+        foreach($expenses as &$expense) {
+            if (Carbon::parse($expense['created_at'])->toDateString() === Carbon::today()->toDateString()) {
+                $totalSpent += $expense['amount'];
+            }
+        }
+
+        return json_encode($totalSpent);
     }
 }

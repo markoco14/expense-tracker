@@ -3,7 +3,7 @@
 
     <x-navbar />
     <div class="container">
-        <h1 class="form-title">Expense Tracker App</h1>
+        <h1 class="form-title">Your Spending</h1>
         <p>Here is a record of your daily spending in {{Carbon\Carbon::now()->format('F')}}</p>
         <table>
             <thead>
