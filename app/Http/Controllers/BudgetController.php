@@ -99,10 +99,16 @@ class BudgetController extends Controller
         ]);
     }
 
-    public function percent() {
+    public function getTodaySpendingPercent($username) {
+        // return json_encode($username);
+        // $expenses = Expense::where('username', auth()->user()->username)
+        //     ->get()
+        //     ->toArray();
+
+        // return $expenses;
         
         $expenses = Expense::get()
-        ->where('username', 'markoco14');
+        ->where('username', $username);
         $totalSpent = 0;
         
         foreach($expenses as &$expense) {

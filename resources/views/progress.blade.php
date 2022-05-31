@@ -1,4 +1,9 @@
 <x-header />
+@if(Auth::check())
+    <script>
+        let username = "{{ Auth::user()->username }}";
+    </script>
+@endif
 <section class="section-full">
     <x-navbar />
     <div class="container">
@@ -95,17 +100,17 @@
     </div>
 </section>
     <script async>
-
+        // console.log(username);
         async function fetchData () {
-            const response = await fetch('api/progress')
-            ;
+            // console.log(username);
+            const response = await fetch(`api/percent/${username}`);
             const data = await response.json();
             return data;
         }
         
         fetchData().then(data => {
             const totalSpent = data;
-            console.log(totalSpent);
+            // console.log(totalSpent);
             data = {
                 datasets: [{
                     label: '% of Budget Spent',
