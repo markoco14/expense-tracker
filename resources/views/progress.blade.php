@@ -100,9 +100,7 @@
     </div>
 </section>
     <script async>
-        // console.log(username);
         async function fetchData () {
-            // console.log(username);
             const response = await fetch(`api/percent/${username}`);
             const data = await response.json();
             return data;
@@ -110,7 +108,6 @@
         
         fetchData().then(data => {
             const totalSpent = data;
-            // console.log(totalSpent);
             data = {
                 datasets: [{
                     label: '% of Budget Spent',
