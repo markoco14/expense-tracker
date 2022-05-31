@@ -7,69 +7,59 @@
 <section class="section-full">
     <x-navbar />
     <div class="container">
-        <h1 class="form-title">Today's Progress</h1>
-        @if ($percent > 100)
-            <p>Woah, dude. You have spent way too much money today. Try to have more self control.</p>
-        @else
-            <p>You're doing pretty decent today. Just don't spend too much more.</p>
-        @endif
-        <div >
-            <div >{{$today->format('F')}} {{$today->day}}</div>
-        </div>
+        <h1 class="form-title">Progress {{$today->format('F')}} {{$today->day}}</h1>
         <div class="progress-row">
             <div class="progress-card">
-                <p>Day's Total</p> 
+                <div class="chart-overlay">
+                    @if ($percent > 100)
+                    <div>
+                        <p class="loss">{{$percent}}%</p>
+                    </div>
+                    @else 
+                    <div>
+                        <p class="gain">{{$percent}}%</p>
+                    </div>
+                    @endif
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="progress-row">
+            <div class="progress-info">
+                <p class="progress-label">You spent </p> 
                 @if ($budget - $remaining > $budget )
-                    <p style="color: red; font-size:2rem; text-align: center;">${{$budget - $remaining}}</p>
+                <p class="loss progress-stat">${{$budget - $remaining}}</p>
                 @else
-                    <p style="color: green; font-size:2rem; text-align: center;">${{$budget - $remaining}}</p>
+                <p class="gain progress-stat">${{$budget - $remaining}}</p>
                 @endif
             </div>
-            <div class="progress-card">
-                <p>Percent of Budget</p>
-                @if ($percent > 100)
-                <p class="loss"{$percent}}%</p>
-                @else 
-                <p class="gain">{{$percent}}%</p>
+        {{-- </div>
+        <div class="progress-row"> --}}
+            <div class="progress-info">
+                <p class="progress-label">You have </p>
+                @if ($remaining < 0)
+                <p class="loss progress-stat">$0</p>
+                @else
+                <p class="gain progress-stat">${{$remaining}}</p>
                 @endif
-                <canvas id="myChart"></canvas>
             </div>
         </div>
-        <div class="progress-row">
-            <div class="progress-card">
-                <p>Money left</p>
-
-                @if ($remaining < 0)
-                <p class="loss">$0</p>
-                @else
-                <p class="gain">${{$remaining}}</p>
-                @endif
-
-            </div>
+        {{-- <div class="progress-row">
             <div class="progress-card">
                 <p>Extra</p>
-                {{-- @php
-                    // $monthSurplus = 900
-                @endphp --}}
-                {{-- @if ($monthSurplus > 0)
-                <p style="color: green; font-size:2rem; text-align: center;">{{$monthSurplus}}</p>
-                @else
-                <p style="color: red; font-size:2rem; text-align: center;">{{$monthSurplus}}</p>
-                @endif --}}
             </div>
-        </div>
+        </div> --}}
         <table>
             <thead>
                 <tr>
                     <th>Your Daily Progress</th>
-                    <th>{{$today->format('F')}}</th>
-                    <th>{{$today->day}}</th>
+                    <th>{{$today->format('F')}} {{$today->day}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Budget</td>
-                    <td>${{$budget}}</td>
+                    <td style="text-align: right;">${{$budget}}</td>
                 </tr>
                 @foreach ($expenses as $key => $value)
                 <tr>
@@ -81,18 +71,18 @@
                     <td>Remaining</td>
                     @if ($remaining < 0)
                     
-                    <td>$0</td>
+                    <td style="text-align: right;">$0</td>
                     @else
-                    <td>${{$remaining}}</td>
+                    <td style="text-align: right;">${{$remaining}}</td>
                     @endif
                 </tr>
                 <tr>
                     @if ($remaining < 0)
                         <td>Overspend</td>
-                        <td>${{$remaining * -1}}</td>
+                        <td style="text-align: right;" class="loss">${{$remaining * -1}}</td>
                         @else
                         <td>Saving</td>
-                        <td>${{$remaining}}</td>
+                        <td style="text-align: right;" class="gain">${{$remaining}}</td>
                     @endif
                 </tr>
             </tbody>
@@ -103,22 +93,39 @@
         async function fetchData () {
             const response = await fetch(`api/percent/${username}`);
             const data = await response.json();
+            console.log(data);
             return data;
         }
         
         fetchData().then(data => {
             const totalSpent = data;
-            data = {
-                datasets: [{
-                    label: '% of Budget Spent',
-                    data: [totalSpent, (500-totalSpent)],
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgba(255, 99, 132, 0.2)',
-                    ],
-                    hoverOffset: 4
-                }]
-            };
+            if (totalSpent <= 500) {
+                data = {
+                    datasets: [{
+                        label: '% of Budget Spent',
+                        data: [totalSpent, (500-totalSpent)],
+                        backgroundColor: [
+                            'rgba(63, 145, 74, 1)',
+                            'rgba(63, 145, 74, 0.2)',
+                        ],
+                        hoverOffset: 4,
+                        cutout: '80%',
+                    }]
+                };
+            } else {
+                data = {
+                    datasets: [{
+                        label: '% of Budget Spent',
+                        data: [100, 0],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 0.2)',
+                        ],
+                        hoverOffset: 4,
+                        cutout: '80%',
+                    }]
+                };
+            }
             myChart.config.type = 'doughnut';
             myChart.config.data = data;
             myChart.update();
@@ -135,12 +142,12 @@
                 label: '% of Budget Spent',
                 data: [0, 100],
                 backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgba(255, 99, 132, 0.2)',
-                    // 'rgb(255,255,255)'
+                    'rgba(63, 145, 74, 1)',
+                    'rgba(63, 145, 74, 0.2)',
                 ],
-                hoverOffset: 4
-            }]
+                hoverOffset: 4,
+                cutout: '80%',
+            }],
         };
         
         const config = {
