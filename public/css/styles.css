@@ -221,20 +221,58 @@ a {
 .progress-row {
     min-height:10vh;
     display:flex;
+    justify-content: center;
+    margin-bottom:2rem;
 }
 
 .progress-card {
     width:50%;
+    padding:1rem;
+}
+
+.progress-info {
+    width:80%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.progress-label {
+    font-size:1.5rem;
+    text-align:center;
+    margin-top:0;
+}
+.progress-stat {
+    text-align:center;
+    margin-top:0;
+    font-size:2rem; 
+
 }
 
 .gain {
     color:green; 
-    font-size:2rem; 
-    text-align: center;
 }
 
 .loss {
     color:red; 
-    font-size:2rem; 
-    text-align: center;
+}
+
+.chart-overlay {
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.chart-overlay div {
+    position: absolute;
+    font-size:3rem;
+}
+.chart-overlay div p {
+    margin:0;
+    font-size:2rem;
+}
+
+.chart-subtext {
+    font-size: 0.75rem;
 }
