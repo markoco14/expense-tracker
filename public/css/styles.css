@@ -23,6 +23,13 @@ a {
     text-decoration: none;
 }
 
+.mobile-header {
+    width: 100%;
+    position: fixed;
+    padding: 1rem;
+    background-color: rgba(10,10,10,0.3);
+}
+
 .landing-nav {
     display:flex;
     justify-content: space-between;
@@ -39,12 +46,17 @@ a {
     text-decoration: none;
 }
 .nav {
+    z-index:9999;
     display:flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1rem;
     color: var(--main-white);
     background-color: var(--main-green);
+}
+
+.nav li {
+    color: var(--main-white);
 }
 
 .nav p {
@@ -56,17 +68,47 @@ a {
     text-decoration: none;
 }
 
-.hamburger-block {
-    padding:0 1rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: right;
-    color:var(--main-white);
-    background-color: var(--main-green);
+.bottom-nav {
+    position: fixed; 
+    z-index:9999;
+    width:100%; 
+    bottom: 0; 
+    left: 0; 
+    background-color:green; 
+    color:white;
 }
+
+
+.bottom-nav ul > li[data-icon="true"] {
+    position:relative;
+    z-index:9999;
+}
+
+.hamburger-block {
+    z-index:1000;
+    margin:0;
+    position:fixed;
+    display:flex;
+    flex-direction:column;
+    gap:2em;
+    justify-content: center;
+    align-items: left;
+    height:100vh;
+    width:70vw;
+    bottom:0;
+    left:0;
+    color:var(--main-white);
+    background-color: rgba(10,10,10,0.2);
+    backdrop-filter: blur(0.7rem);
+    list-style:none;
+}
+
+
 .hamburger-block a {
     color:white;
     text-align: right;
+    font-size:2rem;
+    font-weight:700;
 }
 .hamburger-block-hidden {
     display:none;
@@ -83,13 +125,14 @@ a {
     color: var(--secondary-green);
 }
 .hero-content {
-    padding:0 1rem;
-    margin-top:10rem;
+    padding:10rem 1rem 0;
+    /* margin-top:10rem; */
     color:var(--main-white);
     max-width:650px;
 }
 
 .hero-button {
+    z-index:9999;
     padding: 0 1rem;
     margin-top:2rem;
     margin-bottom:0.75rem;
@@ -166,7 +209,8 @@ a {
 .form-container {
     height:100%;
     padding:1rem;
-    margin-top:25%;
+    padding-top:25%;
+    /* margin-top:25%; */
 }
 
 .profile-form {

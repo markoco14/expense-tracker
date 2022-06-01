@@ -1,6 +1,7 @@
 <x-header />
+<x-mobile-nav/>
     <section class="section-full">
-        <x-navbar />
+        {{-- <x-navbar /> --}}
         <div class="form-container">
 
             <form action="tracking" method="post" class="form">
