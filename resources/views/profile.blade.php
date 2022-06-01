@@ -1,6 +1,7 @@
 <x-header />
-    <x-navbar />
-    <div class="container">
+    {{-- <x-navbar /> --}}
+    <x-mobile-nav/>
+    <div class="container" style="padding-top:5rem;">
         <div class="form">
             <section style="margin-bottom: 2rem;">
                 <h1 class="form-title">Your Financial Profile</h1>

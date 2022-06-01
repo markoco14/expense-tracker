@@ -1,7 +1,8 @@
 <x-header />
-<section class="section-full">
+<x-mobile-nav/>
+<section class="section-full" style="padding-top: 5rem;">
 
-    <x-navbar />
+    {{-- <x-navbar /> --}}
     <div class="container">
         <h1 class="form-title">Your Financial Details</h1>
         <p>Budget List for {{Carbon\Carbon::now()->format('F')}}</p>
