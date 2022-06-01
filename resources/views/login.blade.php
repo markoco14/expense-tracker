@@ -1,6 +1,8 @@
 <x-header />
+<x-mobile-nav-top/>
+
     <section class="section-full half-half">
-        <x-navbar />
+        {{-- <x-navbar /> --}}
         <div class="form-container">
             @if (session()->has('success'))
                 <p
