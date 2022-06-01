@@ -1,5 +1,5 @@
 <x-header />
-    <x-mobile-nav-top/>
+    <x-mobile-nav/>
     <section class="hero">
         {{-- <x-navbar/> --}}
         <div class="hero-flex">
