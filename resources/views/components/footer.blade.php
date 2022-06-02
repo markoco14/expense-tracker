@@ -6,10 +6,12 @@
         const hamburgerMenu = document.getElementById('hamburger-menu');
         const hamburgerToggle = document.getElementById('hamburger-toggle');
         hamburgerToggle.addEventListener('click', ()=>{
-            if(hamburgerMenu.getAttribute('class') === 'hamburger-block') {
-                hamburgerMenu.setAttribute('class', 'hamburger-block-hidden');
+            if (hamburgerMenu.classList.contains('hamburger-block-hidden')) {
+                hamburgerMenu.classList.remove('hamburger-block-hidden');
+                hamburgerMenu.classList.add('hamburger-block');
             } else {
-                hamburgerMenu.setAttribute('class', 'hamburger-block');
+                hamburgerMenu.classList.add('hamburger-block-hidden');
+                hamburgerMenu.classList.remove('hamburger-block');
             }
         });
     </script>

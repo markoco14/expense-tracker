@@ -1,56 +1,55 @@
-<header class="mobile-header">
-    <p style="margin: 0; color:rgb(245,245,245);"><strong>Expensave</strong></p>
-    <nav class="bottom-nav">
-        <ul style="display: flex; gap:1rem; list-style: none; color:white;">
+<header class="primary-header flex">
+    <div class='logo'>
+        <p>Expensave</p>
+    </div>
+    <nav>
+        <ul class="primary-navigation flex">
         @guest
-            <li data-icon="true">
-                <i id="hamburger-toggle" class="fas fa-bars"></i>
-            </li>
-            <li>
-                <a href="/" style="color:white;">Home</a>
-            </li>
-            <li>
-                <a href="login" style="color:white;">Log In</a>
-            </li>
-        @endguest
-        @auth
-        <li>
-                <i id="hamburger-toggle" class="fas fa-bars"></i>
-            </li>
-            <li>
-                <a href="tracking" style="color:white;">Tracking</a>
-            </li>
-            <li>
-                <a href="progress" style="color:white;">Progress</a>
-            </li>            
-        @endauth
-        </ul>
-    </nav>
-    <ul id="hamburger-menu" class="hamburger-block-hidden">
-    @guest
             <li>
                 <a href="/">Home</a>
             </li>
             <li>
-                <a href="signup" style="color:white;">Sign Up</a>
+                <a href="login">Log In</a>
+            </li>
+        @endguest
+        @auth
+            <li>
+                <a href="tracking">Tracking</a>
             </li>
             <li>
-                <a href="login" style="color:white;">Log In</a>
+                <a href="progress">Progress</a>
+            </li>            
+        @endauth
+            <button class="primary-nav-toggle">
+                <i id="hamburger-toggle" class="fas fa-2x fa-bars"></i>
+            </button class="primary-nav-toggle">
+        </ul>
+        <ul id="hamburger-menu" class="secondary-navigation flex hamburger-block-hidden">
+        @guest
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="signup">Sign Up</a>
+            </li>
+            <li>
+                <a href="login">Log In</a>
             </li>
             @endguest
             @auth
                 <li>
-                    <a href="spending" style="color:white;">Spending</a>
+                    <a href="spending">Spending</a>
                 </li>
                 <li>
-                    <a href="profile" style="color:white;">Profile</a>
+                    <a href="profile">Profile</a>
                 </li>
                 <li>
-                    <a href="details" style="color:white;">Details</a>
+                    <a href="details">Details</a>
                 </li>
                 <li>
-                    <a href="logout" style="color:white;">Log out</a>
+                    <a href="logout">Log out</a>
                 </li>
             @endauth
         </ul>
-        </header>
+    </nav>
+</header>
