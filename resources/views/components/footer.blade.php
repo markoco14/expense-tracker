@@ -2,6 +2,7 @@
         <p>all rights reserved c 2022</p>
         <p>thank you for playing</p>
     </footer>
+    <x-bottom-nav />
     <script async defer>
         const hamburgerMenu = document.getElementById('hamburger-menu');
         const hamburgerToggle = document.getElementById('hamburger-toggle');
