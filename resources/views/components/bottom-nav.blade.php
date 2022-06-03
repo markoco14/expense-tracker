@@ -1,5 +1,5 @@
 <nav>
-    <ul>
+    <ul class="secondary-navigation">
     @guest
         <li>
             <a href="/">Home</a>

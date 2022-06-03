@@ -2,7 +2,7 @@
     <div class='logo'>
         <p>Expensave</p>
     </div>
-    <ul id="hamburger-menu" class="secondary-navigation flex hamburger-block-hidden">
+    <ul id="hamburger-menu" class="primary-navigation flex hamburger-block-hidden">
     @guest
         <li>
             <a href="/">Home</a>
