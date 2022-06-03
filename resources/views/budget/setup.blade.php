@@ -1,5 +1,4 @@
 <x-header />
-    <x-navbar />
     <div>
         <div class="col-sm-6 offset-sm-3">
             <h1>Record your expenses</h1>
