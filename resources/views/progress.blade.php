@@ -4,9 +4,7 @@
         let username = "{{ Auth::user()->username }}";
     </script>
 @endif
-<x-mobile-nav/>
 <section class="section-full">
-    {{-- <x-navbar /> --}}
     <div class="container" style="padding-top:5rem;">
         <h1 class="form-title">Progress {{$today->format('F')}} {{$today->day}}</h1>
         <div class="progress-row">

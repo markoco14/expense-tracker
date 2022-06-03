@@ -1,9 +1,6 @@
 <x-header />
-<x-mobile-nav/>
     <section class="section-full">
-        {{-- <x-navbar /> --}}
         <div class="form-container">
-
             <form action="tracking" method="post" class="form">
                 <h1 class="form-title">Track Expenses</h1>
                 @if (session()->has('success'))

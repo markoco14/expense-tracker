@@ -1,7 +1,5 @@
 <x-header />
-    <x-mobile-nav/>
     <section class="hero">
-        {{-- <x-navbar/> --}}
         <div class="hero-flex">
             <div class="hero-content">
                 <h1 class="hero-h1">

@@ -1,8 +1,5 @@
 <x-header />
-<x-mobile-nav/>
 <section class="section-full" style="padding-top:5rem;">
-
-    {{-- <x-navbar /> --}}
     <div class="container">
         <h1 class="form-title">Your Spending</h1>
         <p>Here is a record of your daily spending in {{Carbon\Carbon::now()->format('F')}}</p>

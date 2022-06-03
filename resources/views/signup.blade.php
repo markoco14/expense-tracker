@@ -1,7 +1,5 @@
 <x-header />
-<x-mobile-nav/>
 <section class="section-full half-half">
-    {{-- <x-navbar /> --}}
         <div class="form-container">
             <form action="/signup" method="post" class="form">
                 @csrf

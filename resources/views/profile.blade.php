@@ -1,6 +1,4 @@
 <x-header />
-    {{-- <x-navbar /> --}}
-    <x-mobile-nav/>
     <div class="container" style="padding-top:5rem;">
         <div class="form">
             <section style="margin-bottom: 2rem;">
