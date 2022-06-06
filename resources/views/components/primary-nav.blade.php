@@ -1,6 +1,6 @@
 <header class="primary-header flex">
     <div class='logo'>
-        <p>Expensave</p>
+        <p>expen<i class="fas fa-dollar-sign"></i>ave</p>
     </div>
     <ul id="hamburger-menu" class="primary-navigation flex hamburger-block-hidden">
     @guest
