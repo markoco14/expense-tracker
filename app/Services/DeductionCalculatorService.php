@@ -6,7 +6,7 @@ use App\Models\UserSalary;
 use App\Models\UserBudget;
 use App\Models\UserDeduction;
 use App\Models\UserSaving;
-
+use Carbon\Carbon;
 class DeductionCalculatorService
 {
 
@@ -107,12 +107,26 @@ class DeductionCalculatorService
         $budget = UserBudget::where('user_id', auth()->user()->id)
             ->where('budget_status', 'CURRENT')
             ->pluck('budget_amount');
+            if ($budget->isNotEmpty()) {
+                $budget = $budget->toArray()[0];
+            } else {
+                $budget = 0;
+            }
+        return $budget;
+    }
+
+    public function getTotalMonthlyBudget() {
+        $budget = UserBudget::where('user_id', auth()->user()->id)
+            ->where('budget_status', 'CURRENT')
+            ->pluck('budget_amount');
 
             if ($budget->isNotEmpty()) {
                 $budget = $budget->toArray()[0];
             } else {
                 $budget = 0;
             }
+
+            $budget = $budget * Carbon::now()->daysInMonth;
         return $budget;
     }
 

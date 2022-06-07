@@ -6,21 +6,28 @@ use App\Models\UserBudget;
 use App\Models\UserSalary;
 use App\Models\UserDeduction;
 use App\Models\UserSaving;
-
-use Illuminate\Http\Client\Request;
+use App\Services\DeductionCalculatorService;
 use Carbon\Carbon;
-
-// use Illuminate\Support\Facades\DB;
-
-// use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-// use Illuminate\Foundation\Bus\DispatchesJobs;
-// use Illuminate\Foundation\Validation\ValidatesRequests;
-// use Illuminate\Routing\Controller as BaseController;
 
 class FinancialsController extends Controller
 {
-    public function index() {
-        return view('profile');
+    public function index(DeductionCalculatorService $deductionCalculatorService) {
+        $monthlySalary = $deductionCalculatorService->getSalary();
+        $allDeductions = $deductionCalculatorService->getDeductions();
+        $totalDeductions = 0;
+        foreach ($allDeductions as $deduction) {
+            $totalDeductions += $deduction['deduction_amount'];
+        }
+        $savings = $deductionCalculatorService->getSavings();
+        $dailyBudget = $deductionCalculatorService->getDailyBudget();
+        
+        return view('profile', [
+            'monthlySalary' => number_format($monthlySalary),
+            'totalDeductions' => number_format($totalDeductions),
+            'savings' => number_format($savings),
+            'dailyBudget' => number_format($dailyBudget),
+            'allDeductions' => $allDeductions
+        ]);
     }
 
     // salaries function
