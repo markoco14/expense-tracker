@@ -91,6 +91,12 @@ a {
         font-size:2rem;
     }
 
+    .primary-navigation i {
+        margin-right: 0.5em;
+        width:12%;
+        text-align:left;
+    }
+
     .secondary-nav-container {
         display:flex;
         justify-content: right;

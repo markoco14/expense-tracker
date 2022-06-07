@@ -5,27 +5,27 @@
     <ul id="hamburger-menu" class="primary-navigation flex hamburger-block-hidden">
     @guest
         <li>
-            <a href="/">Home</a>
+            <a href="/"><i class="fa fa-home"></i>Home</a>
         </li>
         <li>
-            <a href="signup">Sign Up</a>
+            <a href="signup"><i class="fas fa-user-plus"></i>Sign Up</a>
         </li>
         <li>
-            <a href="login">Log In</a>
+            <a href="login"><i class="fa fa-sign-in-alt"></i>Log In</a>
         </li>
         @endguest
         @auth
             <li>
-                <a href="spending">Spending</a>
+                <a href="spending"><i class="fas fa-file-invoice-dollar"></i>Spending</a>
             </li>
             <li>
-                <a href="profile">Profile</a>
+                <a href="profile"><i class="fas fa-user-edit"></i>Profile</a>
             </li>
             <li>
-                <a href="details">Details</a>
+                <a href="details"><i class="fas fa-list-ol"></i>Details</a>
             </li>
             <li>
-                <a href="logout">Log out</a>
+                <a href="logout"><i class="fas fa-sign-out-alt"></i>Log out</a>
             </li>
         @endauth
     </ul>
