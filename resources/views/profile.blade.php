@@ -23,8 +23,11 @@
                 {{-- salary section --}}
                 <form  action="profile/salaries" method="post">
                     <h2 class="form-title" id="income">Income</h2>
+                    <div>
+                        <p>Your current salary: ${{$monthlySalary}}</p>
+                    </div>
                     @csrf
-                <div class="form-group">
+                    <div class="form-group">
                         <label for="salary">
                             Salary
                         </label>
@@ -58,6 +61,10 @@
                     id="deduction-form"
                     >
                 <h2 class="form-title" id="deductions">Deductions</h2>
+                <p>Your total deductions: ${{$totalDeductions}}</p>
+                @foreach ($allDeductions as $deduction)
+                <p>Your current {{$deduction['deduction_name']}}: ${{$deduction['deduction_amount']}}</p>
+                @endforeach
                 <div class="add-input-group">
                     <input 
                         type="text"
@@ -87,6 +94,7 @@
                 {{-- savings section --}}
                 <form  action="profile/savings" method="post" >
                     <h2 class="form-title" id="savings">Savings</h2>
+                    <p>Your current savings: ${{$savings}}</p>
                     @csrf
                     <div class="form-group">
                         <label 
@@ -117,11 +125,11 @@
                     </div>
                 </form>
             </section>
-            
             {{-- budget section --}}
             <section class="profile-form">
                 <form  action="profile/budgets" method="post" >
                     <h2 class="form-title" id="budget">Budget</h2>
+                    <p>Your daily budget: ${{$dailyBudget}}</p>
                     @csrf
                     <div class="form-group">
                         <label 

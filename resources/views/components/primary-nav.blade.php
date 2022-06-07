@@ -22,9 +22,6 @@
                 <a href="profile"><i class="fas fa-user-edit"></i>Profile</a>
             </li>
             <li>
-                <a href="details"><i class="fas fa-list-ol"></i>Details</a>
-            </li>
-            <li>
                 <a href="logout"><i class="fas fa-sign-out-alt"></i>Log out</a>
             </li>
         @endauth
