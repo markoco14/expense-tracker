@@ -1,3 +1,4 @@
+    </main>
     <footer style="padding-bottom:5rem;">
         <p>all rights reserved c 2022</p>
         <p>thank you for playing</p>
