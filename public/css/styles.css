@@ -9,6 +9,7 @@
 }
 
 body {
+    font-family: 'Nunito', arial;
     box-sizing:border-box;
     margin:0;
     padding:0;
@@ -20,6 +21,13 @@ ul {
     margin:0;
     padding:0;
 }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--main-green);
+}
+
+
 
 h1, h2, h3, h4, h5, h6, p {
     margin:0;
@@ -198,6 +206,14 @@ a {
     color: var(--secondary-white);
 }
 
+/* 
+ *
+ *
+ Main styles
+ *
+ *
+ */
+
 .app-main {
     background-image: linear-gradient(to bottom right, rgb(152, 236, 136), rgb(192, 255, 211));
     min-height:100vh;
@@ -262,7 +278,7 @@ a {
 
 .form-title {
     margin-bottom: 1rem;
-    color: var(--main-green);
+    /* color: var(--main-green); */
 }
 
 .form-group {
@@ -295,6 +311,10 @@ a {
 .error {
     color:red;
 }
+
+
+
+
 
 /* PROGRESS PAGE STYLES */
 
