@@ -20,12 +20,14 @@ class FinancialsController extends Controller
         }
         $savings = $deductionCalculatorService->getSavings();
         $dailyBudget = $deductionCalculatorService->getDailyBudget();
+        $monthlyBudget = $dailyBudget * Carbon::now()->daysInMonth;
         
         return view('profile', [
             'monthlySalary' => number_format($monthlySalary),
             'totalDeductions' => number_format($totalDeductions),
             'savings' => number_format($savings),
             'dailyBudget' => number_format($dailyBudget),
+            'monthlyBudget' => number_format($monthlyBudget),
             'allDeductions' => $allDeductions
         ]);
     }
