@@ -3,7 +3,7 @@
     --secondary-white: rgb(197, 197, 197);
     --main-dark: rgb(41,41,41);
     /* --main-green: rgb(42, 200, 72); */
-    --main-green: rgb(63, 145, 74);
+    --main-green: rgb(58, 186, 75);
     /* --main-green: rgb(127, 232, 57); */
     --secondary-green: rgb(127, 232, 57);
 }
@@ -44,10 +44,6 @@ h1, h2, h3, h4, h5, h6, p {
 a {
     text-decoration: none;
 }
-
-/* a:visited {
-    color:var(--main-white);
-} */
 
 .flex {
     display: flex;
@@ -391,6 +387,16 @@ button {
 .add-profile-info-button:hover{    
     background: var(--main-green);
     color:white;
+}
+
+.profile-modal {
+    width:95%;
+    aspect-ratio: 1;
+}
+
+.profile-modal-buttons {
+    justify-content:right;
+    gap:1rem;
 }
 
 /* PROGRESS PAGE STYLES */

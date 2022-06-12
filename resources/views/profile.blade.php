@@ -27,33 +27,40 @@
                 </div>
             </li>
         </ul>
-        <button class="add-profile-info-button">+ Income ></button>
-        <form action="profile/salaries" method="post">
-            @csrf
-            <div class="form-group">
-                <label for="salary">
-                    Salary
-                </label>
-                <input 
-                    type="number" 
-                    id="salary" 
-                    name="salary"
-                    value={{old('salary')}}
-                >
-                @error('salary')
-                    <p class="error">{{$message}}</p>
-                @enderror
+        <button id="incomeModalButton">+ New</button>
+        <dialog id="incomeModal" class="profile-modal">
+            <div>
+                <form action="profile/salaries" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="salary">
+                            Salary
+                        </label>
+                        <input 
+                            type="number" 
+                            id="salary" 
+                            name="salary"
+                            value={{old('salary')}}
+                        >
+                        @error('salary')
+                            <p class="error">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="flex profile-modal-buttons">
+                        <button id="incomeCancelButton" value="cancel">Cancel</button>
+                        <button 
+                            id="incomeConfirmButton" 
+                            value="default"
+                            type="submit" 
+                            name="submit" 
+                            class="save-button"
+                        >
+                            Save
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <button 
-                type="submit" 
-                name="submit" 
-                class="save-button"
-            >
-                Save
-            </button>
-        </div>
-    </form>
+        </dialog>
 </div>
 </section>
 <section>
@@ -76,51 +83,58 @@
             {{--  --}}
             @endforeach
         </ul>
-        <button class="add-profile-info-button">+ Deductions ></button>
-        <div>
-            <div class="flex" style="justify-content: space-between">
-                <div class="flex-column" >
-                    <label for="">Deduction Name</label>
-                    <input type="text">
+        <button id="deductionModalButton">+ New</button>
+        <dialog id="deductionModal" class="profile-modal">
+            <div>
+                <div class="flex" style="justify-content: space-between">
+                    <div class="flex-column" >
+                        <label for="">Deduction Name</label>
+                        <input type="text">
+                    </div>
+                    <div class="flex-column" >
+                        <label for="">Deduction Amount</label>
+                        <input type="text">
+                    </div>
                 </div>
-                <div class="flex-column" >
-                    <label for="">Deduction Amount</label>
-                    <input type="text">
-                </div>
-                <div class="flex-column" style="justify-content: end;">
+                <div class="flex" style="justify-content: right;">
                     <button>Add</button>
                 </div>
-            </div>
-            <div class="add-input-group">
-                <input 
-                    type="text"
-                    id="add-deduction-input"
-                >
-                <button
-                    id="add-deduction-button"    
-                >
-                    Add Deduction
-                </button>
-            </div>
-            <form  
-                action="profile/deductions" 
-                method="post"
-                id="deduction-form"
-            >
-                @csrf
-                <div id="user-deductions-container">
-                </div>
-                <div class="form-group">
-                    <button 
-                        type="submit" 
-                        name="submit" 
-                        class="save-button"
-                        >
-                        Save
+                <div class="add-input-group">
+                    <input 
+                        type="text"
+                        id="add-deduction-input"
+                    >
+                    <button
+                        id="add-deduction-button"    
+                    >
+                        Add Deduction
                     </button>
+                    
                 </div>
-            </form>
-        </div>
+                <form  
+                    action="profile/deductions" 
+                    method="post"
+                    id="deduction-form"
+                >
+                    @csrf
+                    <div id="user-deductions-container">
+                    </div>
+                    <div class="flex profile-modal-buttons">
+                        <button id="deductionCancelButton" value="cancel">
+                            Cancel
+                        </button>
+                        <button
+                            value="default"
+                            type="submit" 
+                            name="submit" 
+                            class="save-button"
+                        >
+                            Add
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
     </div>
 </section>
 <section>
@@ -139,35 +153,42 @@
                 </div>
             </li>
         </ul>
-        <button class="add-profile-info-button">+ Savings ></button>
-        <form  action="profile/savings" method="post" >
-            @csrf
-            <div class="form-group">
-                <label 
-                    for="savings" 
-                >
-                    Savings
-                </label>
-                <input 
-                    type="text" 
-                    id="savings" 
-                    name="savings"
-                            value={{old('savings')}}
-                >
-                @error('savings')
-                    <p class="error">{{$message}}</p>
-                @enderror
-            </div>
-            <div class="form-group">
-                <button 
-                    type="submit" 
-                    name="submit" 
-                    class="save-button"
+        <button id="savingsModalButton">+ New</button>
+        <dialog id="savingsModal" class="profile-modal">
+            <form  action="profile/savings" method="post" >
+                @csrf
+                <div class="form-group">
+                    <label 
+                        for="savings" 
                     >
-                    Save
-                </button>
-            </div>
-        </form>
+                        Savings
+                    </label>
+                    <input 
+                        type="text" 
+                        id="savings" 
+                        name="savings"
+                                value={{old('savings')}}
+                    >
+                    @error('savings')
+                        <p class="error">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="flex profile-modal-buttons">
+                    <button id="savingsCancelButton">
+                        Cancel
+                    </button>
+                    <button 
+                        id="savingsConfirmButton"
+                        value="default"
+                        type="submit" 
+                        name="submit" 
+                        class="save-button"
+                    >
+                        Add
+                    </button>
+                </div>
+            </form>
+        </dialog>
 </section>
 <section class="profile-form">
     <div class="profile-container">
@@ -186,39 +207,100 @@
                 </div>
             </li>
         </ul>
-        <button class="add-profile-info-button">+ Budget ></button>
-        <form action="profile/budgets" method="post" >
-            @csrf
-            <div class="form-group">
-                <label 
-                    for="budgets" 
-                >
-                    Daily Budget
-                </label>
-                <input 
-                    type="text" 
-                    id="budgets" 
-                    name="budgets"
-                    
-                    value={{old('budgets')}}
-                >
-                @error('budgets')
-                    <p class="error">{{$message}}</p>
-                @enderror
-            </div>
-            <div class="form-group">
-                <button 
-                    type="submit" 
-                    name="submit" 
-                    class="save-button"
+        <button id="budgetModalButton">+ New</button>
+        <dialog id="budgetModal" class="profile-modal">
+            <form action="profile/budgets" method="post" >
+                @csrf
+                <div class="form-group">
+                    <label 
+                        for="budgets" 
                     >
-                    Save
-                </button>
-            </div>
-        </form>
+                        Daily Budget
+                    </label>
+                    <input 
+                        type="text" 
+                        id="budgets" 
+                        name="budgets"
+                        
+                        value={{old('budgets')}}
+                    >
+                    @error('budgets')
+                        <p class="error">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="flex profile-modal-buttons">
+                    <button id="budgetCancelButton">
+                        Cancel
+                    </button>
+                    <button 
+                        id="budgetConfirmButton"
+                        type="submit" 
+                        name="submit" 
+                        class="save-button"
+                    >
+                        Add
+                    </button>
+                </div>
+            </form>
+        </dialog>
     </div>
 </section>
 <script>
+    // income modal
+    const incomeModal = document.getElementById('incomeModal');
+    const incomeModalButton = document.getElementById('incomeModalButton');
+    const incomeCancelButton = document.getElementById('incomeCancelButton');
+    incomeModalButton.addEventListener('click', function() {
+        incomeModal.showModal();
+    });
+
+    incomeCancelButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        incomeModal.close();
+    });
+    
+    // deduction modal
+    const deductionModal = document.getElementById('deductionModal');
+    const deductionModalButton = document.getElementById('deductionModalButton');
+    const deductionCancelButton = document.getElementById('deductionCancelButton');
+
+    deductionModalButton.addEventListener('click', function() {
+        deductionModal.showModal();
+    });
+
+    deductionCancelButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        deductionModal.close();
+    });
+
+    // savings modal
+    const savingsModal = document.getElementById('savingsModal');
+    const savingsModalButton = document.getElementById('savingsModalButton');
+    const savingsCancelButton = document.getElementById('savingsCancelButton');
+
+    savingsModalButton.addEventListener('click', function() {
+        savingsModal.showModal();
+    });
+
+    savingsCancelButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        savingsModal.close();
+    });
+
+    // budget modal
+    const budgetModal = document.getElementById('budgetModal');
+    const budgetModalButton = document.getElementById('budgetModalButton');
+    const budgetCancelButton = document.getElementById('budgetCancelButton');
+
+    budgetModalButton.addEventListener('click', function() {
+        budgetModal.showModal();
+    });
+
+    budgetCancelButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        budgetModal.close();
+    });
+
     const addDeductionInput = document.getElementById('add-deduction-input');
     const addDeductionButton = document.getElementById('add-deduction-button');
     const deductionForm = document.getElementById('deduction-form');
