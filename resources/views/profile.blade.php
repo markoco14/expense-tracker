@@ -28,7 +28,8 @@
                 </div>
                 <div>
                     <button class="edit-button">Edit</button>
-                    <button class="delete-button">Delete</button>
+                    {{-- delete will need data-name['salary_name'] later --}}
+                    <button class="delete-button delete-salary">Delete</button>
                 </div>
             </li>
         </ul>
@@ -257,6 +258,25 @@
     </div>
 </section>
 <script>
+    const deleteSalaryButtons = document.querySelectorAll('.delete-salary');
+    deleteSalaryButtons.forEach(button => {
+        button.addEventListener('click', deleteSalary);
+    });
+
+    async function deleteSalary(e) {
+        console.log('You are deleting your salary');
+        const response = await fetch(`api/profile/salary/delete/${userid}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                user_id: userid
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+        e.target.parentNode.parentNode.remove();
+    }
+
     const deleteDeductionButtons = document.querySelectorAll('.delete-deduction');
     deleteDeductionButtons.forEach(button => {
         button.addEventListener('click', deleteDeduction);

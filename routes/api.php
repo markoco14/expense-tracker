@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\DeductionController;
+use App\Http\Controllers\SalaryController;
 
 // Auth
 
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // PROFILE PAGE API ROUTES
+Route::post('profile/salary/delete/{userid}', [SalaryController::class, 'delete']);
 Route::post('profile/deduction/delete/{userid}/{deduction}', [DeductionController::class, 'delete']);
 
 // PROGRESS PAGE API ROUTES
