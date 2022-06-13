@@ -214,7 +214,7 @@
                 </div>
                 <div>
                     <button class="edit-button">Edit</button>
-                    <button class="delete-button">Delete</button>
+                    <button class="delete-button delete-budget">Delete</button>
 
                 </div>
             </li>
@@ -264,7 +264,6 @@
     });
 
     async function deleteSalary(e) {
-        console.log('You are deleting your salary');
         const response = await fetch(`api/profile/salary/delete/${userid}`, {
             method: 'POST',
             body: JSON.stringify({
@@ -302,8 +301,25 @@
     });
 
     async function deleteSaving(e) {
-        console.log('You are deleting your saving');
         const response = await fetch(`api/profile/saving/delete/${userid}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                user_id: userid
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+        e.target.parentNode.parentNode.remove();
+    }
+
+    const deleteBudgetButtons = document.querySelectorAll('.delete-budget');
+    deleteBudgetButtons.forEach(button => {
+        button.addEventListener('click', deleteBudget);
+    });
+
+    async function deleteBudget(e) {
+        const response = await fetch(`api/profile/budget/delete/${userid}`, {
             method: 'POST',
             body: JSON.stringify({
                 user_id: userid
@@ -378,8 +394,6 @@
     
     function addNewDeductionInput(e) {
         e.preventDefault();
-        // console.log(addDeductionInput.value);
-        // console.log(deductionForm);
         let userDeductionsContainer = document.getElementById('user-deductions-container');
 
         let newDivGroup = document.createElement('div');
@@ -390,13 +404,11 @@
         newLabel.setAttribute('class', 'form-label');
         newLabel.setAttribute('id', addDeductionInput.value);
         newLabel.textContent = addDeductionInput.value;
-        console.log(newLabel);
         
         let newInput = document.createElement('input');
         newInput.setAttribute('name', addDeductionInput.value);
         newInput.setAttribute('class', 'form-control');
         newInput.setAttribute('type', 'number');
-        console.log(newInput);
 
         userDeductionsContainer.appendChild(newDivGroup);
         newDivGroup.appendChild(newLabel);

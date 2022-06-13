@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('profile/salary/delete/{userid}', [SalaryController::class, 'delete']);
 Route::post('profile/deduction/delete/{userid}/{deduction}', [DeductionController::class, 'delete']);
 Route::post('profile/saving/delete/{userid}', [SavingController::class, 'delete']);
+Route::post('profile/budget/delete/{userid}', [BudgetController::class, 'delete']);
 
 // PROGRESS PAGE API ROUTES
 Route::get('percent/{username}', [BudgetController::class, 'getTodaySpendingPercent']);
