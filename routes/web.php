@@ -7,6 +7,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\FinancialsController;
 use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\DeductionController;
 use Illuminate\Contracts\Session\Session;
 
 /*
@@ -38,7 +39,7 @@ Route::get('logout', [SessionsController::class, 'destroy'])->middleware('auth')
 // profile information routes
 Route::get('profile', [FinancialsController::class, 'index'])->middleware('auth');
 Route::post('profile/salaries', [SalaryController::class, 'index'])->middleware('auth');
-Route::post('profile/deductions', [FinancialsController::class, 'deductions'])->middleware('auth');
+Route::post('profile/deductions', [DeductionController::class, 'index'])->middleware('auth');
 Route::post('profile/savings', [FinancialsController::class, 'savings'])->middleware('auth');
 Route::post('profile/budgets', [FinancialsController::class, 'budgets'])->middleware('auth');
 
