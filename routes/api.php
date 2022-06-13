@@ -3,8 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BudgetController;
-use App\Models\Expense;
-use App\Models\UserBudget;
+use App\Http\Controllers\DeductionController;
 
 // Auth
 
@@ -23,4 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// PROFILE PAGE API ROUTES
+Route::post('profile/deduction/delete/{userid}/{deduction}', [DeductionController::class, 'delete']);
+
+// PROGRESS PAGE API ROUTES
 Route::get('percent/{username}', [BudgetController::class, 'getTodaySpendingPercent']);

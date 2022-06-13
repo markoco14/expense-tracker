@@ -1,4 +1,9 @@
 <x-header />
+@if(Auth::check())
+    <script>
+        let userid = "{{ Auth::user()->id }}";
+    </script>
+@endif
 <section>
     <div class="profile-header">
         <h1>Profile</h1>
@@ -77,9 +82,15 @@
                 </div>
                 <div>
                     <button class="edit-button">Edit</button>
-                    <button class="delete-button">Delete</button>
+                    <button data-name="{{$deduction['deduction_name']}}" class="delete-button delete-deduction">Delete</button>
                 </div>
             </li>
+            {{-- <dialog>
+                <form action="">
+                    <label for="">{{$deduction['deduction_name']}}</label>
+                    <input type="text" value="{{$deduction['deduction_amount']}}">
+                </form>
+            </dialog> --}}
             {{--  --}}
             @endforeach
         </ul>
@@ -245,6 +256,26 @@
         </dialog>
     </div>
 </section>
+<script>
+    const deleteDeductionButtons = document.querySelectorAll('.delete-deduction');
+    deleteDeductionButtons.forEach(button => {
+        button.addEventListener('click', deleteDeduction);
+    });
+    
+    async function deleteDeduction(e) {
+        const response = await fetch(`api/profile/deduction/delete/${userid}/${e.target.getAttribute('data-name')}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                user_id: userid,
+                deduction_name: e.target.getAttribute('data-name'),    
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+        e.target.parentNode.parentNode.remove();
+    }
+</script>
 <script>
     // income modal
     const incomeModal = document.getElementById('incomeModal');
