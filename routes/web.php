@@ -5,7 +5,10 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\BudgetController;
-use App\Http\Controllers\FinancialsController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\DeductionController;
+use App\Http\Controllers\SavingController;
 use Illuminate\Contracts\Session\Session;
 
 /*
@@ -35,11 +38,11 @@ Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest
 Route::get('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
 // profile information routes
-Route::get('profile', [FinancialsController::class, 'index'])->middleware('auth');
-Route::post('profile/salaries', [FinancialsController::class, 'salaries'])->middleware('auth');
-Route::post('profile/deductions', [FinancialsController::class, 'deductions'])->middleware('auth');
-Route::post('profile/savings', [FinancialsController::class, 'savings'])->middleware('auth');
-Route::post('profile/budgets', [FinancialsController::class, 'budgets'])->middleware('auth');
+Route::get('profile', [ProfileController::class, 'index'])->middleware('auth');
+Route::post('profile/salaries', [SalaryController::class, 'index'])->middleware('auth');
+Route::post('profile/deductions', [DeductionController::class, 'index'])->middleware('auth');
+Route::post('profile/savings', [SavingController::class, 'index'])->middleware('auth');
+Route::post('profile/budgets', [BudgetController::class, 'index'])->middleware('auth');
 
 // expense input routes
 Route::get('tracking', [ExpensesController::class, 'index'])->middleware('auth');
