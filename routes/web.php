@@ -42,7 +42,7 @@ Route::get('profile', [FinancialsController::class, 'index'])->middleware('auth'
 Route::post('profile/salaries', [SalaryController::class, 'index'])->middleware('auth');
 Route::post('profile/deductions', [DeductionController::class, 'index'])->middleware('auth');
 Route::post('profile/savings', [SavingController::class, 'index'])->middleware('auth');
-Route::post('profile/budgets', [FinancialsController::class, 'budgets'])->middleware('auth');
+Route::post('profile/budgets', [BudgetController::class, 'index'])->middleware('auth');
 
 // expense input routes
 Route::get('tracking', [ExpensesController::class, 'index'])->middleware('auth');

@@ -13,39 +13,22 @@ use Illuminate\Support\Facades\Auth;
 
 class BudgetController extends Controller
 {
-
-    public function index(DeductionCalculatorService $deductionCalculatorService) {
-        $monthlySalary = $deductionCalculatorService->getSalary();
-        $labourInsurance = $deductionCalculatorService->getLabourInsurance();
-        $nationalHealthInsurance = $deductionCalculatorService->getNationalHealthInsruance();
-        $allDeductions = $deductionCalculatorService->getDeductions();
-        $deductions = 0;
-        foreach ($allDeductions as $deduction) {
-            $deductions += $deduction['deduction_amount'];
-        }
-        $takeHomePay = $monthlySalary - $deductions;
-        // $rent = $deductionCalculatorService->getRent();
-        // $utilities = $deductionCalculatorService->getUtilities();
-        $savings = $deductionCalculatorService->getSavings();
-        $beforeDailyExpenses = $takeHomePay - $savings;
-        $totalDailyBudget = $deductionCalculatorService->getDailyBudget();
-        $budgetedMonthlyExpenses = $totalDailyBudget * Carbon::now()->daysInMonth;
-        $surplus = $beforeDailyExpenses - $budgetedMonthlyExpenses;
-        
-        return view('budget.details', [
-            'monthlySalary' => number_format($monthlySalary),
-            'deductions' => number_format($deductions),
-            'labourInsurance' => number_format($labourInsurance),
-            'nationalHealthInsurance' => number_format($nationalHealthInsurance),
-            'takeHomePay' => number_format($takeHomePay),
-            // 'rent' => number_format($rent),
-            // 'utilities's => number_format($utilities),
-            'savings' => number_format($savings),
-            'beforeDailyExpenses' => number_format($beforeDailyExpenses),
-            'totalDailyBudget' => number_format($budgetedMonthlyExpenses),
-            'surplus' => number_format($surplus),
-            'allDeductions' => $allDeductions
-        ]);
+    public function index() {
+         // dd('You hit the budgets endpoint');
+         $attributes = request()->validate([
+             'budgets' => ['required']
+         ]);
+         // dd($attributes);
+         $budget = new UserBudget;
+         $budget->user_id = auth()->user()->id;
+         $budget->budget_name = 'daily';
+         $budget->budget_status = 'CURRENT';
+         $budget->budget_amount = $attributes['budgets'];
+         // $budget->month = Carbon::now()->month;
+         // dd($budget);
+         $budget->save();
+ 
+         return redirect('profile');
     }
 
     public function setup() {
