@@ -119,4 +119,10 @@ class BudgetController extends Controller
 
         return json_encode($totalSpent);
     }
+
+    public function delete($userid) {
+        UserBudget::where('user_id', $userid)
+        ->where('budget_status', 'CURRENT')
+        ->update(['budget_status' => 'OOD']);
+    }
 }

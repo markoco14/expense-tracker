@@ -1,4 +1,9 @@
 <x-header />
+@if(Auth::check())
+    <script>
+        let userid = "{{ Auth::user()->id }}";
+    </script>
+@endif
 <section>
     <div class="profile-header">
         <h1>Profile</h1>
@@ -23,7 +28,8 @@
                 </div>
                 <div>
                     <button class="edit-button">Edit</button>
-                    <button class="delete-button">Delete</button>
+                    {{-- delete will need data-name['salary_name'] later --}}
+                    <button class="delete-button delete-salary">Delete</button>
                 </div>
             </li>
         </ul>
@@ -77,9 +83,15 @@
                 </div>
                 <div>
                     <button class="edit-button">Edit</button>
-                    <button class="delete-button">Delete</button>
+                    <button data-name="{{$deduction['deduction_name']}}" class="delete-button delete-deduction">Delete</button>
                 </div>
             </li>
+            {{-- <dialog>
+                <form action="">
+                    <label for="">{{$deduction['deduction_name']}}</label>
+                    <input type="text" value="{{$deduction['deduction_amount']}}">
+                </form>
+            </dialog> --}}
             {{--  --}}
             @endforeach
         </ul>
@@ -149,7 +161,7 @@
                 </div>
                 <div>
                     <button class="edit-button">Edit</button>
-                    <button class="delete-button">Delete</button>
+                    <button class="delete-button delete-saving">Delete</button>
                 </div>
             </li>
         </ul>
@@ -202,7 +214,7 @@
                 </div>
                 <div>
                     <button class="edit-button">Edit</button>
-                    <button class="delete-button">Delete</button>
+                    <button class="delete-button delete-budget">Delete</button>
 
                 </div>
             </li>
@@ -245,6 +257,80 @@
         </dialog>
     </div>
 </section>
+<script>
+    const deleteSalaryButtons = document.querySelectorAll('.delete-salary');
+    deleteSalaryButtons.forEach(button => {
+        button.addEventListener('click', deleteSalary);
+    });
+
+    async function deleteSalary(e) {
+        const response = await fetch(`api/profile/salary/delete/${userid}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                user_id: userid
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+        e.target.parentNode.parentNode.remove();
+    }
+
+    const deleteDeductionButtons = document.querySelectorAll('.delete-deduction');
+    deleteDeductionButtons.forEach(button => {
+        button.addEventListener('click', deleteDeduction);
+    });
+    
+    async function deleteDeduction(e) {
+        const response = await fetch(`api/profile/deduction/delete/${userid}/${e.target.getAttribute('data-name')}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                user_id: userid,
+                deduction_name: e.target.getAttribute('data-name'),    
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+        e.target.parentNode.parentNode.remove();
+    }
+
+    const deleteSavingButtons = document.querySelectorAll('.delete-saving');
+    deleteSavingButtons.forEach(button => {
+        button.addEventListener('click', deleteSaving);
+    });
+
+    async function deleteSaving(e) {
+        const response = await fetch(`api/profile/saving/delete/${userid}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                user_id: userid
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+        e.target.parentNode.parentNode.remove();
+    }
+
+    const deleteBudgetButtons = document.querySelectorAll('.delete-budget');
+    deleteBudgetButtons.forEach(button => {
+        button.addEventListener('click', deleteBudget);
+    });
+
+    async function deleteBudget(e) {
+        const response = await fetch(`api/profile/budget/delete/${userid}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                user_id: userid
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+        e.target.parentNode.parentNode.remove();
+    }
+</script>
 <script>
     // income modal
     const incomeModal = document.getElementById('incomeModal');
@@ -308,8 +394,6 @@
     
     function addNewDeductionInput(e) {
         e.preventDefault();
-        // console.log(addDeductionInput.value);
-        // console.log(deductionForm);
         let userDeductionsContainer = document.getElementById('user-deductions-container');
 
         let newDivGroup = document.createElement('div');
@@ -320,13 +404,11 @@
         newLabel.setAttribute('class', 'form-label');
         newLabel.setAttribute('id', addDeductionInput.value);
         newLabel.textContent = addDeductionInput.value;
-        console.log(newLabel);
         
         let newInput = document.createElement('input');
         newInput.setAttribute('name', addDeductionInput.value);
         newInput.setAttribute('class', 'form-control');
         newInput.setAttribute('type', 'number');
-        console.log(newInput);
 
         userDeductionsContainer.appendChild(newDivGroup);
         newDivGroup.appendChild(newLabel);
