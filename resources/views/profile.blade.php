@@ -161,7 +161,7 @@
                 </div>
                 <div>
                     <button class="edit-button">Edit</button>
-                    <button class="delete-button">Delete</button>
+                    <button class="delete-button delete-saving">Delete</button>
                 </div>
             </li>
         </ul>
@@ -288,6 +288,25 @@
             body: JSON.stringify({
                 user_id: userid,
                 deduction_name: e.target.getAttribute('data-name'),    
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+        e.target.parentNode.parentNode.remove();
+    }
+
+    const deleteSavingButtons = document.querySelectorAll('.delete-saving');
+    deleteSavingButtons.forEach(button => {
+        button.addEventListener('click', deleteSaving);
+    });
+
+    async function deleteSaving(e) {
+        console.log('You are deleting your saving');
+        const response = await fetch(`api/profile/saving/delete/${userid}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                user_id: userid
             }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
