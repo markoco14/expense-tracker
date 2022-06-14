@@ -27,7 +27,7 @@
                     <span>${{$monthlySalary}}</span>
                 </div>
                 <div>
-                    <button class="edit-button">Edit</button>
+                    <button data-amount="{{$monthlySalary}}"class="edit-button edit-salary">Edit</button>
                     {{-- delete will need data-name['salary_name'] later --}}
                     <button class="delete-button delete-salary">Delete</button>
                 </div>

@@ -22,6 +22,25 @@ class SalaryController extends Controller
         $salary->save();
         return redirect('profile');
     }
+
+    public function getUpdatedSalary($userid, $name) {
+        // return ['response' => "You are getting the update Salary now"];
+        $salary = UserSalary::where('user_id', $userid)
+        // ->where('salary_name', $name)
+        ->where('salary_status', 'CURRENT')
+        ->get();
+        return json_encode($salary);
+    }
+
+    public function update($userid, $amount) {
+        UserSalary::where('user_id', $userid)
+        ->where('salary_status', 'CURRENT')
+        ->update(['salary_amount' => $amount]);
+        return [
+            'user_id' => $userid, 
+            'amount' => $amount,
+        ];
+    }
     // update with salary param later
     public function delete($userid) {
         UserSalary::where('user_id', $userid)
