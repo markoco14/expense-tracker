@@ -29,6 +29,23 @@ class SavingController extends Controller
 
     }
 
+    public function update($userid, $amount) {
+        UserSaving::where('user_id', $userid)
+        ->where('savings_status', 'CURRENT')
+        ->update(['savings_amount' => $amount]);
+        return ['status' => 201];
+    }
+
+    public function getUpdatedSaving($userid) {
+        // return ['response' => "You are getting the update Saving now"];
+        $saving = UserSaving::where('user_id', $userid)
+        // ->where('saving_name', $name)
+        ->where('savings_status', 'CURRENT')
+        ->get();
+        return json_encode($saving);
+    }
+
+
     public function delete($userid) {
         // return 'You have landed in the delete saving api endpoint';
         UserSaving::where('user_id', $userid)

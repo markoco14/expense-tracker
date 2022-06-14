@@ -7,9 +7,9 @@ function createEditSalaryModal(e) {
     const salaryRow = e.target.parentNode.parentNode;
     const salaryLabel = salaryRow.firstElementChild.firstElementChild;
     const salaryAmount = salaryRow.firstElementChild.firstElementChild.nextElementSibling;
-    console.log(salaryRow);
-    console.log(salaryLabel);
-    console.log(salaryAmount);
+    // console.log(salaryRow);
+    // console.log(salaryLabel);
+    // console.log(salaryAmount);
 
     const editAmount = e.target.getAttribute('data-amount');
     const editModal = document.createElement('dialog');
@@ -79,9 +79,9 @@ function createEditDeductionModal(e) {
     const deductionRow = e.target.parentNode.parentNode;
     const deductionLabel = deductionRow.firstElementChild.firstElementChild;
     const deductionAmount = deductionRow.firstElementChild.firstElementChild.nextElementSibling;
-    console.log(deductionRow);
-    console.log(deductionLabel);
-    console.log(deductionAmount);
+    // console.log(deductionRow);
+    // console.log(deductionLabel);
+    // console.log(deductionAmount);
     // console.log(e.target.getAttribute('data-name'));
     // console.log(e.target.getAttribute('data-amount'));
     const editName = e.target.getAttribute('data-name');
@@ -148,6 +148,77 @@ function createEditDeductionModal(e) {
     editModal.appendChild(editAmountInput);
     editModal.appendChild(confirmButton);
     editModal.appendChild(cancelButton);
+    document.body.appendChild(editModal);
+    editModal.showModal();
+}
+
+const editSavingsButtons = document.querySelectorAll('.edit-savings');
+editSavingsButtons.forEach(button => {
+    button.addEventListener('click', createEditSavingsModal);
+});
+
+function createEditSavingsModal(e) {
+    const savingRow = e.target.parentNode.parentNode;
+    const savingLabel = savingRow.firstElementChild.firstElementChild;
+    const savingAmount = savingRow.firstElementChild.firstElementChild.nextElementSibling;
+    // console.log(savingRow);
+    // console.log(savingLabel);
+    // console.log(savingAmount);
+
+    const editAmount = e.target.getAttribute('data-amount');
+    const editModal = document.createElement('dialog');
+    editModal.setAttribute('class', 'profile-modal');
+
+    const editNameLabel = document.createElement('label');
+    editNameLabel.textContent = 'Saving';
+    const editNameInput = document.createElement('input');
+    editNameInput.value = 'Crypto';
+    const editAmountLabel = document.createElement('label');
+    editAmountLabel.textContent = 'Amount';
+    const editAmountInput = document.createElement('input');
+    editAmountInput.value = editAmount;
+
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = 'Cancel';
+    cancelButton.setAttribute('value', 'cancel');
+    cancelButton.addEventListener('click', () => {
+        e.preventDefault();
+        editModal.close();
+        document.body.removeChild(editModal);
+    });
+
+    const confirmButton = document.createElement('button');
+    confirmButton.textContent = 'Confirm';
+    confirmButton.addEventListener('click', submitData);
+
+    async function submitData() {
+        // console.log('You are submitting data now');
+        const response = await fetch(`api/profile/saving/edit/${userid}/${editAmountInput.value}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                label: editNameInput.value,
+                amount: editAmountInput.value
+            }),
+            headers: {
+            "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+        const updated = await fetch(`api/profile/saving/get/${userid}`);
+        const data = await updated.json();
+        console.log(data);
+        const newAmount = data[0].savings_amount;
+        savingAmount.textContent = `$${newAmount}`;
+        e.target.setAttribute('data-amount', newAmount);
+        editModal.close();
+        document.body.removeChild(editModal);
+    }
+
+    editModal.appendChild(editNameLabel);
+    editModal.appendChild(editNameInput);
+    editModal.appendChild(editAmountLabel);
+    editModal.appendChild(editAmountInput);
+    editModal.appendChild(cancelButton);
+    editModal.appendChild(confirmButton);
     document.body.appendChild(editModal);
     editModal.showModal();
 }

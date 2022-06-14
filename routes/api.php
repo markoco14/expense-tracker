@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // GET ROUTES
 Route::get('profile/salary/get/{userid}/{salary}', [SalaryController::class, 'getUpdatedSalary']);
 Route::get('profile/deduction/get/{userid}/{deduction}', [DeductionController::class, 'getUpdatedDeduction']);
+Route::get('profile/saving/get/{userid}', [SavingController::class, 'getUpdatedSaving']);
 
 // DELETE ROUTES
 Route::post('profile/salary/delete/{userid}', [SalaryController::class, 'delete']);
@@ -37,5 +38,6 @@ Route::post('profile/budget/delete/{userid}', [BudgetController::class, 'delete'
 // EDIT ROUTES
 Route::post('profile/salary/edit/{userid}/{salary_amount}', [SalaryController::class, 'update']);
 Route::post('profile/deduction/edit/{userid}/{deduction}/{amount}/{original_name}', [DeductionController::class, 'update']);
+Route::post('profile/saving/edit/{userid}/{saving_amount}', [SavingController::class, 'update']);
 // PROGRESS PAGE API ROUTES
 Route::get('percent/{username}', [BudgetController::class, 'getTodaySpendingPercent']);
