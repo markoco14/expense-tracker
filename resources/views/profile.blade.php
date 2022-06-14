@@ -27,7 +27,7 @@
                     <span>${{$monthlySalary}}</span>
                 </div>
                 <div>
-                    <button class="edit-button">Edit</button>
+                    <button data-amount="{{$monthlySalary}}" class="edit-button edit-salary">Edit</button>
                     {{-- delete will need data-name['salary_name'] later --}}
                     <button class="delete-button delete-salary">Delete</button>
                 </div>
@@ -82,10 +82,17 @@
                     <span>${{$deduction['deduction_amount']}}</span>
                 </div>
                 <div>
-                    <button class="edit-button">Edit</button>
+                    <button data-name="{{$deduction['deduction_name']}}" data-amount="{{$deduction['deduction_amount']}}" class="edit-button edit-deduction">Edit</button>
                     <button data-name="{{$deduction['deduction_name']}}" class="delete-button delete-deduction">Delete</button>
                 </div>
             </li>
+            {{-- <dialog class="edit-deduction-modal">
+                <form action="">
+                    <label for="">{{$deduction['deduction_name']}}</label>
+                    <input type="text" value="{{$deduction['deduction_amount']}}">
+                    <button type="submit">Save</button>
+                </form>
+            </dialog> --}}
             {{-- <dialog>
                 <form action="">
                     <label for="">{{$deduction['deduction_name']}}</label>
@@ -160,7 +167,7 @@
                     <span>${{$savings}}</span>
                 </div>
                 <div>
-                    <button class="edit-button">Edit</button>
+                    <button data-amount="{{$savings}}" class="edit-button edit-savings">Edit</button>
                     <button class="delete-button delete-saving">Delete</button>
                 </div>
             </li>
@@ -213,7 +220,7 @@
                     <span>${{$dailyBudget}}</span>
                 </div>
                 <div>
-                    <button class="edit-button">Edit</button>
+                    <button data-amount="{{$dailyBudget}}" class="edit-button edit-budget">Edit</button>
                     <button class="delete-button delete-budget">Delete</button>
 
                 </div>
@@ -257,164 +264,7 @@
         </dialog>
     </div>
 </section>
-<script>
-    const deleteSalaryButtons = document.querySelectorAll('.delete-salary');
-    deleteSalaryButtons.forEach(button => {
-        button.addEventListener('click', deleteSalary);
-    });
-
-    async function deleteSalary(e) {
-        const response = await fetch(`api/profile/salary/delete/${userid}`, {
-            method: 'POST',
-            body: JSON.stringify({
-                user_id: userid
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        });
-        e.target.parentNode.parentNode.remove();
-    }
-
-    const deleteDeductionButtons = document.querySelectorAll('.delete-deduction');
-    deleteDeductionButtons.forEach(button => {
-        button.addEventListener('click', deleteDeduction);
-    });
-    
-    async function deleteDeduction(e) {
-        const response = await fetch(`api/profile/deduction/delete/${userid}/${e.target.getAttribute('data-name')}`, {
-            method: 'POST',
-            body: JSON.stringify({
-                user_id: userid,
-                deduction_name: e.target.getAttribute('data-name'),    
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        });
-        e.target.parentNode.parentNode.remove();
-    }
-
-    const deleteSavingButtons = document.querySelectorAll('.delete-saving');
-    deleteSavingButtons.forEach(button => {
-        button.addEventListener('click', deleteSaving);
-    });
-
-    async function deleteSaving(e) {
-        const response = await fetch(`api/profile/saving/delete/${userid}`, {
-            method: 'POST',
-            body: JSON.stringify({
-                user_id: userid
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        });
-        e.target.parentNode.parentNode.remove();
-    }
-
-    const deleteBudgetButtons = document.querySelectorAll('.delete-budget');
-    deleteBudgetButtons.forEach(button => {
-        button.addEventListener('click', deleteBudget);
-    });
-
-    async function deleteBudget(e) {
-        const response = await fetch(`api/profile/budget/delete/${userid}`, {
-            method: 'POST',
-            body: JSON.stringify({
-                user_id: userid
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        });
-        e.target.parentNode.parentNode.remove();
-    }
-</script>
-<script>
-    // income modal
-    const incomeModal = document.getElementById('incomeModal');
-    const incomeModalButton = document.getElementById('incomeModalButton');
-    const incomeCancelButton = document.getElementById('incomeCancelButton');
-    incomeModalButton.addEventListener('click', function() {
-        incomeModal.showModal();
-    });
-
-    incomeCancelButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        incomeModal.close();
-    });
-    
-    // deduction modal
-    const deductionModal = document.getElementById('deductionModal');
-    const deductionModalButton = document.getElementById('deductionModalButton');
-    const deductionCancelButton = document.getElementById('deductionCancelButton');
-
-    deductionModalButton.addEventListener('click', function() {
-        deductionModal.showModal();
-    });
-
-    deductionCancelButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        deductionModal.close();
-    });
-
-    // savings modal
-    const savingsModal = document.getElementById('savingsModal');
-    const savingsModalButton = document.getElementById('savingsModalButton');
-    const savingsCancelButton = document.getElementById('savingsCancelButton');
-
-    savingsModalButton.addEventListener('click', function() {
-        savingsModal.showModal();
-    });
-
-    savingsCancelButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        savingsModal.close();
-    });
-
-    // budget modal
-    const budgetModal = document.getElementById('budgetModal');
-    const budgetModalButton = document.getElementById('budgetModalButton');
-    const budgetCancelButton = document.getElementById('budgetCancelButton');
-
-    budgetModalButton.addEventListener('click', function() {
-        budgetModal.showModal();
-    });
-
-    budgetCancelButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        budgetModal.close();
-    });
-
-    const addDeductionInput = document.getElementById('add-deduction-input');
-    const addDeductionButton = document.getElementById('add-deduction-button');
-    const deductionForm = document.getElementById('deduction-form');
-    addDeductionButton.addEventListener('click', addNewDeductionInput);
-    
-    function addNewDeductionInput(e) {
-        e.preventDefault();
-        let userDeductionsContainer = document.getElementById('user-deductions-container');
-
-        let newDivGroup = document.createElement('div');
-        newDivGroup.setAttribute('class', 'form-group');
-
-        let newLabel = document.createElement('label');
-        newLabel.setAttribute('for', addDeductionInput.value);
-        newLabel.setAttribute('class', 'form-label');
-        newLabel.setAttribute('id', addDeductionInput.value);
-        newLabel.textContent = addDeductionInput.value;
-        
-        let newInput = document.createElement('input');
-        newInput.setAttribute('name', addDeductionInput.value);
-        newInput.setAttribute('class', 'form-control');
-        newInput.setAttribute('type', 'number');
-
-        userDeductionsContainer.appendChild(newDivGroup);
-        newDivGroup.appendChild(newLabel);
-        newDivGroup.appendChild(newInput);
-
-        addDeductionInput.value = '';
-    }
-</script>
+<script type="text/javascript" src="{{URL::asset('js/editProfileStats.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/deleteProfileStats.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/addProfileStats.js')}}"></script>
 <x-footer />

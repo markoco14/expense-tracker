@@ -103,6 +103,23 @@ class BudgetController extends Controller
         return json_encode($totalSpent);
     }
 
+    public function update($userid, $amount) {
+        // return ['response' => 'you have landed in the update function of the budget controller'];
+        UserBudget::where('user_id', $userid)
+        ->where('budget_status', 'CURRENT')
+        ->update(['budget_amount' => $amount]);
+        return ['status' => 201];
+    }
+
+    public function getUpdatedBudget($userid) {
+        // return ['response' => "You are getting the update Saving now"];
+        $budget = UserBudget::where('user_id', $userid)
+        // ->where('budget_name', $name)
+        ->where('budget_status', 'CURRENT')
+        ->get();
+        return json_encode($budget);
+    }
+
     public function delete($userid) {
         UserBudget::where('user_id', $userid)
         ->where('budget_status', 'CURRENT')

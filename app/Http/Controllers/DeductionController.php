@@ -33,6 +33,27 @@ class DeductionController extends Controller
         }
         return redirect('profile');
     }
+    
+    public function getUpdatedDeduction($userid, $name) {
+        $deduction = UserDeduction::where('user_id', $userid)
+        ->where('deduction_name', $name)
+        ->where('deduction_status', 'CURRENT')
+        ->get();
+        return json_encode($deduction);
+    }
+
+    public function update($userid, $deduction, $amount, $original) {
+        UserDeduction::where('user_id', $userid)
+        ->where('deduction_name', $original)
+        ->where('deduction_status', 'CURRENT')
+        ->update(['deduction_name' => $deduction, 'deduction_amount' => $amount]);
+        return [
+            'user_id' => $userid, 
+            'deduction' => $deduction, 
+            'amount' => $amount,
+            'original' => $original
+        ];
+    }
 
     public function delete($userid, $deduction) {
         UserDeduction::where('user_id', $userid)
