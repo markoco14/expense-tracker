@@ -220,7 +220,7 @@
                     <span>${{$dailyBudget}}</span>
                 </div>
                 <div>
-                    <button class="edit-button">Edit</button>
+                    <button data-amount="{{$dailyBudget}}" class="edit-button edit-budget">Edit</button>
                     <button class="delete-button delete-budget">Delete</button>
 
                 </div>

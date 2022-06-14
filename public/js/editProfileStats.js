@@ -222,3 +222,75 @@ function createEditSavingsModal(e) {
     document.body.appendChild(editModal);
     editModal.showModal();
 }
+
+const editBudgetButtons = document.querySelectorAll('.edit-budget');
+editBudgetButtons.forEach(button => {
+    button.addEventListener('click', createEditBudgetModal);
+});
+
+function createEditBudgetModal(e) {
+    // console.log('You clicked the edit budget button');
+    const budgetRow = e.target.parentNode.parentNode;
+    const budgetLabel = budgetRow.firstElementChild.firstElementChild;
+    const budgetAmount = budgetRow.firstElementChild.firstElementChild.nextElementSibling;
+    // console.log(budgetRow);
+    // console.log(budgetLabel);
+    // console.log(budgetAmount);
+
+    const editAmount = e.target.getAttribute('data-amount');
+    const editModal = document.createElement('dialog');
+    editModal.setAttribute('class', 'profile-modal');
+
+    const editNameLabel = document.createElement('label');
+    editNameLabel.textContent = 'Budget';
+    const editNameInput = document.createElement('input');
+    editNameInput.value = 'Daily';
+    const editAmountLabel = document.createElement('label');
+    editAmountLabel.textContent = 'Amount';
+    const editAmountInput = document.createElement('input');
+    editAmountInput.value = editAmount;
+
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = 'Cancel';
+    cancelButton.setAttribute('value', 'cancel');
+    cancelButton.addEventListener('click', () => {
+        e.preventDefault();
+        editModal.close();
+        document.body.removeChild(editModal);
+    });
+
+    const confirmButton = document.createElement('button');
+    confirmButton.textContent = 'Confirm';
+    confirmButton.addEventListener('click', submitData);
+
+    async function submitData() {
+        // console.log('You are submitting data now');
+        const response = await fetch(`api/profile/budget/edit/${userid}/${editAmountInput.value}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                label: editNameInput.value,
+                amount: editAmountInput.value
+            }),
+            headers: {
+            "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+        const updated = await fetch(`api/profile/budget/get/${userid}`);
+        const data = await updated.json();
+        console.log(data);
+        const newAmount = data[0].budget_amount;
+        budgetAmount.textContent = `$${newAmount}`;
+        e.target.setAttribute('data-amount', newAmount);
+        editModal.close();
+        document.body.removeChild(editModal);
+    }
+
+    editModal.appendChild(editNameLabel);
+    editModal.appendChild(editNameInput);
+    editModal.appendChild(editAmountLabel);
+    editModal.appendChild(editAmountInput);
+    editModal.appendChild(cancelButton);
+    editModal.appendChild(confirmButton);
+    document.body.appendChild(editModal);
+    editModal.showModal();
+}
