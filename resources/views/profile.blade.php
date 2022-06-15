@@ -16,6 +16,9 @@
     </div>
 </section>
 <section>
+    <div id="profile-salary"></div>
+</section>
+<section>
     <div class="profile-container">
         <h2 id="income">Income</h2>
         {{-- <p>Total Income: ${{$monthlySalary}}</p> --}}
