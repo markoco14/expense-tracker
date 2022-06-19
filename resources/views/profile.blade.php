@@ -145,7 +145,8 @@
         </dialog>
     </div>
 </section> --}}
-<section>
+<section id="profile-savings"></section>
+{{-- <section>
     <div class="profile-container">
         <h2 id="savings">Savings</h2>
         <p>Total: ${{$savings}}</p>
@@ -197,7 +198,7 @@
                 </div>
             </form>
         </dialog>
-</section>
+</section> --}}
 <section class="profile-form">
     <div class="profile-container">
         <h2 id="budget">Budget</h2>

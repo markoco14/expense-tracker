@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-export default function ProfileDeduction() {
+export default function ProfileDeductions() {
     const [deductions, setDeductions] = useState([]);
     const [totalDeductions, setTotalDeductions] = useState(0);
     const [currentLabel, setCurrentLabel] = useState('');
@@ -140,8 +140,6 @@ export default function ProfileDeduction() {
                                 </div>
                                 <div>
                                     <button 
-                                        data-name={deduction.deduction_name} 
-                                        data-value={deduction.deduction_amount} 
                                         onClick={() => {openEditModal(deduction)}} 
                                         className="edit-button"
                                     >Edit</button>
@@ -184,5 +182,5 @@ export default function ProfileDeduction() {
 }
 
 if (document.getElementById('profile-deduction')) {
-    ReactDOM.render(<ProfileDeduction />, document.getElementById('profile-deduction'));
+    ReactDOM.render(<ProfileDeductions />, document.getElementById('profile-deduction'));
 }

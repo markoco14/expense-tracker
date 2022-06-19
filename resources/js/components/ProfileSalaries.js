@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-export default function ProfileSalary() {
+export default function ProfileSalaries() {
     const [salaries, setSalaries] = useState([]);
 
     const fetchData = async () => {
@@ -139,5 +139,5 @@ export default function ProfileSalary() {
 }
 
 if (document.getElementById('profile-salary')) {
-    ReactDOM.render(<ProfileSalary />, document.getElementById('profile-salary'));
+    ReactDOM.render(<ProfileSalaries />, document.getElementById('profile-salary'));
 }

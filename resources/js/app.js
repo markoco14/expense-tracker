@@ -13,5 +13,6 @@ require('./bootstrap');
  */
 
 require('./components/Example');
-require('./components/ProfileSalary');
-require('./components/ProfileDeduction');
+require('./components/ProfileSalaries');
+require('./components/ProfileDeductions');
+require('./components/ProfileSavings');

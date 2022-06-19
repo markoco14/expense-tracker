@@ -5283,9 +5283,11 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
 
-__webpack_require__(/*! ./components/ProfileSalary */ "./resources/js/components/ProfileSalary.js");
+__webpack_require__(/*! ./components/ProfileSalaries */ "./resources/js/components/ProfileSalaries.js");
 
-__webpack_require__(/*! ./components/ProfileDeduction */ "./resources/js/components/ProfileDeduction.js");
+__webpack_require__(/*! ./components/ProfileDeductions */ "./resources/js/components/ProfileDeductions.js");
+
+__webpack_require__(/*! ./components/ProfileSavings */ "./resources/js/components/ProfileSavings.js");
 
 /***/ }),
 
@@ -5374,16 +5376,16 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/ProfileDeduction.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/ProfileDeduction.js ***!
-  \*****************************************************/
+/***/ "./resources/js/components/ProfileDeductions.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/ProfileDeductions.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ProfileDeduction)
+/* harmony export */   "default": () => (/* binding */ ProfileDeductions)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -5413,7 +5415,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function ProfileDeduction() {
+function ProfileDeductions() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       deductions = _useState2[0],
@@ -5681,8 +5683,6 @@ function ProfileDeduction() {
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-                "data-name": deduction.deduction_name,
-                "data-value": deduction.deduction_amount,
                 onClick: function onClick() {
                   openEditModal(deduction);
                 },
@@ -5754,21 +5754,21 @@ function ProfileDeduction() {
 }
 
 if (document.getElementById('profile-deduction')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(ProfileDeduction, {}), document.getElementById('profile-deduction'));
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(ProfileDeductions, {}), document.getElementById('profile-deduction'));
 }
 
 /***/ }),
 
-/***/ "./resources/js/components/ProfileSalary.js":
-/*!**************************************************!*\
-  !*** ./resources/js/components/ProfileSalary.js ***!
-  \**************************************************/
+/***/ "./resources/js/components/ProfileSalaries.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/ProfileSalaries.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ProfileSalary)
+/* harmony export */   "default": () => (/* binding */ ProfileSalaries)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -5798,7 +5798,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function ProfileSalary() {
+function ProfileSalaries() {
   var _salaries$, _salaries$2;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
@@ -6071,7 +6071,412 @@ function ProfileSalary() {
 }
 
 if (document.getElementById('profile-salary')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(ProfileSalary, {}), document.getElementById('profile-salary'));
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(ProfileSalaries, {}), document.getElementById('profile-salary'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/ProfileSavings.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/ProfileSavings.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ProfileSavings)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+function ProfileSavings() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      savings = _useState2[0],
+      setSavings = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      totalSavings = _useState4[0],
+      setTotalSavings = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      currentLabel = _useState6[0],
+      setCurrentLabel = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState8 = _slicedToArray(_useState7, 2),
+      currentAmount = _useState8[0],
+      setCurrentAmount = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState10 = _slicedToArray(_useState9, 2),
+      newAmount = _useState10[0],
+      setNewAmount = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState12 = _slicedToArray(_useState11, 2),
+      addLabel = _useState12[0],
+      setAddLabel = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState14 = _slicedToArray(_useState13, 2),
+      addAmount = _useState14[0],
+      setAddAmount = _useState14[1];
+
+  function calculateTotalSavings(savings) {
+    var total = 0;
+    savings === null || savings === void 0 ? void 0 : savings.forEach(function (saving) {
+      total += saving.savings_amount;
+    });
+    setTotalSavings(total);
+  }
+
+  var fetchData = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var response, data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return fetch("api/profile/savings/".concat(userid));
+
+            case 2:
+              response = _context.sent;
+              _context.next = 5;
+              return response.json();
+
+            case 5:
+              data = _context.sent;
+              setSavings(data);
+              calculateTotalSavings(data);
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function fetchData() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  function openEditModal(saving) {
+    var editSavingsModal = document.getElementById('edit-savings-modal');
+    setCurrentLabel(saving.savings_name);
+    setCurrentAmount(saving.savings_amount);
+    editSavingsModal.showModal();
+  }
+
+  function closeEditModal() {
+    var editSavingsModal = document.getElementById('edit-savings-modal');
+    editSavingsModal.close();
+  }
+
+  function editSavings() {
+    return _editSavings.apply(this, arguments);
+  }
+
+  function _editSavings() {
+    _editSavings = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var editSavingsModal, editSavingsInput, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              editSavingsModal = document.getElementById('edit-savings-modal');
+              editSavingsInput = document.getElementById('edit-savings-input');
+
+              if (newAmount) {
+                _context2.next = 6;
+                break;
+              }
+
+              alert('You need to choose the savings amount.');
+              _context2.next = 13;
+              break;
+
+            case 6:
+              _context2.next = 8;
+              return fetch("api/profile/saving/edit/".concat(userid, "/").concat(currentLabel, "/").concat(newAmount, "/").concat(currentLabel), {
+                method: 'POST',
+                body: JSON.stringify({
+                  label: 'Deduction',
+                  amount: newAmount
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8"
+                }
+              });
+
+            case 8:
+              response = _context2.sent;
+              fetchData();
+              editSavingsInput.value = '';
+              setNewAmount(undefined);
+              editSavingsModal.close();
+
+            case 13:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    return _editSavings.apply(this, arguments);
+  }
+
+  function openAddModal() {
+    var addSavingsModal = document.getElementById('add-savings-modal');
+    addSavingsModal.showModal();
+  }
+
+  function closeAddModal() {
+    var addSavingsModal = document.getElementById('add-savings-modal');
+    var nameInput = document.getElementById('add-savings-name-input');
+    var amountInput = document.getElementById('add-savings-amount-input');
+    nameInput.value = '';
+    amountInput.value = '';
+    addSavingsModal.close();
+  }
+
+  function addSavings() {
+    return _addSavings.apply(this, arguments);
+  }
+
+  function _addSavings() {
+    _addSavings = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      var addSavingsModal, response, nameInput, amountInput;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              addSavingsModal = document.getElementById('add-savings-modal');
+
+              if (!(addLabel === undefined || addAmount === undefined)) {
+                _context3.next = 5;
+                break;
+              }
+
+              alert('You need to choose your savings information');
+              _context3.next = 16;
+              break;
+
+            case 5:
+              _context3.next = 7;
+              return fetch("api/profile/saving/create/".concat(userid, "/").concat(addLabel, "/").concat(addAmount), {
+                method: 'POST',
+                body: JSON.stringify({
+                  name: addLabel,
+                  amount: addAmount
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8"
+                }
+              });
+
+            case 7:
+              response = _context3.sent;
+              fetchData();
+              nameInput = document.getElementById('add-savings-name-input');
+              amountInput = document.getElementById('add-savings-amount-input');
+              nameInput.value = '';
+              amountInput.value = '';
+              setAddLabel(undefined);
+              setAddAmount(undefined);
+              addSavingsModal.close();
+
+            case 16:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+    return _addSavings.apply(this, arguments);
+  }
+
+  function deleteSavings(_x) {
+    return _deleteSavings.apply(this, arguments);
+  }
+
+  function _deleteSavings() {
+    _deleteSavings = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(saving) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return fetch("api/profile/saving/delete/".concat(userid, "/").concat(saving.id), {
+                method: 'POST',
+                body: JSON.stringify({
+                  user_id: userid
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8"
+                }
+              });
+
+            case 2:
+              response = _context4.sent;
+              fetchData();
+
+            case 4:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+    return _deleteSavings.apply(this, arguments);
+  }
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    fetchData();
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "profile-container",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        children: "Savings"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+        children: ["Total: $", totalSavings ? totalSavings : 0]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+        className: "profile-info-list",
+        children: savings.map(function (saving, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+            className: "flex",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "profile-info-name-amount",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                children: saving.savings_name
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                children: ["$", saving.savings_amount]
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                onClick: function onClick() {
+                  openEditModal(saving);
+                },
+                className: "edit-button",
+                children: "Edit"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                onClick: function onClick() {
+                  return deleteSavings(saving);
+                },
+                className: "delete-button",
+                children: "Delete"
+              })]
+            })]
+          }, index);
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        onClick: openAddModal,
+        children: "+ New"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("dialog", {
+      id: "add-savings-modal",
+      className: "profile-modal",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        children: "Savings Name"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        id: "add-savings-name-input",
+        type: "text",
+        onChange: function onChange(e) {
+          setAddLabel(function () {
+            if (e.target.value === '') {
+              return undefined;
+            }
+
+            return e.target.value;
+          });
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        children: "Savings Amount"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        id: "add-savings-amount-input",
+        type: "number",
+        onChange: function onChange(e) {
+          setAddAmount(function () {
+            if (e.target.value === '') {
+              return undefined;
+            }
+
+            return e.target.value;
+          });
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        onClick: closeAddModal,
+        children: "Cancel"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        onClick: addSavings,
+        children: "Confirm"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("dialog", {
+      id: "edit-savings-modal",
+      className: "profile-modal",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        id: "edit-savings-label",
+        children: currentLabel
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        id: "edit-savings-input",
+        type: "number",
+        placeholder: currentAmount,
+        onChange: function onChange(e) {
+          setNewAmount(function () {
+            if (e.target.value === '') {
+              return undefined;
+            }
+
+            return e.target.value;
+          });
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        onClick: closeEditModal,
+        value: "cancel",
+        children: "Cancel"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        onClick: editSavings,
+        children: "Confirm"
+      })]
+    })]
+  });
+}
+
+if (document.getElementById('profile-savings')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(ProfileSavings, {}), document.getElementById('profile-savings'));
 }
 
 /***/ }),
