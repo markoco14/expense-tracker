@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 export default function ProfileSalary() {
-    const [income, setIncome] = useState([]);
+    const [salaries, setSalaries] = useState([]);
 
     const fetchData = async () => {
         const response = await fetch(`api/profile/salary/${userid}`);
         const data = await response.json();
-        setIncome(data);
+        setSalaries(data);
     };
 
     useEffect(() => {
@@ -90,19 +90,19 @@ export default function ProfileSalary() {
                 "Content-type": "application/json; charset=UTF-8"
             }
         });
+        fetchData();
     }
     
     return (
         <>
-        {console.log(income)}
             <div className="profile-container">
                 <h2>Income</h2>
-                <p>Total: ${income[0]?.salary_amount}</p>
+                <p>Total: ${salaries[0]?.salary_amount}</p>
                 <ul className="profile-info-list">
                     <li className="flex">
                         <div className="profile-info-name-amount">
                             <span>Salary</span>
-                            <span>${income[0]?.salary_amount}</span>
+                            <span>${salaries[0]?.salary_amount}</span>
                         </div>
                         <div>
                             <button 
