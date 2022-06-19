@@ -18,10 +18,9 @@
 <section>
     <div id="profile-salary"></div>
 </section>
-<section>
+{{-- <section>
     <div class="profile-container">
         <h2 id="income">Income</h2>
-        {{-- <p>Total Income: ${{$monthlySalary}}</p> --}}
         <p>Total: ${{$monthlySalary}}</caption>
         <ul class="profile-info-list">
             <li class="flex">
@@ -31,7 +30,6 @@
                 </div>
                 <div>
                     <button data-amount="{{$monthlySalary}}" class="edit-button edit-salary">Edit</button>
-                    {{-- delete will need data-name['salary_name'] later --}}
                     <button class="delete-button delete-salary">Delete</button>
                 </div>
             </li>
@@ -70,12 +68,14 @@
                 </form>
             </div>
         </dialog>
-</div>
-</section>
+    </div>
+</section> --}}
 <section>
+    <div id="profile-deduction"></div>
+</section>
+{{-- <section>
     <div class="profile-container">
         <h2 id="deductions">Deductions</h2>
-        {{-- <p>Total Deductions: ${{$totalDeductions}}</p> --}}
         <p>Total: ${{$totalDeductions}}</p>
         <ul class="profile-info-list">
         @foreach ($allDeductions as $deduction)
@@ -89,20 +89,6 @@
                     <button data-name="{{$deduction['deduction_name']}}" class="delete-button delete-deduction">Delete</button>
                 </div>
             </li>
-            {{-- <dialog class="edit-deduction-modal">
-                <form action="">
-                    <label for="">{{$deduction['deduction_name']}}</label>
-                    <input type="text" value="{{$deduction['deduction_amount']}}">
-                    <button type="submit">Save</button>
-                </form>
-            </dialog> --}}
-            {{-- <dialog>
-                <form action="">
-                    <label for="">{{$deduction['deduction_name']}}</label>
-                    <input type="text" value="{{$deduction['deduction_amount']}}">
-                </form>
-            </dialog> --}}
-            {{--  --}}
             @endforeach
         </ul>
         <button id="deductionModalButton">+ New</button>
@@ -158,7 +144,7 @@
             </div>
         </dialog>
     </div>
-</section>
+</section> --}}
 <section>
     <div class="profile-container">
         <h2 id="savings">Savings</h2>
@@ -267,7 +253,7 @@
         </dialog>
     </div>
 </section>
-<script type="text/javascript" src="{{URL::asset('js/editProfileStats.js')}}"></script>
+{{-- <script type="text/javascript" src="{{URL::asset('js/editProfileStats.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/deleteProfileStats.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/addProfileStats.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/addProfileStats.js')}}"></script> --}}
 <x-footer />

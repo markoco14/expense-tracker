@@ -5285,6 +5285,8 @@ __webpack_require__(/*! ./components/Example */ "./resources/js/components/Examp
 
 __webpack_require__(/*! ./components/ProfileSalary */ "./resources/js/components/ProfileSalary.js");
 
+__webpack_require__(/*! ./components/ProfileDeduction */ "./resources/js/components/ProfileDeduction.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -5372,6 +5374,391 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
+/***/ "./resources/js/components/ProfileDeduction.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/ProfileDeduction.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ProfileDeduction)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+function ProfileDeduction() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      deductions = _useState2[0],
+      setDeductions = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      totalDeductions = _useState4[0],
+      setTotalDeductions = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      currentLabel = _useState6[0],
+      setCurrentLabel = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState8 = _slicedToArray(_useState7, 2),
+      currentAmount = _useState8[0],
+      setCurrentAmount = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState10 = _slicedToArray(_useState9, 2),
+      newAmount = _useState10[0],
+      setNewAmount = _useState10[1];
+
+  function calculateTotalDeductions(deductions) {
+    var total = 0;
+    deductions === null || deductions === void 0 ? void 0 : deductions.forEach(function (deduction) {
+      total += deduction.deduction_amount;
+    });
+    setTotalDeductions(total);
+  }
+
+  var fetchData = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var response, data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return fetch("api/profile/deduction/".concat(userid));
+
+            case 2:
+              response = _context.sent;
+              _context.next = 5;
+              return response.json();
+
+            case 5:
+              data = _context.sent;
+              setDeductions(data);
+              calculateTotalDeductions(data);
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function fetchData() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    fetchData();
+  }, []);
+
+  function openEditModal(deduction) {
+    setCurrentLabel(deduction.deduction_name);
+    setCurrentAmount(deduction.deduction_amount);
+    var editDeductionModal = document.getElementById('edit-deduction-modal');
+    editDeductionModal.showModal();
+  }
+
+  function closeEditModal() {
+    var editDeductionModal = document.getElementById('edit-deduction-modal');
+    var editDeductionInput = document.getElementById('edit-deduction-input');
+    editDeductionInput.value = '';
+    setNewAmount(undefined);
+    editDeductionModal.close();
+  }
+
+  function editDeduction() {
+    return _editDeduction.apply(this, arguments);
+  }
+
+  function _editDeduction() {
+    _editDeduction = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var editDeductionModal, editDeductionInput, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              editDeductionModal = document.getElementById('edit-deduction-modal');
+              editDeductionInput = document.getElementById('edit-deduction-input');
+
+              if (newAmount) {
+                _context2.next = 6;
+                break;
+              }
+
+              alert('You need to choose the deduction amount.');
+              _context2.next = 13;
+              break;
+
+            case 6:
+              _context2.next = 8;
+              return fetch("api/profile/deduction/edit/".concat(userid, "/").concat(currentLabel, "/").concat(newAmount, "/").concat(currentLabel), {
+                method: 'POST',
+                body: JSON.stringify({
+                  label: 'Deduction',
+                  amount: newAmount
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8"
+                }
+              });
+
+            case 8:
+              response = _context2.sent;
+              fetchData();
+              editDeductionInput.value = '';
+              setNewAmount(undefined);
+              editDeductionModal.close();
+
+            case 13:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    return _editDeduction.apply(this, arguments);
+  }
+
+  function openAddModal() {
+    var addDeductionModal = document.getElementById('add-deduction-modal');
+    addDeductionModal.showModal();
+  }
+
+  function closeAddModal() {
+    var nameInput = document.getElementById('add-deduction-name-input');
+    var amountInput = document.getElementById('add-deduction-amount-input');
+    nameInput.value = '';
+    amountInput.value = '';
+    var addDeductionModal = document.getElementById('add-deduction-modal');
+    addDeductionModal.close();
+  }
+
+  function addDeduction() {
+    return _addDeduction.apply(this, arguments);
+  }
+
+  function _addDeduction() {
+    _addDeduction = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      var addDeductionModal, deductionName, deductionAmount, response, nameInput, amountInput;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              addDeductionModal = document.getElementById('add-deduction-modal');
+              deductionName = document.getElementById('add-deduction-name-input').value;
+              deductionAmount = document.getElementById('add-deduction-amount-input').value;
+
+              if (!(deductionName === '' || deductionAmount === '')) {
+                _context3.next = 7;
+                break;
+              }
+
+              alert('You need to choose your deduction information');
+              _context3.next = 10;
+              break;
+
+            case 7:
+              _context3.next = 9;
+              return fetch("api/profile/deduction/create/".concat(userid, "/").concat(deductionName, "/").concat(deductionAmount), {
+                method: 'POST',
+                body: JSON.stringify({
+                  name: deductionName,
+                  amount: deductionAmount
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8"
+                }
+              });
+
+            case 9:
+              response = _context3.sent;
+
+            case 10:
+              fetchData();
+              nameInput = document.getElementById('add-deduction-name-input');
+              amountInput = document.getElementById('add-deduction-amount-input');
+              nameInput.value = '';
+              amountInput.value = '';
+              addDeductionModal.close();
+
+            case 16:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+    return _addDeduction.apply(this, arguments);
+  }
+
+  function deleteDeduction(_x) {
+    return _deleteDeduction.apply(this, arguments);
+  }
+
+  function _deleteDeduction() {
+    _deleteDeduction = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(deduction) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return fetch("api/profile/deduction/delete/".concat(userid, "/").concat(deduction.id), {
+                method: 'POST',
+                body: JSON.stringify({
+                  user_id: userid
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8"
+                }
+              });
+
+            case 2:
+              response = _context4.sent;
+              fetchData();
+
+            case 4:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+    return _deleteDeduction.apply(this, arguments);
+  }
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "profile-container",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        children: "Deductions"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+        children: ["Total: $", totalDeductions ? totalDeductions : 0]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+        className: "profile-info-list",
+        children: deductions.map(function (deduction, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+            className: "flex",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "profile-info-name-amount",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                children: deduction.deduction_name
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                children: ["$", deduction.deduction_amount]
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                "data-name": deduction.deduction_name,
+                "data-value": deduction.deduction_amount,
+                onClick: function onClick() {
+                  openEditModal(deduction);
+                },
+                className: "edit-button",
+                children: "Edit"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                onClick: function onClick() {
+                  deleteDeduction(deduction);
+                },
+                className: "delete-button",
+                children: "Delete"
+              })]
+            })]
+          }, index);
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        onClick: openAddModal,
+        children: "+ New"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("dialog", {
+      id: "add-deduction-modal",
+      className: "profile-modal",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        children: "Deduction Name"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        id: "add-deduction-name-input",
+        type: "text"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        children: "Deduction Amount"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        id: "add-deduction-amount-input",
+        type: "number"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        onClick: closeAddModal,
+        children: "Cancel"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        onClick: addDeduction,
+        children: "Confirm"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("dialog", {
+      id: "edit-deduction-modal",
+      className: "profile-modal",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        id: "edit-deduction-label",
+        children: currentLabel
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        id: "edit-deduction-input",
+        type: "number",
+        placeholder: currentAmount,
+        onChange: function onChange(e) {
+          setNewAmount(function () {
+            if (e.target.value === '') {
+              return undefined;
+            }
+
+            return e.target.value;
+          });
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        onClick: closeEditModal,
+        value: "cancel",
+        children: "Cancel"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        onClick: editDeduction,
+        children: "Confirm"
+      })]
+    })]
+  });
+}
+
+if (document.getElementById('profile-deduction')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(ProfileDeduction, {}), document.getElementById('profile-deduction'));
+}
+
+/***/ }),
+
 /***/ "./resources/js/components/ProfileSalary.js":
 /*!**************************************************!*\
   !*** ./resources/js/components/ProfileSalary.js ***!
@@ -5412,12 +5799,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function ProfileSalary() {
-  var _income$, _income$2;
+  var _salaries$, _salaries$2;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      income = _useState2[0],
-      setIncome = _useState2[1];
+      salaries = _useState2[0],
+      setSalaries = _useState2[1];
 
   var fetchData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -5436,7 +5823,7 @@ function ProfileSalary() {
 
             case 5:
               data = _context.sent;
-              setIncome(data);
+              setSalaries(data);
 
             case 7:
             case "end":
@@ -5598,8 +5985,9 @@ function ProfileSalary() {
 
             case 2:
               response = _context4.sent;
+              fetchData();
 
-            case 3:
+            case 4:
             case "end":
               return _context4.stop();
           }
@@ -5613,12 +6001,12 @@ function ProfileSalary() {
   }();
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [console.log(income), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "profile-container",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
         children: "Income"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-        children: ["Total: $", (_income$ = income[0]) === null || _income$ === void 0 ? void 0 : _income$.salary_amount]
+        children: ["Total: $", (_salaries$ = salaries[0]) === null || _salaries$ === void 0 ? void 0 : _salaries$.salary_amount]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
         className: "profile-info-list",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
@@ -5628,7 +6016,7 @@ function ProfileSalary() {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
               children: "Salary"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-              children: ["$", (_income$2 = income[0]) === null || _income$2 === void 0 ? void 0 : _income$2.salary_amount]
+              children: ["$", (_salaries$2 = salaries[0]) === null || _salaries$2 === void 0 ? void 0 : _salaries$2.salary_amount]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
