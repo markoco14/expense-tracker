@@ -5289,6 +5289,8 @@ __webpack_require__(/*! ./components/ProfileDeductions */ "./resources/js/compon
 
 __webpack_require__(/*! ./components/ProfileSavings */ "./resources/js/components/ProfileSavings.js");
 
+__webpack_require__(/*! ./components/ProfileBudgets */ "./resources/js/components/ProfileBudgets.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -5372,6 +5374,416 @@ function Example() {
 
 if (document.getElementById('example')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Example, {}), document.getElementById('example'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/ProfileBudgets.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/ProfileBudgets.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ProfileBudgets)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+function ProfileBudgets() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      budgets = _useState2[0],
+      setBudgets = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      totalBudgets = _useState4[0],
+      setTotalBudgets = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      currentLabel = _useState6[0],
+      setCurrentLabel = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState8 = _slicedToArray(_useState7, 2),
+      currentAmount = _useState8[0],
+      setCurrentAmount = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState10 = _slicedToArray(_useState9, 2),
+      currentId = _useState10[0],
+      setCurrentId = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState12 = _slicedToArray(_useState11, 2),
+      newAmount = _useState12[0],
+      setNewAmount = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState14 = _slicedToArray(_useState13, 2),
+      newLabel = _useState14[0],
+      setNewLabel = _useState14[1];
+
+  function calculateTotalBudgets(budgets) {
+    var total = 0;
+    budgets === null || budgets === void 0 ? void 0 : budgets.forEach(function (budget) {
+      total += budget.budget_amount;
+    });
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+    var daysInMonth = new Date(year, month, 0).getDate();
+    setTotalBudgets(total * daysInMonth);
+  }
+
+  var fetchData = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var response, data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return fetch("api/profile/budgets/".concat(userid));
+
+            case 2:
+              response = _context.sent;
+              _context.next = 5;
+              return response.json();
+
+            case 5:
+              data = _context.sent;
+              setBudgets(data);
+              calculateTotalBudgets(data);
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function fetchData() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    fetchData();
+  }, []);
+
+  function openEditModal(budget) {
+    var editBudgetModal = document.getElementById('edit-budgets-modal');
+    setCurrentLabel(budget.budget_name);
+    setCurrentAmount(budget.budget_amount);
+    setCurrentId(budget.id);
+    editBudgetModal.showModal();
+  }
+
+  function closeEditModal() {
+    var editBudgetModal = document.getElementById('edit-budgets-modal');
+    setCurrentLabel('');
+    setCurrentAmount(0);
+    setCurrentId(0);
+    editBudgetModal.close();
+  }
+
+  function editBudget() {
+    return _editBudget.apply(this, arguments);
+  }
+
+  function _editBudget() {
+    _editBudget = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var editBudgetModal, editBudgetInput, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              editBudgetModal = document.getElementById('edit-budgets-modal');
+              editBudgetInput = document.getElementById('edit-budgets-input');
+
+              if (newAmount) {
+                _context2.next = 6;
+                break;
+              }
+
+              alert('You need to choose an amount for your budget!');
+              _context2.next = 13;
+              break;
+
+            case 6:
+              _context2.next = 8;
+              return fetch("api/profile/budget/edit/".concat(userid, "/").concat(currentId, "/").concat(newAmount), {
+                method: 'POST',
+                body: JSON.stringify({
+                  label: 'Deduction',
+                  amount: newAmount
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8"
+                }
+              });
+
+            case 8:
+              response = _context2.sent;
+              fetchData();
+              editBudgetInput.value = '';
+              setNewAmount(undefined);
+              editBudgetModal.close();
+
+            case 13:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    return _editBudget.apply(this, arguments);
+  }
+
+  function openAddModal() {
+    var addBudgetModal = document.getElementById('add-budgets-modal');
+    addBudgetModal.showModal();
+  }
+
+  function closeAddModal() {
+    var addBudgetModal = document.getElementById('add-budgets-modal');
+    setNewLabel(undefined);
+    setNewAmount(undefined);
+    addBudgetModal.close();
+  }
+
+  function addBudget() {
+    return _addBudget.apply(this, arguments);
+  }
+
+  function _addBudget() {
+    _addBudget = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              console.log('You clicked confirm');
+
+              if (!(!newLabel || !newAmount)) {
+                _context3.next = 5;
+                break;
+              }
+
+              alert('You need to name the type of budget and choose an amount!');
+              _context3.next = 12;
+              break;
+
+            case 5:
+              console.log(newLabel);
+              console.log(newAmount);
+              _context3.next = 9;
+              return fetch("api/profile/budget/create/".concat(userid, "/").concat(newLabel, "/").concat(newAmount), {
+                method: 'POST',
+                body: JSON.stringify({
+                  label: newLabel,
+                  amount: newAmount
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8"
+                }
+              });
+
+            case 9:
+              response = _context3.sent;
+              fetchData(); // const addBudgetModal = document.getElementById('add-budgets-modal');
+
+              document.getElementById('add-budgets-modal').close();
+
+            case 12:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+    return _addBudget.apply(this, arguments);
+  }
+
+  function deleteBudget(_x) {
+    return _deleteBudget.apply(this, arguments);
+  }
+
+  function _deleteBudget() {
+    _deleteBudget = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(budget) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return fetch("api/profile/budget/delete/".concat(userid, "/").concat(budget.id), {
+                method: 'POST',
+                body: JSON.stringify({
+                  user_id: userid
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8"
+                }
+              });
+
+            case 2:
+              response = _context4.sent;
+              fetchData();
+
+            case 4:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+    return _deleteBudget.apply(this, arguments);
+  }
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "profile-container",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        children: "Budgets"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+        children: ["Monthly: ", totalBudgets ? totalBudgets : 0]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+        className: "profile-info-list",
+        children: budgets.map(function (budget, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "profile-info-name-amount",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                children: budget.budget_name
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                children: budget.budget_amount
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                onClick: function onClick() {
+                  openEditModal(budget);
+                },
+                className: "edit-button",
+                children: "Edit"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                onClick: function onClick() {
+                  return deleteBudget(budget);
+                },
+                className: "delete-button",
+                children: "Delete"
+              })]
+            })]
+          }, index);
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        onClick: openAddModal,
+        children: "+ New"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("dialog", {
+        id: "add-budgets-modal",
+        className: "profile-modal",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          children: "Budget Name"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          id: "new-budget-label",
+          type: "string",
+          placeholder: "Daily",
+          onChange: function onChange(e) {
+            setNewLabel(function () {
+              if (e.target.value === '') {
+                return undefined;
+              }
+
+              return e.target.value;
+            });
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          children: "Budget Amount"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          id: "new-budget-input",
+          type: "number",
+          placeholder: 0,
+          onChange: function onChange(e) {
+            setNewAmount(function () {
+              if (e.target.value === '') {
+                return undefined;
+              }
+
+              return e.target.value;
+            });
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          onClick: closeAddModal,
+          value: "cancel",
+          children: "Cancel"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          onClick: addBudget,
+          children: "Confirm"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("dialog", {
+        id: "edit-budgets-modal",
+        className: "profile-modal",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          id: "edit-budgets-label",
+          children: currentLabel
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          id: "edit-budgets-input",
+          type: "number",
+          placeholder: currentAmount,
+          onChange: function onChange(e) {
+            setNewAmount(function () {
+              if (e.target.value === '') {
+                return undefined;
+              }
+
+              return e.target.value;
+            });
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          onClick: closeEditModal,
+          value: "cancel",
+          children: "Cancel"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          onClick: editBudget,
+          children: "Confirm"
+        })]
+      })]
+    })
+  });
+}
+
+if (document.getElementById('profile-budgets')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(ProfileBudgets, {}), document.getElementById('profile-budgets'));
 }
 
 /***/ }),

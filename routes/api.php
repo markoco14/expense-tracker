@@ -30,23 +30,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('profile/salary/create/{userid}/{salary}', [SalaryController::class, 'create']);
 Route::post('profile/deduction/create/{userid}/{deduction_name}/{deduction_amount}', [DeductionController::class, 'create']);
 Route::post('profile/saving/create/{userid}/{saving_name}/{saving_amount}', [SavingController::class, 'create']);
+Route::post('profile/budget/create/{userid}/{budget_name}/{budget_amount}', [BudgetController::class, 'create']);
 
 // READ ROUTES
 Route::get('profile/salary/{userid}', [SalaryController::class, 'getAll']);
 Route::get('profile/deduction/{userid}', [DeductionController::class, 'getAll']);
 Route::get('profile/savings/{userid}', [SavingController::class, 'getAll']);
+Route::get('profile/budgets/{userid}', [BudgetController::class, 'getAll']);
 
 // UPDATE ROUTES
 Route::post('profile/salary/edit/{userid}/{salary_amount}', [SalaryController::class, 'update']);
 Route::post('profile/deduction/edit/{userid}/{deduction}/{amount}/{original_name}', [DeductionController::class, 'update']);
 Route::post('profile/saving/edit/{userid}/{saving}/{amount}/{original_name}', [SavingController::class, 'update']);
-Route::post('profile/budget/edit/{userid}/{budget_amount}', [BudgetController::class, 'update']);
+Route::post('profile/budget/edit/{userid}/{id}/{amount}', [BudgetController::class, 'update']);
 
 // DELETE ROUTES
 Route::post('profile/salary/delete/{userid}', [SalaryController::class, 'delete']);
 Route::post('profile/deduction/delete/{userid}/{deduction_id}', [DeductionController::class, 'delete']);
 Route::post('profile/saving/delete/{userid}/{saving_id}', [SavingController::class, 'delete']);
-Route::post('profile/budget/delete/{userid}', [BudgetController::class, 'delete']);
+Route::post('profile/budget/delete/{userid}/{budget_id}', [BudgetController::class, 'delete']);
 
 // PROGRESS PAGE API ROUTES
 Route::get('percent/{username}', [BudgetController::class, 'getTodaySpendingPercent']);

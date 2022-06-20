@@ -16,3 +16,4 @@ require('./components/Example');
 require('./components/ProfileSalaries');
 require('./components/ProfileDeductions');
 require('./components/ProfileSavings');
+require('./components/ProfileBudgets');
