@@ -48,10 +48,9 @@ class BudgetController extends Controller
         $expenses = Expense::where('username', auth()->user()->username)
             ->get()
             ->toArray();
-
         $expensesToday = [];
         $totalSpent = 0;
-        
+
         foreach($expenses as &$expense) {
             $expense['created_at'] = Carbon::parse($expense['created_at'])->toDateString();
             if ($expense['created_at'] === Carbon::today()->toDateString()) {
@@ -64,14 +63,9 @@ class BudgetController extends Controller
             ->where('budget_status', 'CURRENT')
             ->get()
             ->toArray()[0]['budget_amount'];
-
         $amountRemaining = $budget - $totalSpent;
         $percentSpent = $totalSpent/$budget*100;
-        // dd(json_encode($percentSpent));
-        // dd($amountRemaining);
-
         $today = Carbon::today();
-
 
         return view('progress', [
             'expenses' => $expensesToday,
@@ -83,13 +77,6 @@ class BudgetController extends Controller
     }
 
     public function getTodaySpendingPercent($username) {
-        // return json_encode($username);
-        // $expenses = Expense::where('username', auth()->user()->username)
-        //     ->get()
-        //     ->toArray();
-
-        // return $expenses;
-        
         $expenses = Expense::get()
         ->where('username', $username);
         $totalSpent = 0;
@@ -103,26 +90,42 @@ class BudgetController extends Controller
         return json_encode($totalSpent);
     }
 
-    public function update($userid, $amount) {
-        // return ['response' => 'you have landed in the update function of the budget controller'];
-        UserBudget::where('user_id', $userid)
+    public function getAll($userid) {
+        $budgetCollection = UserBudget::where('user_id', $userid)
         ->where('budget_status', 'CURRENT')
+        ->get();
+        $budget = $budgetCollection->toArray();
+        return json_encode($budget);
+    }
+
+    public function create($userid, $label, $amount) {
+        $budget = new UserBudget;
+        $budget->user_id = $userid;
+        $budget->budget_name = $label;
+        $budget->budget_status = 'CURRENT';
+        $budget->budget_amount = $amount;
+        $budget->save();
+        return ['success' => 200];
+    } 
+
+    public function update($userid, $id, $amount) {
+        UserBudget::where('user_id', $userid)
+        ->where('id', $id)
         ->update(['budget_amount' => $amount]);
         return ['status' => 201];
     }
 
     public function getUpdatedBudget($userid) {
-        // return ['response' => "You are getting the update Saving now"];
         $budget = UserBudget::where('user_id', $userid)
-        // ->where('budget_name', $name)
         ->where('budget_status', 'CURRENT')
         ->get();
         return json_encode($budget);
     }
 
-    public function delete($userid) {
+    public function delete($userid, $id) {
         UserBudget::where('user_id', $userid)
-        ->where('budget_status', 'CURRENT')
+        ->where('id', $id)
         ->update(['budget_status' => 'OOD']);
+        return ['success', 200];
     }
 }

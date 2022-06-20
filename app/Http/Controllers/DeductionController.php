@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserDeduction;
+use App\Services\DeductionCalculatorService;
 use Carbon\Carbon;
 
 class DeductionController extends Controller
@@ -33,6 +34,26 @@ class DeductionController extends Controller
         }
         return redirect('profile');
     }
+
+    public function create($userid, $name, $amount) {
+        $deduction = new UserDeduction;
+            $deduction->user_id = $userid;
+            $deduction->deduction_name = $name;
+            $deduction->deduction_amount = $amount;
+            $deduction->deduction_status = 'CURRENT';
+            $deduction->deduction_type = 'deduction';
+            $deduction->month = Carbon::now()->month;
+            $deduction->save();
+        return ["status" => 201];
+    }
+
+    public function getAll($userid) {
+        $deductionsCollection = UserDeduction::where('user_id', $userid)
+        ->where('deduction_status', 'CURRENT')
+        ->get();
+        $deductions = $deductionsCollection->toArray();
+        return json_encode($deductions);
+    }
     
     public function getUpdatedDeduction($userid, $name) {
         $deduction = UserDeduction::where('user_id', $userid)
@@ -57,7 +78,7 @@ class DeductionController extends Controller
 
     public function delete($userid, $deduction) {
         UserDeduction::where('user_id', $userid)
-        ->where('deduction_name', $deduction)
+        ->where('id', $deduction)
         ->where('deduction_status', 'CURRENT')
         ->update(['deduction_status' => 'OOD']);
     }
