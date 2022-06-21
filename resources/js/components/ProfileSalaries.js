@@ -5,6 +5,8 @@ export default function ProfileSalaries() {
     const [salaries, setSalaries] = useState([]);
     const [totalSalary, setTotalSalary] = useState(undefined);
     const [salaryId, setSalaryId] = useState(undefined);
+    const [newSalaryName, setNewSalaryName] = useState(undefined);
+    const [newSalaryAmount, setNewSalaryAmount] = useState(undefined);
 
     function calculateTotalSalary(salaries) {
         let total = 0;
@@ -16,6 +18,7 @@ export default function ProfileSalaries() {
     const fetchData = async () => {
         const response = await fetch(`api/profile/salary/${userid}`);
         const data = await response.json();
+        console.log(data);
         setSalaries(data);
         calculateTotalSalary(data);
     };
@@ -35,16 +38,16 @@ export default function ProfileSalaries() {
     }
 
     const addSalary = async () => {
-        const addSalaryInput = document.getElementById('add-salary-input');
-        const newSalary = addSalaryInput.value;
-        if (!newSalary) {
+        // const addSalaryInput = document.getElementById('add-salary-input');
+        // const newSalary = addSalaryInput.value;
+        if (!newSalaryAmount || !newSalaryName) {
             alert('You need to set a salary amount');
         } else {
-            const response = await fetch(`api/profile/salary/create/${userid}/${newSalary}`, {
+            const response = await fetch(`api/profile/salary/create/${userid}/${newSalaryName}/${newSalaryAmount}`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    label: 'Salary',
-                    amount: newSalary
+                    name: newSalaryName,
+                    amount: newSalaryAmount
                 }),
                 headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -117,7 +120,7 @@ export default function ProfileSalaries() {
                             
                         <li key={index} className="flex">
                             <div className="profile-info-name-amount">
-                                <span>Salary</span>
+                                <span>{salary.salary_name}</span>
                                 <span>${salary.salary_amount}</span>
                             </div>
                             <div>
@@ -141,8 +144,33 @@ export default function ProfileSalaries() {
                 <button onClick={openAddModal}>+ New</button>
             </div>
             <dialog id="add-salary-modal" className="profile-modal">
-                <label>Salary</label>
-                <input id="add-salary-input" type="number"></input>
+
+                <label>Salary Name</label>
+                <input 
+                    id="add-salary-name-input" 
+                    type="text"
+                    onChange={(e) => {
+                        setNewSalaryName(() => {
+                            if (e.target.value === '') {
+                                return undefined;
+                            }
+                            return e.target.value;
+                        });
+                    }}
+                ></input>
+                <label>Salary Amount</label>
+                <input 
+                    id="add-salary-amount-input" 
+                    type="number"
+                    onChange={(e) => {
+                        setNewSalaryAmount(() => {
+                            if (e.target.value === '') {
+                                return undefined;
+                            }
+                            return e.target.value;
+                        });
+                    }}
+                ></input>
                 <button onClick={closeAddModal}>Cancel</button>
                 <button onClick={addSalary}>Confirm</button>
             </dialog>

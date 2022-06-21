@@ -6226,6 +6226,16 @@ function ProfileSalaries() {
       salaryId = _useState6[0],
       setSalaryId = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState8 = _slicedToArray(_useState7, 2),
+      newSalaryName = _useState8[0],
+      setNewSalaryName = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState10 = _slicedToArray(_useState9, 2),
+      newSalaryAmount = _useState10[0],
+      setNewSalaryAmount = _useState10[1];
+
   function calculateTotalSalary(salaries) {
     var total = 0;
     salaries === null || salaries === void 0 ? void 0 : salaries.forEach(function (salary) {
@@ -6251,10 +6261,11 @@ function ProfileSalaries() {
 
             case 5:
               data = _context.sent;
+              console.log(data);
               setSalaries(data);
               calculateTotalSalary(data);
 
-            case 8:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -6283,43 +6294,40 @@ function ProfileSalaries() {
 
   var addSalary = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      var addSalaryInput, newSalary, response, addSalaryModal;
+      var response, addSalaryModal;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              addSalaryInput = document.getElementById('add-salary-input');
-              newSalary = addSalaryInput.value;
-
-              if (newSalary) {
-                _context2.next = 6;
+              if (!(!newSalaryAmount || !newSalaryName)) {
+                _context2.next = 4;
                 break;
               }
 
               alert('You need to set a salary amount');
-              _context2.next = 12;
+              _context2.next = 10;
               break;
 
-            case 6:
-              _context2.next = 8;
-              return fetch("api/profile/salary/create/".concat(userid, "/").concat(newSalary), {
+            case 4:
+              _context2.next = 6;
+              return fetch("api/profile/salary/create/".concat(userid, "/").concat(newSalaryName, "/").concat(newSalaryAmount), {
                 method: 'POST',
                 body: JSON.stringify({
-                  label: 'Salary',
-                  amount: newSalary
+                  name: newSalaryName,
+                  amount: newSalaryAmount
                 }),
                 headers: {
                   "Content-type": "application/json; charset=UTF-8"
                 }
               });
 
-            case 8:
+            case 6:
               response = _context2.sent;
               fetchData();
               addSalaryModal = document.getElementById('add-salary-modal');
               addSalaryModal.close();
 
-            case 12:
+            case 10:
             case "end":
               return _context2.stop();
           }
@@ -6447,7 +6455,7 @@ function ProfileSalaries() {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "profile-info-name-amount",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                children: "Salary"
+                children: salary.salary_name
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
                 children: ["$", salary.salary_amount]
               })]
@@ -6476,10 +6484,33 @@ function ProfileSalaries() {
       id: "add-salary-modal",
       className: "profile-modal",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-        children: "Salary"
+        children: "Salary Name"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-        id: "add-salary-input",
-        type: "number"
+        id: "add-salary-name-input",
+        type: "text",
+        onChange: function onChange(e) {
+          setNewSalaryName(function () {
+            if (e.target.value === '') {
+              return undefined;
+            }
+
+            return e.target.value;
+          });
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        children: "Salary Amount"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        id: "add-salary-amount-input",
+        type: "number",
+        onChange: function onChange(e) {
+          setNewSalaryAmount(function () {
+            if (e.target.value === '') {
+              return undefined;
+            }
+
+            return e.target.value;
+          });
+        }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
         onClick: closeAddModal,
         children: "Cancel"

@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // PROFILE PAGE API ROUTES
 
 // CREATE ROUTES
-Route::post('profile/salary/create/{userid}/{salary}', [SalaryController::class, 'create']);
+Route::post('profile/salary/create/{userid}/{salary_name}/{salary_amount}', [SalaryController::class, 'create']);
 Route::post('profile/deduction/create/{userid}/{deduction_name}/{deduction_amount}', [DeductionController::class, 'create']);
 Route::post('profile/saving/create/{userid}/{saving_name}/{saving_amount}', [SavingController::class, 'create']);
 Route::post('profile/budget/create/{userid}/{budget_name}/{budget_amount}', [BudgetController::class, 'create']);

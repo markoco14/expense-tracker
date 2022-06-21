@@ -30,10 +30,11 @@ class SalaryController extends Controller
         return json_encode($salary);
     }
 
-    public function create($userid, $amount) {
+    public function create($userid, $name, $amount) {
         // return ['response' => 'You landed in the create function of the salary controller'];
         $salary = new UserSalary;
         $salary->user_id = $userid;
+        $salary->salary_name = $name;
         $salary->salary_amount = $amount;
         $salary->salary_status = 'CURRENT';
         $salary->job_category = 'NULL';
