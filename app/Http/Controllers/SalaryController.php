@@ -44,14 +44,11 @@ class SalaryController extends Controller
         return ['status' => 201];
     }
 
-    public function update($userid, $id, $amount) {
+    public function update($userid, $id, $name, $amount) {
         UserSalary::where('user_id', $userid)
         ->where('id', $id)
-        ->update(['salary_amount' => $amount]);
-        return [
-            'user_id' => $userid, 
-            'amount' => $amount,
-        ];
+        ->update(['salary_name' => $name, 'salary_amount' => $amount]);
+        return ['success' => 201];
     }
 
     public function getUpdatedSalary($userid, $name) {

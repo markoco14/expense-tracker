@@ -39,7 +39,7 @@ Route::get('profile/savings/{userid}', [SavingController::class, 'getAll']);
 Route::get('profile/budgets/{userid}', [BudgetController::class, 'getAll']);
 
 // UPDATE ROUTES
-Route::post('profile/salary/edit/{userid}/{salary_id}/{salary_amount}', [SalaryController::class, 'update']);
+Route::post('profile/salary/edit/{userid}/{salary_id}/{salary_name}/{salary_amount}', [SalaryController::class, 'update']);
 Route::post('profile/deduction/edit/{userid}/{deduction}/{amount}/{original_name}', [DeductionController::class, 'update']);
 Route::post('profile/saving/edit/{userid}/{saving}/{amount}/{original_name}', [SavingController::class, 'update']);
 Route::post('profile/budget/edit/{userid}/{id}/{amount}', [BudgetController::class, 'update']);

@@ -7,6 +7,8 @@ export default function ProfileSalaries() {
     const [salaryId, setSalaryId] = useState(undefined);
     const [newSalaryName, setNewSalaryName] = useState(undefined);
     const [newSalaryAmount, setNewSalaryAmount] = useState(undefined);
+    const [currentSalaryName, setCurrentSalaryName] = useState(undefined);
+    const [currentSalaryAmount, setCurrentSalaryAmount] = useState(undefined);
 
     function calculateTotalSalary(salaries) {
         let total = 0;
@@ -18,7 +20,6 @@ export default function ProfileSalaries() {
     const fetchData = async () => {
         const response = await fetch(`api/profile/salary/${userid}`);
         const data = await response.json();
-        console.log(data);
         setSalaries(data);
         calculateTotalSalary(data);
     };
@@ -41,7 +42,7 @@ export default function ProfileSalaries() {
         // const addSalaryInput = document.getElementById('add-salary-input');
         // const newSalary = addSalaryInput.value;
         if (!newSalaryAmount || !newSalaryName) {
-            alert('You need to set a salary amount');
+            alert('You need to set a salary name and amount');
         } else {
             const response = await fetch(`api/profile/salary/create/${userid}/${newSalaryName}/${newSalaryAmount}`, {
                 method: 'POST',
@@ -55,6 +56,8 @@ export default function ProfileSalaries() {
             });
             fetchData();
             const addSalaryModal = document.getElementById('add-salary-modal');
+            setNewSalaryName(undefined);
+            setNewSalaryAmount(undefined);
             addSalaryModal.close();
             
         }
@@ -62,36 +65,40 @@ export default function ProfileSalaries() {
 
     const openEditModal = (salary) => {
         const editSalaryModal = document.getElementById('edit-salary-modal');
+        setCurrentSalaryName(salary.salary_name);
+        setCurrentSalaryAmount(salary.salary_amount);
         setSalaryId(salary.id);
         editSalaryModal.showModal();
     }
 
     const closeEditModal = () => {
-        const editSalaryModal = document.getElementById('edit-salary-modal');
         setSalaryId(undefined);
+        setNewSalaryAmount(undefined);
+        setNewSalaryName(undefined);
+        const editSalaryModal = document.getElementById('edit-salary-modal');
         editSalaryModal.close();
     }
 
     const editSalary = async () => {
-        const editSalaryInput = document.getElementById('edit-salary-input');
-        const newSalary = editSalaryInput.value;
-        if (!newSalary) {
-            alert('You need to choose a salary level');
+        if (!newSalaryAmount || !newSalaryName) {
+            alert('You need to choose a salary name and amount');
         } else {
-            const response = await fetch(`api/profile/salary/edit/${userid}/${salaryId}/${newSalary}`, {
+            const response = await fetch(`api/profile/salary/edit/${userid}/${salaryId}/${newSalaryName}/${newSalaryAmount}`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    label: 'Salary',
-                    amount: newSalary
+                    id: salaryId,
+                    name: newSalaryName,
+                    amount: newSalaryAmount
                 }),
                 headers: {
                 "Content-type": "application/json; charset=UTF-8"
                 }
             });
-            editSalaryInput.value = '';
             fetchData();
-            const editSalaryModal = document.getElementById('edit-salary-modal');
             setSalaryId(undefined);
+            setNewSalaryAmount(undefined);
+            setNewSalaryName(undefined);
+            const editSalaryModal = document.getElementById('edit-salary-modal');
             editSalaryModal.close();
         }
     }
@@ -116,8 +123,7 @@ export default function ProfileSalaries() {
                 <p>Total: {totalSalary? `$${totalSalary}` : `$0`}</p>
                 <ul className="profile-info-list">
                     {salaries?.map((salary, index) => {
-                        return (
-                            
+                        return (    
                         <li key={index} className="flex">
                             <div className="profile-info-name-amount">
                                 <span>{salary.salary_name}</span>
@@ -144,7 +150,6 @@ export default function ProfileSalaries() {
                 <button onClick={openAddModal}>+ New</button>
             </div>
             <dialog id="add-salary-modal" className="profile-modal">
-
                 <label>Salary Name</label>
                 <input 
                     id="add-salary-name-input" 
@@ -175,8 +180,32 @@ export default function ProfileSalaries() {
                 <button onClick={addSalary}>Confirm</button>
             </dialog>
             <dialog id="edit-salary-modal" className="profile-modal">
-                <label>Salary</label>
-                <input id="edit-salary-input" type="number"></input>
+                <label>Salary Name</label>
+                <input 
+                    type="text" 
+                    placeholder={currentSalaryName} 
+                    onChange={(e) => {
+                        setNewSalaryName(() => {
+                            if (e.target.value === '') {
+                                return undefined;
+                            }
+                            return e.target.value;
+                        });
+                    }}
+                    ></input>
+                <label>Salary Amount</label>
+                <input
+                    type="number"
+                    placeholder={currentSalaryAmount}
+                    onChange={(e) => {
+                        setNewSalaryAmount(() => {
+                            if (e.target.value === '') {
+                                return undefined;
+                            }
+                            return e.target.value;
+                        });
+                    }}
+                    ></input>
                 <button onClick={closeEditModal} value="cancel">Cancel</button>
                 <button onClick={editSalary} value="default">Confirm</button>
             </dialog>

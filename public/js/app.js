@@ -6236,6 +6236,16 @@ function ProfileSalaries() {
       newSalaryAmount = _useState10[0],
       setNewSalaryAmount = _useState10[1];
 
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState12 = _slicedToArray(_useState11, 2),
+      currentSalaryName = _useState12[0],
+      setCurrentSalaryName = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState14 = _slicedToArray(_useState13, 2),
+      currentSalaryAmount = _useState14[0],
+      setCurrentSalaryAmount = _useState14[1];
+
   function calculateTotalSalary(salaries) {
     var total = 0;
     salaries === null || salaries === void 0 ? void 0 : salaries.forEach(function (salary) {
@@ -6261,11 +6271,10 @@ function ProfileSalaries() {
 
             case 5:
               data = _context.sent;
-              console.log(data);
               setSalaries(data);
               calculateTotalSalary(data);
 
-            case 9:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -6304,8 +6313,8 @@ function ProfileSalaries() {
                 break;
               }
 
-              alert('You need to set a salary amount');
-              _context2.next = 10;
+              alert('You need to set a salary name and amount');
+              _context2.next = 12;
               break;
 
             case 4:
@@ -6325,9 +6334,11 @@ function ProfileSalaries() {
               response = _context2.sent;
               fetchData();
               addSalaryModal = document.getElementById('add-salary-modal');
+              setNewSalaryName(undefined);
+              setNewSalaryAmount(undefined);
               addSalaryModal.close();
 
-            case 10:
+            case 12:
             case "end":
               return _context2.stop();
           }
@@ -6342,57 +6353,60 @@ function ProfileSalaries() {
 
   var openEditModal = function openEditModal(salary) {
     var editSalaryModal = document.getElementById('edit-salary-modal');
+    setCurrentSalaryName(salary.salary_name);
+    setCurrentSalaryAmount(salary.salary_amount);
     setSalaryId(salary.id);
     editSalaryModal.showModal();
   };
 
   var closeEditModal = function closeEditModal() {
-    var editSalaryModal = document.getElementById('edit-salary-modal');
     setSalaryId(undefined);
+    setNewSalaryAmount(undefined);
+    setNewSalaryName(undefined);
+    var editSalaryModal = document.getElementById('edit-salary-modal');
     editSalaryModal.close();
   };
 
   var editSalary = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-      var editSalaryInput, newSalary, response, editSalaryModal;
+      var response, editSalaryModal;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              editSalaryInput = document.getElementById('edit-salary-input');
-              newSalary = editSalaryInput.value;
-
-              if (newSalary) {
-                _context3.next = 6;
+              if (!(!newSalaryAmount || !newSalaryName)) {
+                _context3.next = 4;
                 break;
               }
 
-              alert('You need to choose a salary level');
-              _context3.next = 14;
+              alert('You need to choose a salary name and amount');
+              _context3.next = 13;
               break;
 
-            case 6:
-              _context3.next = 8;
-              return fetch("api/profile/salary/edit/".concat(userid, "/").concat(salaryId, "/").concat(newSalary), {
+            case 4:
+              _context3.next = 6;
+              return fetch("api/profile/salary/edit/".concat(userid, "/").concat(salaryId, "/").concat(newSalaryName, "/").concat(newSalaryAmount), {
                 method: 'POST',
                 body: JSON.stringify({
-                  label: 'Salary',
-                  amount: newSalary
+                  id: salaryId,
+                  name: newSalaryName,
+                  amount: newSalaryAmount
                 }),
                 headers: {
                   "Content-type": "application/json; charset=UTF-8"
                 }
               });
 
-            case 8:
+            case 6:
               response = _context3.sent;
-              editSalaryInput.value = '';
               fetchData();
-              editSalaryModal = document.getElementById('edit-salary-modal');
               setSalaryId(undefined);
+              setNewSalaryAmount(undefined);
+              setNewSalaryName(undefined);
+              editSalaryModal = document.getElementById('edit-salary-modal');
               editSalaryModal.close();
 
-            case 14:
+            case 13:
             case "end":
               return _context3.stop();
           }
@@ -6522,10 +6536,33 @@ function ProfileSalaries() {
       id: "edit-salary-modal",
       className: "profile-modal",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-        children: "Salary"
+        children: "Salary Name"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-        id: "edit-salary-input",
-        type: "number"
+        type: "text",
+        placeholder: currentSalaryName,
+        onChange: function onChange(e) {
+          setNewSalaryName(function () {
+            if (e.target.value === '') {
+              return undefined;
+            }
+
+            return e.target.value;
+          });
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        children: "Salary Amount"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        type: "number",
+        placeholder: currentSalaryAmount,
+        onChange: function onChange(e) {
+          setNewSalaryAmount(function () {
+            if (e.target.value === '') {
+              return undefined;
+            }
+
+            return e.target.value;
+          });
+        }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
         onClick: closeEditModal,
         value: "cancel",
