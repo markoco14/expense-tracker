@@ -6211,12 +6211,28 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function ProfileSalaries() {
-  var _salaries$, _salaries$2;
-
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       salaries = _useState2[0],
       setSalaries = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState4 = _slicedToArray(_useState3, 2),
+      totalSalary = _useState4[0],
+      setTotalSalary = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState6 = _slicedToArray(_useState5, 2),
+      salaryId = _useState6[0],
+      setSalaryId = _useState6[1];
+
+  function calculateTotalSalary(salaries) {
+    var total = 0;
+    salaries === null || salaries === void 0 ? void 0 : salaries.forEach(function (salary) {
+      total += salary.salary_amount;
+    });
+    setTotalSalary(total);
+  }
 
   var fetchData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -6236,8 +6252,9 @@ function ProfileSalaries() {
             case 5:
               data = _context.sent;
               setSalaries(data);
+              calculateTotalSalary(data);
 
-            case 7:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -6315,13 +6332,15 @@ function ProfileSalaries() {
     };
   }();
 
-  var openEditModal = function openEditModal() {
+  var openEditModal = function openEditModal(salary) {
     var editSalaryModal = document.getElementById('edit-salary-modal');
+    setSalaryId(salary.id);
     editSalaryModal.showModal();
   };
 
   var closeEditModal = function closeEditModal() {
     var editSalaryModal = document.getElementById('edit-salary-modal');
+    setSalaryId(undefined);
     editSalaryModal.close();
   };
 
@@ -6341,12 +6360,12 @@ function ProfileSalaries() {
               }
 
               alert('You need to choose a salary level');
-              _context3.next = 13;
+              _context3.next = 14;
               break;
 
             case 6:
               _context3.next = 8;
-              return fetch("api/profile/salary/edit/".concat(userid, "/").concat(newSalary), {
+              return fetch("api/profile/salary/edit/".concat(userid, "/").concat(salaryId, "/").concat(newSalary), {
                 method: 'POST',
                 body: JSON.stringify({
                   label: 'Salary',
@@ -6362,9 +6381,10 @@ function ProfileSalaries() {
               editSalaryInput.value = '';
               fetchData();
               editSalaryModal = document.getElementById('edit-salary-modal');
+              setSalaryId(undefined);
               editSalaryModal.close();
 
-            case 13:
+            case 14:
             case "end":
               return _context3.stop();
           }
@@ -6378,14 +6398,14 @@ function ProfileSalaries() {
   }();
 
   var deleteThisIncome = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(salary) {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return fetch("api/profile/salary/delete/".concat(userid), {
+              return fetch("api/profile/salary/delete/".concat(userid, "/").concat(salary.id), {
                 method: 'POST',
                 body: JSON.stringify({
                   user_id: userid
@@ -6407,7 +6427,7 @@ function ProfileSalaries() {
       }, _callee4);
     }));
 
-    return function deleteThisIncome() {
+    return function deleteThisIncome(_x) {
       return _ref4.apply(this, arguments);
     };
   }();
@@ -6418,29 +6438,35 @@ function ProfileSalaries() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
         children: "Income"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-        children: ["Total: $", (_salaries$ = salaries[0]) === null || _salaries$ === void 0 ? void 0 : _salaries$.salary_amount]
+        children: ["Total: ", totalSalary ? "$".concat(totalSalary) : "$0"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
         className: "profile-info-list",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
-          className: "flex",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "profile-info-name-amount",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-              children: "Salary"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-              children: ["$", (_salaries$2 = salaries[0]) === null || _salaries$2 === void 0 ? void 0 : _salaries$2.salary_amount]
+        children: salaries === null || salaries === void 0 ? void 0 : salaries.map(function (salary, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+            className: "flex",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "profile-info-name-amount",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                children: "Salary"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                children: ["$", salary.salary_amount]
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                onClick: function onClick() {
+                  openEditModal(salary);
+                },
+                className: "edit-button",
+                children: "Edit"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                onClick: function onClick() {
+                  deleteThisIncome(salary);
+                },
+                className: "delete-button",
+                children: "Delete"
+              })]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-              onClick: openEditModal,
-              className: "edit-button",
-              children: "Edit"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-              onClick: deleteThisIncome,
-              className: "delete-button",
-              children: "Delete"
-            })]
-          })]
+          }, index);
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
         onClick: openAddModal,

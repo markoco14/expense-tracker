@@ -39,13 +39,13 @@ Route::get('profile/savings/{userid}', [SavingController::class, 'getAll']);
 Route::get('profile/budgets/{userid}', [BudgetController::class, 'getAll']);
 
 // UPDATE ROUTES
-Route::post('profile/salary/edit/{userid}/{salary_amount}', [SalaryController::class, 'update']);
+Route::post('profile/salary/edit/{userid}/{salary_id}/{salary_amount}', [SalaryController::class, 'update']);
 Route::post('profile/deduction/edit/{userid}/{deduction}/{amount}/{original_name}', [DeductionController::class, 'update']);
 Route::post('profile/saving/edit/{userid}/{saving}/{amount}/{original_name}', [SavingController::class, 'update']);
 Route::post('profile/budget/edit/{userid}/{id}/{amount}', [BudgetController::class, 'update']);
 
 // DELETE ROUTES
-Route::post('profile/salary/delete/{userid}', [SalaryController::class, 'delete']);
+Route::post('profile/salary/delete/{userid}/{salary_id}', [SalaryController::class, 'delete']);
 Route::post('profile/deduction/delete/{userid}/{deduction_id}', [DeductionController::class, 'delete']);
 Route::post('profile/saving/delete/{userid}/{saving_id}', [SavingController::class, 'delete']);
 Route::post('profile/budget/delete/{userid}/{budget_id}', [BudgetController::class, 'delete']);

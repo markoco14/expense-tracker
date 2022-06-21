@@ -3,11 +3,21 @@ import ReactDOM from 'react-dom';
 
 export default function ProfileSalaries() {
     const [salaries, setSalaries] = useState([]);
+    const [totalSalary, setTotalSalary] = useState(undefined);
+    const [salaryId, setSalaryId] = useState(undefined);
 
+    function calculateTotalSalary(salaries) {
+        let total = 0;
+        salaries?.forEach(salary => {
+            total += salary.salary_amount;
+        })
+        setTotalSalary(total);
+    }
     const fetchData = async () => {
         const response = await fetch(`api/profile/salary/${userid}`);
         const data = await response.json();
         setSalaries(data);
+        calculateTotalSalary(data);
     };
 
     useEffect(() => {
@@ -47,13 +57,15 @@ export default function ProfileSalaries() {
         }
     }
 
-    const openEditModal = () => {
+    const openEditModal = (salary) => {
         const editSalaryModal = document.getElementById('edit-salary-modal');
+        setSalaryId(salary.id);
         editSalaryModal.showModal();
     }
 
     const closeEditModal = () => {
         const editSalaryModal = document.getElementById('edit-salary-modal');
+        setSalaryId(undefined);
         editSalaryModal.close();
     }
 
@@ -63,7 +75,7 @@ export default function ProfileSalaries() {
         if (!newSalary) {
             alert('You need to choose a salary level');
         } else {
-            const response = await fetch(`api/profile/salary/edit/${userid}/${newSalary}`, {
+            const response = await fetch(`api/profile/salary/edit/${userid}/${salaryId}/${newSalary}`, {
                 method: 'POST',
                 body: JSON.stringify({
                     label: 'Salary',
@@ -76,12 +88,13 @@ export default function ProfileSalaries() {
             editSalaryInput.value = '';
             fetchData();
             const editSalaryModal = document.getElementById('edit-salary-modal');
+            setSalaryId(undefined);
             editSalaryModal.close();
         }
     }
 
-    const deleteThisIncome = async () => {
-        const response = await fetch(`api/profile/salary/delete/${userid}`, {
+    const deleteThisIncome = async (salary) => {
+        const response = await fetch(`api/profile/salary/delete/${userid}/${salary.id}`, {
             method: 'POST',
             body: JSON.stringify({
                 user_id: userid
@@ -97,28 +110,33 @@ export default function ProfileSalaries() {
         <>
             <div className="profile-container">
                 <h2>Income</h2>
-                <p>Total: ${salaries[0]?.salary_amount}</p>
+                <p>Total: {totalSalary? `$${totalSalary}` : `$0`}</p>
                 <ul className="profile-info-list">
-                    <li className="flex">
-                        <div className="profile-info-name-amount">
-                            <span>Salary</span>
-                            <span>${salaries[0]?.salary_amount}</span>
-                        </div>
-                        <div>
-                            <button 
-                                onClick={openEditModal} 
-                                className="edit-button"
-                            >
-                                Edit
-                            </button>
-                            <button 
-                                onClick={deleteThisIncome} 
-                                className="delete-button"
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    </li>
+                    {salaries?.map((salary, index) => {
+                        return (
+                            
+                        <li key={index} className="flex">
+                            <div className="profile-info-name-amount">
+                                <span>Salary</span>
+                                <span>${salary.salary_amount}</span>
+                            </div>
+                            <div>
+                                <button 
+                                    onClick={() => {openEditModal(salary)}} 
+                                    className="edit-button"
+                                >
+                                    Edit
+                                </button>
+                                <button 
+                                    onClick={() => {deleteThisIncome(salary)}} 
+                                    className="delete-button"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </li>
+                        );
+                    })}
                 </ul>
                 <button onClick={openAddModal}>+ New</button>
             </div>

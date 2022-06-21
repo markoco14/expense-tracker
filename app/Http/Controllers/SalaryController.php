@@ -43,9 +43,9 @@ class SalaryController extends Controller
         return ['status' => 201];
     }
 
-    public function update($userid, $amount) {
+    public function update($userid, $id, $amount) {
         UserSalary::where('user_id', $userid)
-        ->where('salary_status', 'CURRENT')
+        ->where('id', $id)
         ->update(['salary_amount' => $amount]);
         return [
             'user_id' => $userid, 
@@ -54,18 +54,16 @@ class SalaryController extends Controller
     }
 
     public function getUpdatedSalary($userid, $name) {
-        // return ['response' => "You are getting the update Salary now"];
         $salary = UserSalary::where('user_id', $userid)
-        // ->where('salary_name', $name)
         ->where('salary_status', 'CURRENT')
         ->get();
         return json_encode($salary);
     }
 
     // update with salary param later
-    public function delete($userid) {
-        UserSalary::where('user_id', $userid)
-        ->where('salary_status', 'CURRENT')
+    public function delete($user_id, $salary_id) {
+        UserSalary::where('user_id', $user_id)
+        ->where('id', $salary_id)
         ->update(['salary_status' => 'OOD']);
     }
 }
