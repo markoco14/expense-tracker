@@ -30,10 +30,11 @@ class SalaryController extends Controller
         return json_encode($salary);
     }
 
-    public function create($userid, $amount) {
+    public function create($userid, $name, $amount) {
         // return ['response' => 'You landed in the create function of the salary controller'];
         $salary = new UserSalary;
         $salary->user_id = $userid;
+        $salary->salary_name = $name;
         $salary->salary_amount = $amount;
         $salary->salary_status = 'CURRENT';
         $salary->job_category = 'NULL';
@@ -43,29 +44,24 @@ class SalaryController extends Controller
         return ['status' => 201];
     }
 
-    public function update($userid, $amount) {
+    public function update($userid, $id, $name, $amount) {
         UserSalary::where('user_id', $userid)
-        ->where('salary_status', 'CURRENT')
-        ->update(['salary_amount' => $amount]);
-        return [
-            'user_id' => $userid, 
-            'amount' => $amount,
-        ];
+        ->where('id', $id)
+        ->update(['salary_name' => $name, 'salary_amount' => $amount]);
+        return ['success' => 201];
     }
 
     public function getUpdatedSalary($userid, $name) {
-        // return ['response' => "You are getting the update Salary now"];
         $salary = UserSalary::where('user_id', $userid)
-        // ->where('salary_name', $name)
         ->where('salary_status', 'CURRENT')
         ->get();
         return json_encode($salary);
     }
 
     // update with salary param later
-    public function delete($userid) {
-        UserSalary::where('user_id', $userid)
-        ->where('salary_status', 'CURRENT')
+    public function delete($user_id, $salary_id) {
+        UserSalary::where('user_id', $user_id)
+        ->where('id', $salary_id)
         ->update(['salary_status' => 'OOD']);
     }
 }
