@@ -60,12 +60,27 @@
                     <td>Budget</td>
                     <td style="text-align: right;">${{$budget}}</td>
                 </tr>
-                @foreach ($expenses as $key => $value)
-                <tr>
-                    <td>Expense {{$key + 1}}</td>
-                    <td style="text-align: right;">${{$value}}</td>
-                </tr>
-                @endforeach
+                @if ($expenses !== [])
+                    @foreach ($expenses as $key => $value)
+                    <tr>
+                        <td>
+                            Expense {{$key + 1}}
+                        </td>
+                        <td style="text-align: right;">
+                            ${{$value}}
+                        </td>
+                    </tr>
+                    @endforeach
+                @else 
+                    <tr>
+                        <td>
+                            Expenses
+                        </td>
+                        <td style="text-align: right;">
+                            $0
+                        </td>
+                    </tr>
+                @endif
                 <tr>
                     <td>Remaining</td>
                     @if ($remaining < 0)
@@ -92,7 +107,6 @@
         async function fetchData () {
             const response = await fetch(`api/percent/${username}`);
             const data = await response.json();
-            console.log(data);
             return data;
         }
         
