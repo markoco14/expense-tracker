@@ -394,9 +394,13 @@ button {
     aspect-ratio: 1;
 }
 
-.profile-modal-buttons {
-    justify-content:right;
-    gap:1rem;
+.profile-modal-button {
+    width: 50%;
+}
+
+.profile-modal-confirm {
+    background-color: var(--main-green);
+    color:white;
 }
 
 /* PROGRESS PAGE STYLES */
