@@ -390,8 +390,10 @@ button {
 }
 
 .profile-modal {
-    width:95%;
+    width:80%;
     aspect-ratio: 1;
+    border:none;
+    border-radius: 5px / 5px;
 }
 
 .profile-modal-button {
