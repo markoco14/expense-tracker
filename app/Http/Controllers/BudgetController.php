@@ -63,6 +63,7 @@ class BudgetController extends Controller
 
         $budget = UserBudget::where('user_id', auth()->user()->id)
             ->where('budget_name', 'Daily')
+            ->where('budget_status', 'CURRENT')
             ->get()
             ->toArray();
 
