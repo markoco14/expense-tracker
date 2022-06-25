@@ -51,20 +51,32 @@ class BudgetController extends Controller
         $expensesToday = [];
         $totalSpent = 0;
 
-        foreach($expenses as &$expense) {
-            $expense['created_at'] = Carbon::parse($expense['created_at'])->toDateString();
-            if ($expense['created_at'] === Carbon::today()->toDateString()) {
-                array_push($expensesToday, $expense['amount']);
-                $totalSpent += $expense['amount'];
+        if ($expenses !== []) {
+            foreach($expenses as &$expense) {
+                $expense['created_at'] = Carbon::parse($expense['created_at'])->toDateString();
+                if ($expense['created_at'] === Carbon::today()->toDateString()) {
+                    array_push($expensesToday, $expense['amount']);
+                    $totalSpent += $expense['amount'];
+                }
             }
         }
 
         $budget = UserBudget::where('user_id', auth()->user()->id)
-            ->where('budget_status', 'CURRENT')
+            ->where('budget_name', 'Daily')
             ->get()
-            ->toArray()[0]['budget_amount'];
-        $amountRemaining = $budget - $totalSpent;
-        $percentSpent = $totalSpent/$budget*100;
+            ->toArray();
+
+        if ($budget === []) {
+            $budget = 0;
+            $percentSpent = 0;
+            $amountRemaining = 0;
+        }
+        else {
+            $budget = $budget[0]['budget_amount'];
+            $amountRemaining = $budget - $totalSpent;
+            $percentSpent = $totalSpent/$budget*100; // division by zero
+        }
+
         $today = Carbon::today();
 
         return view('progress', [
