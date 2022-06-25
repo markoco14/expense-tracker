@@ -121,7 +121,7 @@ export default function ProfileSavings() {
 
     return (
         <>
-            <div className="profile-container">
+            <div id="savings" className="profile-container">
                 <h2>Savings</h2>
                 <p>Total: ${totalSavings? totalSavings : 0}</p>
                 <ul className="profile-info-list">
@@ -153,54 +153,64 @@ export default function ProfileSavings() {
                 <button onClick={openAddModal}>+ New</button>
             </div>
             <dialog id="add-savings-modal" className="profile-modal">
-                <label>Savings Name</label>
-                <input 
-                    id="add-savings-name-input" 
-                    type="text"
-                    onChange={(e) => {
-                        setAddLabel(() => {
-                            if (e.target.value === '') {
-                                return undefined;
-                            }
-                            return e.target.value;
-                        });
-                    }}
-                >
-                </input>
-                <label>Savings Amount</label>
-                <input
-                    id="add-savings-amount-input"
-                    type="number"
-                    onChange={(e) => {
-                        setAddAmount(() => {
-                            if (e.target.value === '') {
-                                return undefined;
-                            }
-                            return e.target.value;
-                        });
-                    }}
-                >
-                </input>
-                <button onClick={closeAddModal}>Cancel</button>
-                <button onClick={addSavings}>Confirm</button>
+                <div className="form-group">
+                    <label>Savings Name</label>
+                    <input 
+                        id="add-savings-name-input" 
+                        type="text"
+                        onChange={(e) => {
+                            setAddLabel(() => {
+                                if (e.target.value === '') {
+                                    return undefined;
+                                }
+                                return e.target.value;
+                            });
+                        }}
+                    >
+                    </input>
+                </div>
+                <div className="form-group">
+                    <label>Savings Amount</label>
+                    <input
+                        id="add-savings-amount-input"
+                        type="number"
+                        onChange={(e) => {
+                            setAddAmount(() => {
+                                if (e.target.value === '') {
+                                    return undefined;
+                                }
+                                return e.target.value;
+                            });
+                        }}
+                    >
+                    </input>
+                </div>
+                <div>
+                    <button className="profile-modal-button" onClick={closeAddModal}>Cancel</button>
+                    <button className="profile-modal-button profile-modal-confirm" onClick={addSavings}>Confirm</button>
+                </div>
             </dialog>
             <dialog id="edit-savings-modal" className="profile-modal">
-                <label id="edit-savings-label">{currentLabel}</label>
-                <input 
-                id="edit-savings-input" 
-                type="number" 
-                placeholder={currentAmount}
-                onChange={(e) => {
-                    setNewAmount(() => {
-                        if (e.target.value === '') {
-                            return undefined;
-                        }
-                        return e.target.value;
-                    });
-                }}
-                ></input>
-                <button onClick={closeEditModal} value="cancel">Cancel</button>
-                <button onClick={editSavings}>Confirm</button>
+                <div className="form-group">
+                    <label id="edit-savings-label">{currentLabel}</label>
+                    <input 
+                    id="edit-savings-input" 
+                    type="number" 
+                    placeholder={currentAmount}
+                    onChange={(e) => {
+                        setNewAmount(() => {
+                            if (e.target.value === '') {
+                                return undefined;
+                            }
+                            return e.target.value;
+                        });
+                    }}
+                    ></input>
+                </div>
+                <div>
+                    <button className="profile-modal-button" onClick={closeEditModal} value="cancel">Cancel</button>
+                    <button className="profile-modal-button profile-modal-confirm" onClick={editSavings}>Confirm</button>
+                </div>
             </dialog>
         </>
     );

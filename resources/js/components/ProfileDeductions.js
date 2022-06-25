@@ -122,7 +122,7 @@ export default function ProfileDeductions() {
 
     return (
         <>
-            <div className="profile-container">
+            <div id="deductions" className="profile-container">
                 <h2>Deductions</h2>
                 <p>Total: ${totalDeductions? totalDeductions : 0}</p>
                 <ul className="profile-info-list">
@@ -152,14 +152,21 @@ export default function ProfileDeductions() {
                 <button onClick={openAddModal}>+ New</button>
             </div>
             <dialog id="add-deduction-modal" className="profile-modal">
-                <label>Deduction Name</label>
-                <input id="add-deduction-name-input" type="text"></input>
-                <label>Deduction Amount</label>
-                <input id="add-deduction-amount-input" type="number"></input>
-                <button onClick={closeAddModal}>Cancel</button>
-                <button onClick={addDeduction}>Confirm</button>
+                <div className="form-group">
+                    <label>Deduction Name</label>
+                    <input id="add-deduction-name-input" type="text"></input>
+                </div>
+                <div className="form-group">
+                    <label>Deduction Amount</label>
+                    <input id="add-deduction-amount-input" type="number"></input>
+                </div>
+                <div>
+                    <button className="profile-modal-button" onClick={closeAddModal}>Cancel</button>
+                    <button className="profile-modal-button profile-modal-confirm" onClick={addDeduction}>Confirm</button>
+                </div>
             </dialog>
             <dialog id="edit-deduction-modal" className="profile-modal">
+            <div className="form-group">
                 <label id="edit-deduction-label">{currentLabel}</label>
                 <input 
                 id="edit-deduction-input" 
@@ -174,8 +181,11 @@ export default function ProfileDeductions() {
                     });
                 }}
                 ></input>
-                <button onClick={closeEditModal} value="cancel">Cancel</button>
-                <button onClick={editDeduction}>Confirm</button>
+            </div>
+            <div>
+                <button className="profile-modal-button" onClick={closeEditModal} value="cancel">Cancel</button>
+                <button className="profile-modal-button profile-modal-confirm" onClick={editDeduction}>Confirm</button>
+            </div>
             </dialog>
         </>
     );

@@ -123,7 +123,7 @@ export default function ProfileBudgets() {
 
     return (
         <>
-            <div className="profile-container">
+            <div id="budget" className="profile-container">
                 <h2>Budgets</h2>
                 <p>Monthly: {totalBudgets? totalBudgets : 0}</p>
                 <ul className="profile-info-list">
@@ -154,54 +154,64 @@ export default function ProfileBudgets() {
                 </ul>
                 <button onClick={openAddModal}>+ New</button>
                 <dialog id="add-budgets-modal" className="profile-modal">
-                    <label>Budget Name</label>
-                    <input 
-                    id="new-budget-label" 
-                    type="string" 
-                    placeholder={"Daily"}
-                    onChange={(e) => {
-                        setNewLabel(() => {
-                            if (e.target.value === '') {
-                                return undefined;
-                            }
-                            return e.target.value;
-                        });
-                    }}
+                    <div className="form-group">
+                        <label>Budget Name</label>
+                        <input 
+                        id="new-budget-label" 
+                        type="string" 
+                        placeholder={"Daily"}
+                        onChange={(e) => {
+                            setNewLabel(() => {
+                                if (e.target.value === '') {
+                                    return undefined;
+                                }
+                                return e.target.value;
+                            });
+                        }}
                     ></input>
-                    <label>Budget Amount</label>
-                    <input 
-                    id="new-budget-input" 
-                    type="number" 
-                    placeholder={0}
-                    onChange={(e) => {
-                        setNewAmount(() => {
-                            if (e.target.value === '') {
-                                return undefined;
-                            }
-                            return e.target.value;
-                        });
-                    }}
-                    ></input>
-                    <button onClick={closeAddModal} value="cancel">Cancel</button>
-                    <button onClick={addBudget}>Confirm</button>
+                    </div>
+                    <div className="form-group">
+                        <label>Budget Amount</label>
+                        <input 
+                        id="new-budget-input" 
+                        type="number" 
+                        placeholder={0}
+                        onChange={(e) => {
+                            setNewAmount(() => {
+                                if (e.target.value === '') {
+                                    return undefined;
+                                }
+                                return e.target.value;
+                            });
+                        }}
+                        ></input>
+                    </div>
+                    <div>
+                        <button className="profile-modal-button" onClick={closeAddModal} value="cancel">Cancel</button>
+                        <button className="profile-modal-button profile-modal-confirm" onClick={addBudget}>Confirm</button>
+                    </div>
                 </dialog>
                 <dialog id="edit-budgets-modal" className="profile-modal">
-                    <label id="edit-budgets-label">{currentLabel}</label>
-                    <input 
-                    id="edit-budgets-input" 
-                    type="number" 
-                    placeholder={currentAmount}
-                    onChange={(e) => {
-                        setNewAmount(() => {
-                            if (e.target.value === '') {
-                                return undefined;
-                            }
-                            return e.target.value;
-                        });
-                    }}
-                    ></input>
-                    <button onClick={closeEditModal} value="cancel">Cancel</button>
-                    <button onClick={editBudget}>Confirm</button>
+                    <div className="form-group">
+                        <label id="edit-budgets-label">{currentLabel}</label>
+                        <input 
+                        id="edit-budgets-input" 
+                        type="number" 
+                        placeholder={currentAmount}
+                        onChange={(e) => {
+                            setNewAmount(() => {
+                                if (e.target.value === '') {
+                                    return undefined;
+                                }
+                                return e.target.value;
+                            });
+                        }}
+                        ></input>
+                    </div>
+                    <div>
+                        <button className="profile-modal-button" onClick={closeEditModal} value="cancel">Cancel</button>
+                        <button className="profile-modal-button profile-modal-confirm" onClick={editBudget}>Confirm</button>
+                    </div>
                 </dialog>
             </div>
         </>

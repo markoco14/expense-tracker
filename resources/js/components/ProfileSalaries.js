@@ -118,7 +118,7 @@ export default function ProfileSalaries() {
     
     return (
         <>
-            <div className="profile-container">
+            <div id="income" className="profile-container">
                 <h2>Income</h2>
                 <p>Total: {totalSalary? `$${totalSalary}` : `$0`}</p>
                 <ul className="profile-info-list">
@@ -150,64 +150,76 @@ export default function ProfileSalaries() {
                 <button onClick={openAddModal}>+ New</button>
             </div>
             <dialog id="add-salary-modal" className="profile-modal">
-                <label>Salary Name</label>
-                <input 
-                    id="add-salary-name-input" 
-                    type="text"
-                    onChange={(e) => {
-                        setNewSalaryName(() => {
-                            if (e.target.value === '') {
-                                return undefined;
-                            }
-                            return e.target.value;
-                        });
-                    }}
-                ></input>
-                <label>Salary Amount</label>
-                <input 
-                    id="add-salary-amount-input" 
-                    type="number"
-                    onChange={(e) => {
-                        setNewSalaryAmount(() => {
-                            if (e.target.value === '') {
-                                return undefined;
-                            }
-                            return e.target.value;
-                        });
-                    }}
-                ></input>
-                <button onClick={closeAddModal}>Cancel</button>
-                <button onClick={addSalary}>Confirm</button>
+                <div className="form-group">
+                    <label>Salary Name</label>
+                    <input 
+                        id="add-salary-name-input" 
+                        type="text"
+                        onChange={(e) => {
+                            setNewSalaryName(() => {
+                                if (e.target.value === '') {
+                                    return undefined;
+                                }
+                                return e.target.value;
+                            });
+                        }}
+                    ></input>
+                </div>
+                <div className="form-group">
+                    <label>Salary Amount</label>
+                    <input 
+                        id="add-salary-amount-input" 
+                        type="number"
+                        onChange={(e) => {
+                            setNewSalaryAmount(() => {
+                                if (e.target.value === '') {
+                                    return undefined;
+                                }
+                                return e.target.value;
+                            });
+                        }}
+                    ></input>
+                </div>
+                <div>
+                    <button className="profile-modal-button" onClick={closeAddModal}>Cancel</button>
+                    <button className="profile-modal-button profile-modal-confirm" onClick={addSalary}>Confirm</button>
+                </div>
             </dialog>
             <dialog id="edit-salary-modal" className="profile-modal">
-                <label>Salary Name</label>
-                <input 
-                    type="text" 
-                    placeholder={currentSalaryName} 
-                    onChange={(e) => {
-                        setNewSalaryName(() => {
-                            if (e.target.value === '') {
-                                return undefined;
-                            }
-                            return e.target.value;
-                        });
-                    }}
-                    ></input>
-                <label>Salary Amount</label>
-                <input
-                    type="number"
-                    placeholder={currentSalaryAmount}
-                    onChange={(e) => {
-                        setNewSalaryAmount(() => {
-                            if (e.target.value === '') {
-                                return undefined;
-                            }
-                            return e.target.value;
-                        });
-                    }}
-                    ></input>
-                <button onClick={closeEditModal} value="cancel">Cancel</button>
-                <button onClick={editSalary} value="default">Confirm</button>
+                <div className="form-group">
+                    <label>Salary Name</label>
+                    <input 
+                        type="text" 
+                        placeholder={currentSalaryName} 
+                        onChange={(e) => {
+                            setNewSalaryName(() => {
+                                if (e.target.value === '') {
+                                    return undefined;
+                                }
+                                return e.target.value;
+                            });
+                        }}
+                        ></input>
+                </div>
+                <div className="form-group">
+                    <label>Salary Amount</label>
+                    <input
+                        type="number"
+                        placeholder={currentSalaryAmount}
+                        onChange={(e) => {
+                            setNewSalaryAmount(() => {
+                                if (e.target.value === '') {
+                                    return undefined;
+                                }
+                                return e.target.value;
+                            });
+                        }}
+                        ></input>
+                </div>
+                <div>
+                    <button className="profile-modal-button" onClick={closeEditModal} value="cancel">Cancel</button>
+                    <button className="profile-modal-button profile-modal-confirm" onClick={editSalary} value="default">Confirm</button>
+                </div>
             </dialog>
         </>
     );
