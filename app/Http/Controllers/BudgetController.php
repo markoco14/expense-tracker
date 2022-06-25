@@ -37,10 +37,40 @@ class BudgetController extends Controller
 
     public function spending() {
 
-        $expenses = Expense::where('username', auth()->user()->username)
-            ->get();
+        // // dd(Carbon::today()->toDateString());
+        // $year = Carbon::today()->year;
+        // $month = Carbon::today()->month;
+        // // dd($month);
 
-        return view('budget.spending', compact('expenses'));
+
+        $expenses = Expense::where('username', auth()->user()->username)
+            // ->whereDate('created_at', '=', Carbon::today()->toDateString())
+            ->get()
+            ->toArray();
+            // dd($expenses);
+
+        if ($expenses !== []) {
+            $monthlyExpenses = [];
+            $totalSpending = 0;
+            foreach ($expenses as $expense) {
+                // dd($expense['created_at'], Carbon::parse($expense['created_at'])->timezone('Asia/Taipei'));   
+                $date = Carbon::parse($expense['created_at'])->timezone('Asia/Taipei');
+                // dd($date);
+                if ($date->month === Carbon::today()->month 
+                    && $date->year === Carbon::today()->year){
+                        array_push($monthlyExpenses, $expense);
+                        $totalSpending += $expense['amount'];
+                }
+            }
+        } else {
+            $monthlyExpenses = [];
+            $totalSpending = 0;
+        }
+
+        return view('budget.spending', [
+            'expenses' => $monthlyExpenses,
+            'totalSpending' => $totalSpending,
+        ]);
     }
 
     public function progress() {
