@@ -5423,45 +5423,56 @@ function ProfileBudgets() {
       budgets = _useState2[0],
       setBudgets = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
       _useState4 = _slicedToArray(_useState3, 2),
-      totalBudgets = _useState4[0],
-      setTotalBudgets = _useState4[1];
+      dailyBudget = _useState4[0],
+      setDailyBudget = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
-      currentLabel = _useState6[0],
-      setCurrentLabel = _useState6[1];
+      totalBudgets = _useState6[0],
+      setTotalBudgets = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      currentAmount = _useState8[0],
-      setCurrentAmount = _useState8[1];
+      currentLabel = _useState8[0],
+      setCurrentLabel = _useState8[1];
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
       _useState10 = _slicedToArray(_useState9, 2),
-      currentId = _useState10[0],
-      setCurrentId = _useState10[1];
+      currentAmount = _useState10[0],
+      setCurrentAmount = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
       _useState12 = _slicedToArray(_useState11, 2),
-      newAmount = _useState12[0],
-      setNewAmount = _useState12[1];
+      currentId = _useState12[0],
+      setCurrentId = _useState12[1];
 
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
       _useState14 = _slicedToArray(_useState13, 2),
-      newLabel = _useState14[0],
-      setNewLabel = _useState14[1];
+      newAmount = _useState14[0],
+      setNewAmount = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(undefined),
+      _useState16 = _slicedToArray(_useState15, 2),
+      newLabel = _useState16[0],
+      setNewLabel = _useState16[1];
 
   function calculateTotalBudgets(budgets) {
     var total = 0;
     budgets === null || budgets === void 0 ? void 0 : budgets.forEach(function (budget) {
-      total += budget.budget_amount;
+      if (budget.budget_name === 'Daily' || budget.budget_name === 'daily') {
+        setDailyBudget(budget.budget_amount);
+        var month = new Date().getMonth() + 1;
+        var year = new Date().getFullYear();
+        var daysInMonth = new Date(year, month, 0).getDate();
+        var monthlyBudget = budget.budget_amount * daysInMonth;
+        total += monthlyBudget;
+      } else {
+        total += budget.budget_amount;
+      }
     });
-    var month = new Date().getMonth() + 1;
-    var year = new Date().getFullYear();
-    var daysInMonth = new Date(year, month, 0).getDate();
-    setTotalBudgets(total * daysInMonth);
+    setTotalBudgets(total);
   }
 
   var fetchData = /*#__PURE__*/function () {
@@ -5511,9 +5522,11 @@ function ProfileBudgets() {
 
   function closeEditModal() {
     var editBudgetModal = document.getElementById('edit-budgets-modal');
+    var editBudgetInput = document.getElementById('edit-budgets-input');
     setCurrentLabel('');
     setCurrentAmount(0);
     setCurrentId(0);
+    editBudgetInput.value = '';
     editBudgetModal.close();
   }
 
@@ -5579,6 +5592,8 @@ function ProfileBudgets() {
     var addBudgetModal = document.getElementById('add-budgets-modal');
     setNewLabel(undefined);
     setNewAmount(undefined);
+    document.getElementById('new-budget-amount').value = '';
+    document.getElementById('new-budget-label').value = '';
     addBudgetModal.close();
   }
 
@@ -5601,13 +5616,11 @@ function ProfileBudgets() {
               }
 
               alert('You need to name the type of budget and choose an amount!');
-              _context3.next = 12;
+              _context3.next = 14;
               break;
 
             case 5:
-              console.log(newLabel);
-              console.log(newAmount);
-              _context3.next = 9;
+              _context3.next = 7;
               return fetch("api/profile/budget/create/".concat(userid, "/").concat(newLabel, "/").concat(newAmount), {
                 method: 'POST',
                 body: JSON.stringify({
@@ -5619,13 +5632,17 @@ function ProfileBudgets() {
                 }
               });
 
-            case 9:
+            case 7:
               response = _context3.sent;
-              fetchData(); // const addBudgetModal = document.getElementById('add-budgets-modal');
+              fetchData();
+              setNewLabel(undefined);
+              setNewAmount(undefined);
+              document.getElementById('new-budget-amount').value = '';
+              document.getElementById('new-budget-label').value = ''; // const addBudgetModal = document.getElementById('add-budgets-modal');
 
               document.getElementById('add-budgets-modal').close();
 
-            case 12:
+            case 14:
             case "end":
               return _context3.stop();
           }
@@ -5646,7 +5663,12 @@ function ProfileBudgets() {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              _context4.next = 2;
+              // you should delete by id because you have the budget` object
+              if (budget.budget_name === 'Daily' || 'daily') {
+                setDailyBudget(undefined);
+              }
+
+              _context4.next = 3;
               return fetch("api/profile/budget/delete/".concat(userid, "/").concat(budget.id), {
                 method: 'POST',
                 body: JSON.stringify({
@@ -5657,11 +5679,11 @@ function ProfileBudgets() {
                 }
               });
 
-            case 2:
+            case 3:
               response = _context4.sent;
               fetchData();
 
-            case 4:
+            case 5:
             case "end":
               return _context4.stop();
           }
@@ -5720,8 +5742,12 @@ function ProfileBudgets() {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
             id: "new-budget-label",
             type: "string",
-            placeholder: "Daily",
             onChange: function onChange(e) {
+              if (dailyBudget && (e.target.value === 'Daily' || e.target.value === 'daily')) {
+                e.target.value = '';
+                alert('You already have a daily budget. Choose another name.');
+              }
+
               setNewLabel(function () {
                 if (e.target.value === '') {
                   return undefined;
@@ -5736,9 +5762,8 @@ function ProfileBudgets() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
             children: "Budget Amount"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-            id: "new-budget-input",
+            id: "new-budget-amount",
             type: "number",
-            placeholder: 0,
             onChange: function onChange(e) {
               setNewAmount(function () {
                 if (e.target.value === '') {

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 export default function ProfileBudgets() {
     const [budgets, setBudgets] = useState([]);
+    const [dailyBudget, setDailyBudget] = useState(undefined);
     const [totalBudgets, setTotalBudgets] = useState(0);
     const [currentLabel, setCurrentLabel] = useState('');
     const [currentAmount, setCurrentAmount] = useState(0);
@@ -14,12 +15,18 @@ export default function ProfileBudgets() {
     function calculateTotalBudgets(budgets) {
         let total = 0;
         budgets?.forEach(budget => {
-            total += budget.budget_amount;
+            if (budget.budget_name === 'Daily' || budget.budget_name === 'daily') {
+                setDailyBudget(budget.budget_amount);
+                const month = new Date().getMonth()+1;
+                const year = new Date().getFullYear();
+                const daysInMonth = new Date(year, month, 0).getDate();
+                const monthlyBudget = budget.budget_amount*daysInMonth;
+                total += monthlyBudget;
+            } else {
+                total += budget.budget_amount;
+            }
         })
-        const month = new Date().getMonth()+1;
-        const year = new Date().getFullYear();
-        const daysInMonth = new Date(year, month, 0).getDate();
-        setTotalBudgets(total*daysInMonth);
+        setTotalBudgets(total);
     }
 
     const fetchData = async () => {
@@ -43,9 +50,11 @@ export default function ProfileBudgets() {
 
     function closeEditModal() {
         const editBudgetModal = document.getElementById('edit-budgets-modal');
+        const editBudgetInput = document.getElementById('edit-budgets-input');
         setCurrentLabel('');
         setCurrentAmount(0);
         setCurrentId(0);
+        editBudgetInput.value = '';
         editBudgetModal.close();
     }
 
@@ -81,6 +90,8 @@ export default function ProfileBudgets() {
         const addBudgetModal = document.getElementById('add-budgets-modal');
         setNewLabel(undefined);
         setNewAmount(undefined);
+        document.getElementById('new-budget-amount').value = '';
+        document.getElementById('new-budget-label').value = '';
         addBudgetModal.close();
     }
 
@@ -89,8 +100,8 @@ export default function ProfileBudgets() {
         if (!newLabel || !newAmount) {
             alert('You need to name the type of budget and choose an amount!');
         } else {
-            console.log(newLabel);
-            console.log(newAmount);
+            // console.log(newLabel);
+            // console.log(newAmount);
             const response = await fetch(`api/profile/budget/create/${userid}/${newLabel}/${newAmount}`, {
                 method: 'POST',
                 body: JSON.stringify({
@@ -102,6 +113,10 @@ export default function ProfileBudgets() {
                 }
             });
             fetchData();
+            setNewLabel(undefined);
+            setNewAmount(undefined);    
+            document.getElementById('new-budget-amount').value = '';
+            document.getElementById('new-budget-label').value = '';
             // const addBudgetModal = document.getElementById('add-budgets-modal');
             document.getElementById('add-budgets-modal').close();
         }
@@ -109,6 +124,9 @@ export default function ProfileBudgets() {
 
     async function deleteBudget(budget) {
         // you should delete by id because you have the budget` object
+        if (budget.budget_name === 'Daily' || 'daily') {
+            setDailyBudget(undefined);
+        }
         const response = await fetch(`api/profile/budget/delete/${userid}/${budget.id}`, {
             method: 'POST',
             body: JSON.stringify({
@@ -159,8 +177,14 @@ export default function ProfileBudgets() {
                         <input 
                         id="new-budget-label" 
                         type="string" 
-                        placeholder={"Daily"}
                         onChange={(e) => {
+                            if (dailyBudget && 
+                                (e.target.value === 'Daily' || e.target.value === 'daily')
+                            ) {
+                                e.target.value = '';
+                                alert('You already have a daily budget. Choose another name.');
+                                
+                            }
                             setNewLabel(() => {
                                 if (e.target.value === '') {
                                     return undefined;
@@ -173,9 +197,8 @@ export default function ProfileBudgets() {
                     <div className="form-group">
                         <label>Budget Amount</label>
                         <input 
-                        id="new-budget-input" 
+                        id="new-budget-amount" 
                         type="number" 
-                        placeholder={0}
                         onChange={(e) => {
                             setNewAmount(() => {
                                 if (e.target.value === '') {

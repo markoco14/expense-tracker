@@ -13,36 +13,11 @@ use Illuminate\Support\Facades\Auth;
 
 class BudgetController extends Controller
 {
-    public function index() {
-         // dd('You hit the budgets endpoint');
-         $attributes = request()->validate([
-             'budgets' => ['required']
-         ]);
-         // dd($attributes);
-         $budget = new UserBudget;
-         $budget->user_id = auth()->user()->id;
-         $budget->budget_name = 'daily';
-         $budget->budget_status = 'CURRENT';
-         $budget->budget_amount = $attributes['budgets'];
-         // $budget->month = Carbon::now()->month;
-         // dd($budget);
-         $budget->save();
- 
-         return redirect('profile');
-    }
-
     public function setup() {
         return view('budget.setup');
     }
 
     public function spending() {
-
-        // // dd(Carbon::today()->toDateString());
-        // $year = Carbon::today()->year;
-        // $month = Carbon::today()->month;
-        // // dd($month);
-
-
         $expenses = Expense::where('username', auth()->user()->username)
             // ->whereDate('created_at', '=', Carbon::today()->toDateString())
             ->get()

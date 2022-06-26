@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\UserBudget;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades;
@@ -28,6 +29,19 @@ class UsersController extends Controller
         ]);
 
         User::create($attributes);
+
+        $user = User::where('email', $attributes['email'])
+        ->get()
+        ->toArray();
+
+        $budget = new UserBudget;
+        $budget->user_id = $user[0]['id'];
+        $budget->budget_name = 'Daily';
+        $budget->budget_status = 'CURRENT';
+        $budget->budget_amount = 0;
+        $budget->save();
+        // $budget->month = Carbon::now()->month;
+
 
         session()->flash('success', 'Your account has been created.');
 
