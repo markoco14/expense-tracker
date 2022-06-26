@@ -1,26 +1,27 @@
 <x-header />
 <section class="section-full" style="padding-top:5rem;">
     <div class="container">
-        <h1 class="form-title">Spending</h1>
-        
-        @if($expenses !== [])
-            <p>June Total Spending: ${{$totalSpending}}</p>
-            <table style="width: 100%">
-                <thead>
-                    <tr style="text-align: left;">
-                        <th>Amount</th>
-                        <th>What</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($expenses as $expense)
-                    <tr>
-                        <td>{{$expense['amount']}}</td>
-                        <td>{{$expense['what']}}</td>
-                    </tr>
+        <div style="margin-bottom:1em;">
+            @if($expenses !== [])
+                <h1>{{Carbon\Carbon::now()->format('F')}} Spending: ${{$totalSpending}}</h1>
+            </div>
+                    @foreach($dates as $date)
+                        <div style="margin-bottom:0.5em;">
+                            <p style="width: 100%; color:var(--main-green); font-weight:700;">
+                                {{$date->format('F')}}
+                                {{$date->format('d')}} - 
+                                {{$date->format('l')}}
+                            </p>
+                            @foreach($expenses as $expense)
+                            @if (Carbon\Carbon::parse($expense['created_at'])->toDateString() === $date->toDateString())
+                            <div style="width: 90%; display:flex; justify-content:space-between;">
+                                <span>{{$expense['what']}}</span>
+                                <span>${{$expense['amount']}}</span>
+                            </div>
+                            @endif
+                            @endforeach
+                        </div>
                     @endforeach
-                </tbody>
-            </table>
         @else
             <p>You have no expenses this month.</p>
         @endif

@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Expense;
 use App\Models\UserBudget;
-use App\Models\UserDeduction;
-use App\Models\UserSalary;
-use Illuminate\Http\Request;
-use App\Services\DeductionCalculatorService;
+use Carbon\CarbonPeriod;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class BudgetController extends Controller
 {
@@ -18,11 +14,18 @@ class BudgetController extends Controller
     }
 
     public function spending() {
+        $period = CarbonPeriod::create('2022-06-01', '2022-06-30');
+        $dates = [];
+        
         $expenses = Expense::where('username', auth()->user()->username)
-            // ->whereDate('created_at', '=', Carbon::today()->toDateString())
-            ->get()
-            ->toArray();
-            // dd($expenses);
+        // ->whereDate('created_at', '=', Carbon::today()->toDateString())
+        ->get()
+        ->toArray();
+        // dd($expenses);
+
+        // foreach($period as $date) {
+        //     array_push($dates, $date->toDateString());
+        // }
 
         if ($expenses !== []) {
             $monthlyExpenses = [];
@@ -42,9 +45,19 @@ class BudgetController extends Controller
             $totalSpending = 0;
         }
 
+        foreach ($monthlyExpenses as $expense) {
+            array_push ($dates, Carbon::parse($expense['created_at'])->toDateString());
+        }
+        $dates = array_unique($dates);
+        foreach ($dates as &$date) {
+            $date = Carbon::parse($date);
+        }
+
+
         return view('budget.spending', [
             'expenses' => $monthlyExpenses,
             'totalSpending' => $totalSpending,
+            'dates' => $dates,
         ]);
     }
 
