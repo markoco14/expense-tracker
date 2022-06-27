@@ -185,7 +185,12 @@ button {
         backdrop-filter: blur(1rem);
     }
 }
-
+@supports (-webkit-backdrop-filter: blur(1rem)) {
+    .primary-navigation {
+        background: rgba(10,10,10,0.3);
+        backdrop-filter: blur(1rem);
+    }
+}
 
 .hero {
     background-image: url('../images/money_tree_coins.jpg');
