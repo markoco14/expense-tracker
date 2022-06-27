@@ -6,19 +6,22 @@
             </button class="primary-nav-toggle">
         </li>
     @guest
-        <li>
+        {{-- <li>
             <a href="/"><i class="fa fa-home"></i></a>
+        </li> --}}
+        <li>
+            <button href="/"><i class="fa fa-home"></i></button>
         </li>
         <li>
-            <a href="login"><i class="fa fa-sign-in-alt"></i></a>
+            <button href="login"><i class="fa fa-sign-in-alt"></i></button>
         </li>
     @endguest
     @auth
         <li>
-            <a href="tracking"><i class="fa fa-money-bill"></i></a>
+            <button href="tracking"><i class="fa fa-money-bill"></i></button>
         </li>
         <li>
-            <a href="progress"><i class="fa fa-chart-line"></i></a>
+            <button href="progress"><i class="fa fa-chart-line"></i></button>
         </li>            
     @endauth
     </ul>
