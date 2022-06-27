@@ -179,16 +179,11 @@ button {
 
 }
 
-@supports (backdrop-filter: blur(1rem)) {
+@supports ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
     .primary-navigation {
         background: rgba(10,10,10,0.3);
         backdrop-filter: blur(1rem);
-    }
-}
-@supports (-webkit-backdrop-filter: blur(1rem)) {
-    .primary-navigation {
-        background: rgba(10,10,10,0.3);
-        backdrop-filter: blur(1rem);
+        -webkit-backdrop-filter: blur(1rem);
     }
 }
 
