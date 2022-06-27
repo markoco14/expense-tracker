@@ -158,10 +158,13 @@ button {
     .secondary-navigation li {
         width: 20%;
         text-align:center;
+        display:flex;
+        justify-content: center;
+        align-items:center;
     }
 
     .secondary-navigation i {
-        font-size:30px;
+        font-size:36px;
     }
     
     .secondary-navigation a {
