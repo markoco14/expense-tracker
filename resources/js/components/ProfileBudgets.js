@@ -141,7 +141,7 @@ export default function ProfileBudgets() {
 
     return (
         <>
-            <div id="budget" className="profile-container">
+            <div id="budget">
                 <h2>Budgets</h2>
                 <p>Monthly: {totalBudgets? totalBudgets : 0}</p>
                 <ul className="profile-info-list">

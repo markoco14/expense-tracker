@@ -1,6 +1,6 @@
 <x-header />
     <section class="section-full">
-        <div class="form-container">
+        <div class="container">
             <form action="tracking" method="post" class="form">
                 <h1 class="form-title">Track Expenses</h1>
                 @if (session()->has('success'))

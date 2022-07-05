@@ -118,7 +118,7 @@ export default function ProfileSalaries() {
     
     return (
         <>
-            <div id="income" className="profile-container">
+            <div id="income">
                 <h2>Income</h2>
                 <p>Total: {totalSalary? `$${totalSalary}` : `$0`}</p>
                 <ul className="profile-info-list">

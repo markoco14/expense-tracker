@@ -122,7 +122,7 @@ export default function ProfileDeductions() {
 
     return (
         <>
-            <div id="deductions" className="profile-container">
+            <div id="deductions">
                 <h2>Deductions</h2>
                 <p>Total: ${totalDeductions? totalDeductions : 0}</p>
                 <ul className="profile-info-list">

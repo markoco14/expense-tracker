@@ -1,6 +1,6 @@
 <x-header />
-    <section class="section-full half-half">
-        <div class="form-container">
+    <section class="section-full">
+        <div class="container">
             @if (session()->has('success'))
                 <p
                     x-data="{ show: true }"

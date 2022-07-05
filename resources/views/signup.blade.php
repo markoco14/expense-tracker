@@ -1,6 +1,6 @@
 <x-header />
 <section class="section-full half-half">
-        <div class="form-container">
+        <div class="container">
             <form action="/signup" method="post" class="form">
                 @csrf
             <div class="form-title">

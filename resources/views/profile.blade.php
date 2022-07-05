@@ -5,18 +5,23 @@
     </script>
 @endif
 <section>
-    <div class="profile-header">
-        <h1>Profile</h1>
-        <div>
-            <a href="#income">Income</a>
-            <a href="#deductions">Deductions</a>
-            <a href="#savings">Savings</a>
-            <a href="#budget">Budget</a>
-        </div>
+    <div class="container">
+        <article class="profile-section profile-header">
+            <h1>Profile</h1>
+            {{-- <div>
+                <a href="#income">Income</a>
+                <a href="#deductions">Deductions</a>
+                <a href="#savings">Savings</a>
+                <a href="#budget">Budget</a>
+            </div> --}}
+            <p>Set your financial details so you can 
+                compare how you much you earn and spend.
+            </p>
+        </article>
+        <article id="profile-salary" class="profile-section"></article>
+        <article id="profile-deduction" class="profile-section"></article>
+        <article id="profile-savings" class="profile-section"></article>
+        <article id="profile-budgets" class="profile-section"></article>
     </div>
 </section>
-<section id="profile-salary"></section>
-<section id="profile-deduction"></section>
-<section id="profile-savings"></section>
-<section id="profile-budgets"></section>
 <x-footer />

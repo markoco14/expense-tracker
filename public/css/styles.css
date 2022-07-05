@@ -69,6 +69,29 @@ button {
     color:white;
 }
 
+.rounding {
+    border-radius:5%;
+}
+
+.section-full {
+    width:100%;
+    min-height:100vh;
+    margin:auto;
+    background: white;
+}
+.section-half {
+    width:100%;
+    min-height:50vh;
+    margin:auto;
+    background: white;
+}
+.section-quarter {
+    width:100%;
+    min-height:25vh;
+    margin:auto;
+    background: white;
+}
+
 /* HEADER SECTION BEGINS */
 
 .primary-header {
@@ -312,38 +335,20 @@ HERO SECTION STYLES
     width:100vw;
 }
 
-.rounding {
-    border-radius:5%;
-}
-.section-full {
-    width:100%;
-    min-height:100vh;
-    margin:auto;
-    background: white;
-}
-.section-half {
-    width:100%;
-    min-height:50vh;
-    margin:auto;
-    background: white;
-}
-.section-quarter {
-    width:100%;
-    min-height:25vh;
-    margin:auto;
-    background: white;
-}
-
 .container {
     height:100%;
-    padding: 1rem;
+    padding:1rem;
+    max-width: 500px;
+    margin: auto;
+    padding: 5rem 1rem;
 }
 
-.form-container {
-    height:100%;
-    padding:1rem;
-    padding-top:25%;
-    /* margin-top:25%; */
+@media screen and (max-width: 500px) {
+    .container {
+        height:100%;
+        padding:1rem;
+        padding-top:25%;
+    }
 }
 
 .profile-form {
@@ -351,7 +356,7 @@ HERO SECTION STYLES
 }
 
 .form {
-    padding: 2em;
+    padding: 2em 1em;
     border-radius: 2%;
     background-color: white;
     box-shadow: 0px 10px 22px 0px rgba(122,122,122,1);
@@ -359,13 +364,12 @@ HERO SECTION STYLES
 
 .form-title {
     margin-bottom: 1rem;
-    /* color: var(--main-green); */
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .add-input-group {
@@ -380,7 +384,7 @@ HERO SECTION STYLES
 
 .form button {
     border:none;
-    padding: 0.5em;
+    padding: 1em 0.5em;
     color: var(--main-white);
     background-color: var(--main-green);
 }
@@ -401,12 +405,12 @@ HERO SECTION STYLES
  *
  *
 */
-.profile-header {
-    padding:5rem 1rem 0;
-}
 
-.profile-container {
-    padding:2rem 1rem;
+.profile-section {
+    margin-bottom:2rem;
+}
+.profile-header h1 {
+    font-size:2.5rem;
 }
 
 .profile-info-list {
@@ -462,16 +466,16 @@ HERO SECTION STYLES
 
 /* PROGRESS PAGE STYLES */
 
-.progress-row {
-    min-height:10vh;
-    display:flex;
-    justify-content: center;
-    margin-bottom:2rem;
-}
-
 .progress-card {
     width:50%;
     padding:1rem;
+}
+.progress-row {
+    min-height:10vh;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    margin-bottom:2rem;
 }
 
 .progress-info {
@@ -490,8 +494,8 @@ HERO SECTION STYLES
     text-align:center;
     margin-top:0;
     font-size:2rem; 
-
 }
+
 
 .gain {
     color:green; 
@@ -499,6 +503,10 @@ HERO SECTION STYLES
 
 .loss {
     color:red; 
+}
+.progress-table {
+    width:100%;
+    margin: auto;
 }
 
 .chart-overlay {
@@ -520,6 +528,42 @@ HERO SECTION STYLES
 .chart-subtext {
     font-size: 0.75rem;
 }
+@media screen and (min-width: 500px) {
+    .progress-container {
+        display: flex;
+    }
+    .progress-row {
+        min-height:10vh;
+        width:50%;
+        display:flex;
+        justify-content: center;
+        margin-bottom:2rem;
+    }
+    
+    .progress-stat {
+        text-align:center;
+        margin-top:0;
+        font-size:1.5rem; 
+    }
+
+    .progress-card {
+        width:50%;
+        padding:1rem;
+    }
+
+    .chart-overlay div p {
+        margin:0;
+        font-size:1.5rem;
+    }
+
+
+}
+
+
+
+/****  
+FOOTER PAGE
+****/
 
 .footer {
     color: white;

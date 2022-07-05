@@ -121,7 +121,7 @@ export default function ProfileSavings() {
 
     return (
         <>
-            <div id="savings" className="profile-container">
+            <div id="savings">
                 <h2>Savings</h2>
                 <p>Total: ${totalSavings? totalSavings : 0}</p>
                 <ul className="profile-info-list">

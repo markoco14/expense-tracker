@@ -7,48 +7,43 @@
 <section class="section-full">
     <div class="container" style="padding-top:5rem;">
         <h1 class="form-title">Progress {{$today->format('F')}} {{$today->day}}</h1>
-        <div class="progress-row">
-            <div class="progress-card">
-                <div class="chart-overlay">
-                    @if ($percent > 100)
-                    <div>
-                        <p class="loss">{{$percent}}%</p>
+        <article class="progress-container">
+            <div class="progress-row">
+                <div class="progress-card">
+                    <div class="chart-overlay">
+                        @if ($percent > 100)
+                        <div>
+                            <p class="loss">{{$percent}}%</p>
+                        </div>
+                        @else 
+                        <div>
+                            <p class="gain">{{$percent}}%</p>
+                        </div>
+                        @endif
+                        <canvas id="myChart"></canvas>
                     </div>
-                    @else 
-                    <div>
-                        <p class="gain">{{$percent}}%</p>
-                    </div>
-                    @endif
-                    <canvas id="myChart"></canvas>
                 </div>
             </div>
-        </div>
-        <div class="progress-row">
-            <div class="progress-info">
-                <p class="progress-label">You spent </p> 
-                @if ($budget - $remaining > $budget )
-                <p class="loss progress-stat">${{$budget - $remaining}}</p>
-                @else
-                <p class="gain progress-stat">${{$budget - $remaining}}</p>
-                @endif
+            <div class="progress-row">
+                <div class="progress-info">
+                    <p class="progress-label">You spent </p> 
+                    @if ($budget - $remaining > $budget )
+                    <p class="loss progress-stat">${{$budget - $remaining}}</p>
+                    @else
+                    <p class="gain progress-stat">${{$budget - $remaining}}</p>
+                    @endif
+                </div>
+                <div class="progress-info">
+                    <p class="progress-label">You have </p>
+                    @if ($remaining < 0)
+                    <p class="loss progress-stat">$0</p>
+                    @else
+                    <p class="gain progress-stat">${{$remaining}}</p>
+                    @endif
+                </div>
             </div>
-        {{-- </div>
-        <div class="progress-row"> --}}
-            <div class="progress-info">
-                <p class="progress-label">You have </p>
-                @if ($remaining < 0)
-                <p class="loss progress-stat">$0</p>
-                @else
-                <p class="gain progress-stat">${{$remaining}}</p>
-                @endif
-            </div>
-        </div>
-        {{-- <div class="progress-row">
-            <div class="progress-card">
-                <p>Extra</p>
-            </div>
-        </div> --}}
-        <table>
+        </article>
+        <table class="progress-table">
             <thead>
                 <tr>
                     <th>Your Daily Progress</th>

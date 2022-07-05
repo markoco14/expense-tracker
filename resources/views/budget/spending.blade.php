@@ -1,9 +1,9 @@
 <x-header />
-<section class="section-full" style="padding-top:5rem;">
+<section class="section-full">
     <div class="container">
         <div style="margin-bottom:1em;">
+            <h1>{{Carbon\Carbon::now()->format('F')}} Spending: ${{$totalSpending}}</h1>
             @if($expenses !== [])
-                <h1>{{Carbon\Carbon::now()->format('F')}} Spending: ${{$totalSpending}}</h1>
             </div>
                     @foreach($dates as $date)
                         <div style="margin-bottom:0.5em;">
