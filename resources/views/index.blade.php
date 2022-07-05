@@ -1,6 +1,6 @@
 <x-header />
     <section class="hero">
-        <div class="hero-flex">
+        <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-h1">
                     Know the <span>ins</span> <br> and <span>outs</span> <br> of your financial life

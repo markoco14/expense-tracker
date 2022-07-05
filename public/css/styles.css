@@ -275,10 +275,14 @@ HERO SECTION STYLES
 *****/
 
 .hero {
-    background-image: url('../images/money_tree_coins.jpg');
-    background-position: 5%;
+    background-image: url('../images/money_tree_coins_2.jpg');
+    background-position: 55%;
     background-size: cover;
     min-height:100vh;
+}
+
+.hero h1 {
+    color:white;
 }
 
 .hero span {
@@ -311,14 +315,45 @@ HERO SECTION STYLES
 }
 
 .hero-button-secondary {
-    color: var(--secondary-white);
+    /* color: var(--secondary-white); */
+    color: white;
     padding: 0 1rem;
     border-radius: 2%;
     font-size:1.25rem;
 }
 
 .hero-button-secondary a {
-    color: var(--secondary-white);
+    color: white;
+    /* color: var(--secondary-green); */
+}
+.hero-button-secondary a:hover {
+    color: white;
+    text-decoration: underline;
+    /* color: var(--secondary-green); */
+}
+
+@media (pointer: fine) and (max-width: 500px) {
+    .hero-content {
+        padding:6rem 1rem 0;
+        color:var(--main-white);
+        max-width:650px;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .hero-container {
+        height:100%;
+        max-width: 500px;
+        margin: auto;
+    }
+
+    .hero-content {
+        padding:6rem 1rem 0;
+        /* margin-top:10rem; */
+        color:var(--main-white);
+        max-width:650px;
+    }
+
 }
 
 /* 
