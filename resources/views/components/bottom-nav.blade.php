@@ -1,8 +1,8 @@
 <nav>
-    <ul class="secondary-navigation">
+    <ul class="mobile-secondary-navigation">
         <li>
             <button class="primary-nav-toggle">
-                <i id="hamburger-toggle" class="fa fa-2x fa-bars"></i>
+                <i id="mobile-hamburger-toggle" class="fa fa-2x fa-bars"></i>
             </button class="primary-nav-toggle">
         </li>
     @guest

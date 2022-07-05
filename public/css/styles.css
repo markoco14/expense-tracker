@@ -71,10 +71,15 @@ button {
 
 /* HEADER SECTION BEGINS */
 
+.primary-header {
+    background: var(--main-green);
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 .logo {
     padding:1rem;
-    width:100vw;
-    background: rgba(10,10,10,0.2);
     color:white;
     font-weight:bold;
     font-size:1.5rem;
@@ -85,34 +90,101 @@ button {
 }
 
 .primary-navigation {
-    list-style:none;
+    list-style: none;
+    align-items: center;
+    gap:1rem;
+    padding-right:1rem;
 }
 
 .primary-navigation a {
-    color:white;
+    color: white;
+}
+
+.primary-navigation a:hover {
+    text-decoration: underline;
+}
+.primary-navigation button {
+    background: none;
+    border: none;
+    color: white;
+}
+
+#close-hamburger-toggle {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    color: white;
 }
 
 .secondary-navigation {
+    z-index:100;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 2rem 0;
+    background: rgba(10,10,10,0.3);
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+}
+
+.secondary-navigation li {
+    padding:1rem;
+}
+
+
+.secondary-navigation a {
+    color: white;
+}
+
+.secondary-navigation a:hover {
+    text-decoration: underline;
+}
+
+.mobile-secondary-navigation {
     display: none;
 }
 
-.hamburger-block-hidden {
+.large-hamburger-block-hidden {
+    display: none;
+}
+
+.large-hamburger-block {
+    display: flex;
+}
+
+.mobile-hamburger-block-hidden {
     display:none;
 }
 
-.hamburger-block {
+.mobile-hamburger-block {
     z-index: 1000;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
     .primary-header {
         position:fixed;
+        background: rgba(10,10,10,0.2);
+    }
+
+    .primary-navigation {
+        display: none;
+    }
+
+    .secondary-navigation {
+        display: none;
+    }
+
+    .mobile-primary-navigation {
+        list-style:none;
     }
     
-    .primary-navigation {
+    .mobile-primary-navigation {
         flex-direction: column;
         position:fixed;
-        /* inset: 0 0 0 30%; */
         top: 0;
         left:0;
         height:100vh;
@@ -127,23 +199,17 @@ button {
         -webkit-backdrop-filter: blur(1rem);
     }
 
-    .primary-navigation i {
+    .mobile-primary-navigation i {
         margin-right: 0.5em;
         width:12%;
         text-align:left;
     }
 
-    .secondary-nav-container {
-        display:flex;
-        justify-content: right;
-        gap:2rem;
-        width:100%;
-        position:fixed;
-        bottom:0;
-        background: var(--main-green);
+    .mobile-primary-navigation a {
+        color:white;
     }
-
-    .secondary-navigation {
+    
+    .mobile-secondary-navigation {
         position: fixed;
         bottom:0;
         width:100%;
@@ -158,7 +224,7 @@ button {
         font-size:1.5rem;
     }
 
-    .secondary-navigation li {
+    .mobile-secondary-navigation li {
         width: 20%;
         text-align:center;
         display:flex;
@@ -166,15 +232,15 @@ button {
         align-items:center;
     }
 
-    .secondary-navigation i {
+    .mobile-secondary-navigation i {
         font-size:36px;
     }
     
-    .secondary-navigation a {
+    .mobile-secondary-navigation a {
         color: white;
     }
     
-    .secondary-navigation button {
+    .mobile-secondary-navigation button {
         background: none;
         border: none;
         color: white;
@@ -182,13 +248,9 @@ button {
 
 }
 
-/* @supports (backdrop-filter: none) {
-    .primary-navigation {
-        background: rgba(10,10,10,0.3);
-        backdrop-filter: blur(1rem);
-        -webkit-backdrop-filter: blur(1rem);
-    }
-} */
+/***** 
+HERO SECTION STYLES
+*****/
 
 .hero {
     background-image: url('../images/money_tree_coins.jpg');
@@ -272,18 +334,6 @@ button {
     margin:auto;
     background: white;
 }
-
-
-
-.half-half {
-    background: rgb(228,228,228);
-    background: linear-gradient(
-        0deg, 
-        rgba(255,255,255,1) 45%, 
-        rgba(255,255,255,1) 50%, 
-        rgba(63,145,74,1) 55%
-        );
-    }
 
 .container {
     height:100%;
