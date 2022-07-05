@@ -1,7 +1,6 @@
     </main>
-    <footer style="padding-bottom:5rem;">
-        <p>all rights reserved c 2022</p>
-        <p>thank you for playing</p>
+    <footer class="footer">
+        <p class="copyright">Copyright 2022 ExpenSave <br> All Rights Reserved</p>
     </footer>
     <script async defer>
         const hamburgerMenu = document.getElementById('mobile-hamburger-menu');
