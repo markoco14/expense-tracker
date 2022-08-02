@@ -2,6 +2,7 @@
 @if(Auth::check())
     <script>
         let username = "{{ Auth::user()->username }}";
+        let userId = "{{ Auth::user()->id }}";
     </script>
 @endif
 <section class="section-full">
@@ -11,7 +12,7 @@
             <div class="progress-row">
                 <div class="progress-card">
                     <div class="chart-overlay">
-                        @if ($percent > 100)
+                        @if ($percent > 100 || $percent < 0)
                         <div>
                             <p class="loss">{{$percent}}%</p>
                         </div>
@@ -100,18 +101,33 @@
 </section>
     <script async>
         async function fetchData () {
-            const response = await fetch(`api/percent/${username}`);
+            const response = await fetch(`api/percent/${username}/${userId}`);
             const data = await response.json();
             return data;
         }
         
         fetchData().then(data => {
-            const totalSpent = data;
-            if (totalSpent <= 500) {
+            const totalSpent = data.totalSpent;
+            const dailyBudget = data.budgetData[0].budget_amount;
+
+            if (totalSpent === 0 && dailyBudget === 0) {
                 data = {
                     datasets: [{
                         label: '% of Budget Spent',
-                        data: [totalSpent, (500-totalSpent)],
+                        data: [0, 100],
+                        backgroundColor: [
+                            'rgba(63, 145, 74, 1)',
+                            'rgba(63, 145, 74, 0.2)',
+                        ],
+                        hoverOffset: 4,
+                        cutout: '80%',
+                    }]
+                };
+            } else if (totalSpent <= dailyBudget) {
+                data = {
+                    datasets: [{
+                        label: '% of Budget Spent',
+                        data: [totalSpent, (dailyBudget-totalSpent)],
                         backgroundColor: [
                             'rgba(63, 145, 74, 1)',
                             'rgba(63, 145, 74, 0.2)',
