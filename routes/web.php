@@ -22,33 +22,35 @@ use Illuminate\Contracts\Session\Session;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->middleware('guest');
+Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return view('index');
+    });
 
-// sign up page routes
-Route::get('signup', [UsersController::class, 'create'])->middleware('guest');
-Route::post('signup', [UsersController::class, 'store'])->middleware('guest');
+    Route::get('signup', [UsersController::class, 'create']);
+    Route::post('signup', [UsersController::class, 'store']);
 
-// log in page routes
-Route::get('login', [SessionsController::class, 'create'])->middleware('guest')->name('login');
-Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest');
+    Route::get('login', [SessionsController::class, 'create'])->name('login');
+    Route::post('sessions', [SessionsController::class, 'store']);
+});
 
-// log out
-Route::get('logout', [SessionsController::class, 'destroy'])->middleware('auth');
+Route::middleware('auth')->group(function () { 
+    Route::get('logout', [SessionsController::class, 'destroy']);
 
-// profile information routes
-Route::get('profile', [ProfileController::class, 'index'])->middleware('auth');
-Route::post('profile/salaries', [SalaryController::class, 'index'])->middleware('auth');
-Route::post('profile/deductions', [DeductionController::class, 'index'])->middleware('auth');
-Route::post('profile/savings', [SavingController::class, 'index'])->middleware('auth');
-Route::post('profile/budgets', [BudgetController::class, 'index'])->middleware('auth');
- 
-// expense input routes
-Route::get('tracking', [ExpensesController::class, 'index'])->middleware('auth');
-Route::post('tracking', [ExpensesController::class, 'store'])->middleware('auth');
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::post('/salaries', [SalaryController::class, 'index']);
+        Route::post('/deductions', [DeductionController::class, 'index']);
+        Route::post('/savings', [SavingController::class, 'index']);
+        Route::post('/budgets', [BudgetController::class, 'index']);
+    });
 
-// budget routes
-Route::get('setup', [BudgetController::class, 'setup'])->middleware('auth');
-Route::get('spending', [BudgetController::class, 'spending'])->middleware('auth');
-Route::get('progress', [BudgetController::class, 'progress'])->middleware('auth');
+    Route::prefix('tracking')->group(function () {
+        Route::get('/', [ExpensesController::class, 'index']);
+        Route::post('/', [ExpensesController::class, 'store']);
+    });
+
+    Route::get('setup', [BudgetController::class, 'setup']);
+    Route::get('spending', [BudgetController::class, 'spending']);
+    Route::get('progress', [BudgetController::class, 'progress']);
+});
