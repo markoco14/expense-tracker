@@ -112,6 +112,7 @@ class BudgetController extends Controller
 
     public function getTodaySpendingPercent($username, $userId) {
         $budgetData = UserBudget::where('user_id', $userId)
+        ->where('budget_status', 'CURRENT')
         ->get();
 
         $expenses = Expense::where('username', $username)
