@@ -51,4 +51,4 @@ Route::post('profile/saving/delete/{userid}/{saving_id}', [SavingController::cla
 Route::post('profile/budget/delete/{userid}/{budget_id}', [BudgetController::class, 'delete']);
 
 // PROGRESS PAGE API ROUTES
-Route::get('percent/{username}', [BudgetController::class, 'getTodaySpendingPercent']);
+Route::get('percent/{username}/{userid}', [BudgetController::class, 'getTodaySpendingPercent']);

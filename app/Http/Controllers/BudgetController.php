@@ -85,15 +85,18 @@ class BudgetController extends Controller
             ->get()
             ->toArray();
 
-        if ($budget === []) {
-            $budget = 0;
-            $percentSpent = 0;
+        if($budget[0]['budget_amount'] === 0 && $totalSpent === 0) {
+            $budget = $budget[0]['budget_amount'];
             $amountRemaining = 0;
-        }
-        else {
+            $percentSpent = 0;
+        } elseif ($budget[0]['budget_amount'] === 0 && $totalSpent > 0){
             $budget = $budget[0]['budget_amount'];
             $amountRemaining = $budget - $totalSpent;
-            $percentSpent = $totalSpent/$budget*100; // division by zero
+            $percentSpent = -100;
+        } else {
+            $budget = $budget[0]['budget_amount'];
+            $amountRemaining = $budget - $totalSpent;
+            $percentSpent = $totalSpent/$budget*100;
         }
 
         $today = Carbon::today();
@@ -107,9 +110,12 @@ class BudgetController extends Controller
         ]);
     }
 
-    public function getTodaySpendingPercent($username) {
-        $expenses = Expense::get()
-        ->where('username', $username);
+    public function getTodaySpendingPercent($username, $userId) {
+        $budgetData = UserBudget::where('user_id', $userId)
+        ->get();
+
+        $expenses = Expense::where('username', $username)
+        ->get();
         $totalSpent = 0;
         
         foreach($expenses as &$expense) {
@@ -118,7 +124,10 @@ class BudgetController extends Controller
             }
         }
 
-        return json_encode($totalSpent);
+        return json_encode([
+            'totalSpent' => $totalSpent,
+            'budgetData' => $budgetData
+        ]);
     }
 
     public function getAll($userid) {
