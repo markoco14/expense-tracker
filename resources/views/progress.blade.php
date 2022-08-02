@@ -14,11 +14,11 @@
                     <div class="chart-overlay">
                         @if ($percent > 100 || $percent < 0)
                         <div>
-                            <p class="loss">{{$percent}}%</p>
+                            <p class="loss">{{round($percent,0)}}%</p>
                         </div>
                         @else 
                         <div>
-                            <p class="gain">{{$percent}}%</p>
+                            <p class="gain">{{round($percent,0)}}%</p>
                         </div>
                         @endif
                         <canvas id="myChart"></canvas>
