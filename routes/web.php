@@ -27,6 +27,10 @@ Route::middleware('guest')->group(function () {
         return view('index');
     });
 
+    Route::get('/home', function () {
+        return redirect('/');
+    });
+
     Route::get('signup', [UsersController::class, 'create']);
     Route::post('signup', [UsersController::class, 'store']);
 
@@ -36,6 +40,10 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () { 
     Route::get('logout', [SessionsController::class, 'destroy']);
+
+    Route::get('/home', function () {
+        return redirect('tracking');
+    });
 
     Route::prefix('profile')->group(function () {
         Route::get('/', [ProfileController::class, 'index']);
