@@ -31,6 +31,7 @@ class ExpensesController extends Controller
         $expense->what = $attributes['what'];
         $expense->where = $attributes['where'];
         $expense->username = auth()->user()->username;
+        $expense->user_id = auth()->user()->id;
         $expense->save();
 
         session()->flash('success', 'Your data has been stored.');
