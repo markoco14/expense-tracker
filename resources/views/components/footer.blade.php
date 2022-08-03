@@ -15,23 +15,25 @@
             }
         });
     </script>
-    <script async defer>
-        const largeDeviceHamburgerMenu = document.getElementById('large-hamburger-menu');
-        const largeHamburgerToggle = document.getElementById('large-hamburger-toggle');
-        largeHamburgerToggle.addEventListener('click', () => {
-            if (largeDeviceHamburgerMenu.classList.contains('large-hamburger-block-hidden')) {
-                largeDeviceHamburgerMenu.classList.remove('large-hamburger-block-hidden');
-                largeDeviceHamburgerMenu.classList.add('large-hamburger-block');
-            } else {
+    @auth
+        <script async defer>
+            const largeDeviceHamburgerMenu = document.getElementById('large-hamburger-menu');
+            const largeHamburgerToggle = document.getElementById('large-hamburger-toggle');
+            largeHamburgerToggle.addEventListener('click', () => {
+                if (largeDeviceHamburgerMenu.classList.contains('large-hamburger-block-hidden')) {
+                    largeDeviceHamburgerMenu.classList.remove('large-hamburger-block-hidden');
+                    largeDeviceHamburgerMenu.classList.add('large-hamburger-block');
+                } else {
+                    largeDeviceHamburgerMenu.classList.add('large-hamburger-block-hidden');
+                    largeDeviceHamburgerMenu.classList.remove('large-hamburger-block');
+                }
+            });
+            const closeHamburgerButton = document.getElementById('close-hamburger-toggle');
+            closeHamburgerButton.addEventListener('click', () => {
                 largeDeviceHamburgerMenu.classList.add('large-hamburger-block-hidden');
                 largeDeviceHamburgerMenu.classList.remove('large-hamburger-block');
-            }
-        });
-        const closeHamburgerButton = document.getElementById('close-hamburger-toggle');
-        closeHamburgerButton.addEventListener('click', () => {
-            largeDeviceHamburgerMenu.classList.add('large-hamburger-block-hidden');
-            largeDeviceHamburgerMenu.classList.remove('large-hamburger-block');
-        });
-    </script>
+            });
+        </script>
+    @endauth
     </body>
 </html>
