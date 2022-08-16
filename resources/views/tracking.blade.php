@@ -3,13 +3,13 @@
         <div class="container">
             <form action="tracking" method="post" class="form">
                 <h1 class="form-title">Track Expenses</h1>
-                @if (session()->has('success'))
+                @if (session()->has('response'))
                     <p
                         x-data="{ show: true }"
                         x-init="setTimeout(() => show = false, 4000)"
                         x-show="show"
                     >
-                        {{ session('success') }}
+                        {{ session('response.success') }}
                     </p>
                 @endif
                 @csrf
