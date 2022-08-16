@@ -52,3 +52,8 @@ Route::post('profile/budget/delete/{userid}/{budget_id}', [BudgetController::cla
 
 // PROGRESS PAGE API ROUTES
 Route::get('percent/{username}/{userid}', [BudgetController::class, 'getTodaySpendingPercent']);
+
+
+Route::group(['middleware' => ['auth:sanctum']], function() {
+    Route::get('percent', [BudgetController::class, 'getTodaySpendingPercent']);
+});

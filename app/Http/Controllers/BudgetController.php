@@ -110,12 +110,14 @@ class BudgetController extends Controller
         ]);
     }
 
-    public function getTodaySpendingPercent($username, $userId) {
+    public function getTodaySpendingPercent() {
+        $userId = auth()->user()->id;
         $budgetData = UserBudget::where('user_id', $userId)
         ->where('budget_status', 'CURRENT')
         ->get();
+        $budgetAmount = $budgetData[0]['budget_amount'];
 
-        $expenses = Expense::where('username', $username)
+        $expenses = Expense::where('user_id', $userId)
         ->get();
         $totalSpent = 0;
         
@@ -127,7 +129,7 @@ class BudgetController extends Controller
 
         return json_encode([
             'totalSpent' => $totalSpent,
-            'budgetData' => $budgetData
+            'budgetAmount' => $budgetAmount
         ]);
     }
 

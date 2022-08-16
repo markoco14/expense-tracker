@@ -101,14 +101,18 @@
 </section>
     <script async>
         async function fetchData () {
-            const response = await fetch(`api/percent/${username}/${userId}`);
+            const response = await fetch(`api/percent`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                }
+            });
             const data = await response.json();
             return data;
         }
-        
         fetchData().then(data => {
             const totalSpent = data.totalSpent;
-            const dailyBudget = data.budgetData[0].budget_amount;
+            const dailyBudget = data.budgetAmount;
 
             if (totalSpent === 0 && dailyBudget === 0) {
                 data = {
