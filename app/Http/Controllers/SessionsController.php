@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+
 class SessionsController extends Controller
 {
     public function create() {
@@ -14,8 +16,15 @@ class SessionsController extends Controller
             'password' => ['required']
         ]);
 
+        
+        
         if (auth()->attempt($attributes)) {
-            return redirect('tracking')->with('success', 'Welcome back!');
+            $user = User::where('email', $attributes['email'])->first();
+            $user->createToken('app-auth')->plainTextToken;
+            $response = [
+                'success' => 'Welcome back!',
+            ];
+            return redirect('tracking')->with(['response' => $response]);
         }
 
         return back()
@@ -26,6 +35,7 @@ class SessionsController extends Controller
     }
 
     public function destroy() {
+        User::find(auth()->user()->id)->tokens()->delete();
         auth()->logout();
         return redirect('login');
     }
