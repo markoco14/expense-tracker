@@ -16,7 +16,7 @@ export default function ProfileDeductions() {
         setTotalDeductions(total);
     }
     const fetchData = async () => {
-        const response = await fetch(`api/profile/deduction/${userid}`);
+        const response = await fetch(`api/profile/deductionList`);
         const data = await response.json();
         setDeductions(data);
         calculateTotalDeductions(data);

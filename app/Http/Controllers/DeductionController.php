@@ -47,8 +47,9 @@ class DeductionController extends Controller
         return ["status" => 201];
     }
 
-    public function getAll($userid) {
-        $deductionsCollection = UserDeduction::where('user_id', $userid)
+    public function getAll() {
+        $userId = auth()->user()->id;
+        $deductionsCollection = UserDeduction::where('user_id', $userId)
         ->where('deduction_status', 'CURRENT')
         ->get();
         $deductions = $deductionsCollection->toArray();
