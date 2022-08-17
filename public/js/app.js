@@ -5483,7 +5483,7 @@ function ProfileBudgets() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("api/profile/budgets/".concat(userid));
+              return fetch("api/profile/budgetList");
 
             case 2:
               response = _context.sent;
@@ -5911,7 +5911,7 @@ function ProfileDeductions() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("api/profile/deduction/".concat(userid));
+              return fetch("api/profile/deductionList");
 
             case 2:
               response = _context.sent;
@@ -6321,7 +6321,7 @@ function ProfileSalaries() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("api/profile/salary/".concat(userid));
+              return fetch("api/profile/salaryList");
 
             case 2:
               response = _context.sent;
@@ -6752,7 +6752,7 @@ function ProfileSavings() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("api/profile/savings/".concat(userid));
+              return fetch("api/profile/savingList");
 
             case 2:
               response = _context.sent;
