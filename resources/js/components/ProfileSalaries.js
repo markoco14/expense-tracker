@@ -18,7 +18,7 @@ export default function ProfileSalaries() {
         setTotalSalary(total);
     }
     const fetchData = async () => {
-        const response = await fetch(`api/profile/salary/${userid}`);
+        const response = await fetch(`api/profile/salaryList`);
         const data = await response.json();
         setSalaries(data);
         calculateTotalSalary(data);

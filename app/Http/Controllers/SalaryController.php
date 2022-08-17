@@ -23,8 +23,9 @@ class SalaryController extends Controller
         return redirect('profile');
     }
 
-    public function getAll($userid) {
-        $salary = UserSalary::where('user_id', $userid)
+    public function getAll() {
+        $userId = auth()->user()->id;
+        $salary = UserSalary::where('user_id', $userId)
         ->where('salary_status', 'CURRENT')
         ->get();
         return json_encode($salary);
