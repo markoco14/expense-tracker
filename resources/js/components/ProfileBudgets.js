@@ -30,7 +30,7 @@ export default function ProfileBudgets() {
     }
 
     const fetchData = async () => {
-        const response = await fetch(`api/profile/budgets/${userid}`);
+        const response = await fetch(`api/profile/budgetList`);
         const data = await response.json();
         setBudgets(data);
         calculateTotalBudgets(data)

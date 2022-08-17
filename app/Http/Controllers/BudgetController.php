@@ -133,8 +133,9 @@ class BudgetController extends Controller
         ]);
     }
 
-    public function getAll($userid) {
-        $budgetCollection = UserBudget::where('user_id', $userid)
+    public function getAll() {
+        $userId = auth()->user()->id;
+        $budgetCollection = UserBudget::where('user_id', $userId)
         ->where('budget_status', 'CURRENT')
         ->get();
         $budget = $budgetCollection->toArray();
