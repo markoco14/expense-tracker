@@ -19,7 +19,7 @@ export default function ProfileSavings() {
     }
 
     const fetchData = async () => {
-        const response = await fetch(`api/profile/savings/${userid}`);
+        const response = await fetch(`api/profile/savingList`);
         const data = await response.json();
         setSavings(data);
         calculateTotalSavings(data);

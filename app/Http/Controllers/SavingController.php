@@ -21,8 +21,9 @@ class SavingController extends Controller
 
     }
 
-    public function getAll($userid) {
-        $savingsCollection = UserSaving::where('user_id', $userid)
+    public function getAll() {
+        $userId = auth()->user()->id;
+        $savingsCollection = UserSaving::where('user_id', $userId)
         ->where('savings_status', 'CURRENT')
         ->get();
         $savings = $savingsCollection->toArray();
